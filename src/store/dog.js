@@ -30,9 +30,6 @@ class Dog {
             breed: this.breed,
             size: this.size
         };
-
-        horizon('dogs')
-            .upsert({...updateData});
     };
 
 }

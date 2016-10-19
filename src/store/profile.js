@@ -25,30 +25,11 @@ class Profile {
             return updateData;
         }, {});
 
-        horizon('users')
-            .update({
-                id: this.userId,
-                profile: {
-                    ...dataToUpdate
-                }
-            });
     }
 
     @action getData(){
         if(!this.userId) throw Exception;
-        horizon('users')
-            .find(this.userId)
-            .watch()
-            .map(d => d.profile)
-            .subscribe(data => {
-                for (let d in data) {
-                    if (data.hasOwnProperty(d)) {
-                        if(this.propsToUpdate.includes(d)) {
-                            this[d] = data[d];
-                        }
-                    }
-                }
-            })
+
     }
 
 

@@ -43,7 +43,11 @@ class Auth {
 
 	//Make APi request
 	get(endpoint, data = {}){
-		return this.request(apiUrl + endpoint);
+		return this.request(endpoint);
+	}
+
+	post(endpoint, data = {}){
+		return this.request.post(endpoint, data);
 	}
 
 	checkAuthFromBackend(){
