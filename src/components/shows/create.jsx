@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
+import {observable} from 'mobx';
 import {observer} from 'mobx-react';
 import {createViewModel} from 'mobx-utils';
-import {Form, Button} from 'semantic-ui-react';
+import {Form, Button, Grid} from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import Show from '../../store/show';
 import {hashHistory} from 'react-router';
 import moment from 'moment';
-
 
 @observer(['shows', 'auth'])
 class Create extends Component {
 
     show;
 	vm;
-	formLoading = false;
+	@observable formLoading = false;
 
     constructor(props){
         super(props);
@@ -69,14 +69,22 @@ class Create extends Component {
 						<label htmlFor="notes">Notes</label>
 						<Form.TextArea name="notes" placeholder="Do you have any notes for this show?" onChange={this.onChange} value={this.vm.notes} />
 					</Form.Field>
-                    <Form.Field>
-                        <label htmlFor="startDate">Start date</label>
-                        <DatePicker name="startDate" placeholder="Start date" dateFormat="DD-MM-YYYY" maxDate={this.vm.endDate} onChange={this.setDate.bind(this, 'startDate')} selected={this.vm.startDate}/>
-                    </Form.Field>
-                    <Form.Field>
-                        <label htmlFor="endDate">Start date</label>
-                        <DatePicker name="endDate" placeholder="End date" dateFormat="DD-MM-YYYY" minDate={this.vm.startDate} onChange={this.setDate.bind(this, 'endDate')} selected={this.vm.endDate}/>
-                    </Form.Field>
+					<Grid columns={3}>
+						<Grid.Row>
+							<Grid.Column>
+								<Form.Field>
+									<label htmlFor="startDate">Start date</label>
+									<DatePicker name="startDate" placeholder="Start date" dateFormat="dddd Do MMMM, YYYY" maxDate={this.vm.endDate} onChange={this.setDate.bind(this, 'startDate')} selected={this.vm.startDate}/>
+								</Form.Field>
+							</Grid.Column>
+							<Grid.Column>
+								<Form.Field>
+									<label htmlFor="endDate">End date</label>
+									<DatePicker name="endDate" placeholder="End date" dateFormat="dddd Do MMMM, YYYY" minDate={this.vm.startDate} onChange={this.setDate.bind(this, 'endDate')} selected={this.vm.endDate}/>
+								</Form.Field>
+							</Grid.Column>
+						</Grid.Row>
+					</Grid>
                     <Button primary>Add show</Button>
                 </Form>
             </div>

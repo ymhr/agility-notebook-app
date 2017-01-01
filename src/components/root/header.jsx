@@ -35,7 +35,7 @@ class HeaderContainer extends Component {
             <header>
                 <Button size="mini" floated="right" onClick={this.logout}>Logout</Button>
                 <Header as="h1">
-                    Agility Notebook test
+                    Agility Notebook
                     <Header.Subheader>Makes notes and stuff</Header.Subheader>
                 </Header>
 

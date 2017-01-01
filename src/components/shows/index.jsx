@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
 import Show from './show';
-import {Button, Icon} from 'semantic-ui-react';
+import {Button, Icon, List} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
 
 @observer(['shows'])
@@ -19,14 +19,18 @@ class Shows extends Component {
 
         let content = this.props.children;
 
+		const showList = this.props.shows.items.map(s => {
+			return <Show key={s.id} show={s} />
+		});
+
         if(!this.props.children){
             content = (
             	<div>
 					<Button fluid content="Add show" icon="plus" onClick={this.openCreate} />
 					<br />
-					{this.props.shows.items.map(s => {
-						return <Show key={s.id} show={s} />;
-					})}
+					<List divided selection>
+						{showList}
+					</List>
 				</div>
 			);
         }
