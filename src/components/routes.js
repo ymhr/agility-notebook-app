@@ -2,6 +2,7 @@ import Root from './root/index';
 import Shows from './shows/index';
 import CreateShow from './shows/create';
 import ViewShow from './shows/view';
+import EditShow from './shows/edit';
 import Profile from './profile/index';
 import Dogs from './dogs/index';
 import CreateDog from './dogs/create';
@@ -15,8 +16,9 @@ const routes = [
         indexRoute: { component: Shows },
         childRoutes: [
             {path: '/shows', component:Shows, hideFromNav: true, childRoutes: [
-                {path: 'add', component: CreateShow, label: 'Add show'},
-                {path: ':id', component: ViewShow, label: 'View show'}
+                {path: 'add', component: EditShow, label: 'Add show'},
+                {path: ':id', component: ViewShow, label: 'View show'},
+                {path: ':id/edit', component: EditShow, label: 'Edit show'}
             ]},
             {path: '/profile', component: Profile, label: 'Profile'},
             {path: '/dogs', component: Dogs, label: 'Dogs', childRoutes: [

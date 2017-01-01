@@ -37,15 +37,15 @@ class Shows {
 			});
 	}
 
-	addOrReplaceInList(items){
-	
-		if(!this.items.length){
+	addOrReplaceInList(items) {
+
+		if (!this.items.length) {
 			return items;
 		}
 
 		const itemIds = items.map(i => i.id);
 
-		var filteredItems = this.items.filter((item) => {
+		const filteredItems = this.items.filter((item) => {
 			return !itemIds.includes(item.id);
 		});
 
@@ -53,7 +53,15 @@ class Shows {
 
 	}
 
-	sortList(items){
+	create(data) {
+		return auth.post('/shows', data);
+	}
+
+	update(id, data) {
+		return auth.post(`/shows/${id}`, data);
+	}
+
+	sortList(items) {
 		return items.sort((a, b) => {
 			const aDate = moment(a.startDate);
 			const bDate = moment(b.startDate);
@@ -62,7 +70,7 @@ class Shows {
 		});
 	}
 
-	itemsContains(id){
+	itemsContains(id) {
 		return (this.items.filter(item => item.id = id));
 	}
 
