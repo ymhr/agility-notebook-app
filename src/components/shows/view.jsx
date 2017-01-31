@@ -12,13 +12,9 @@ import {hashHistory} from 'react-router';
 class View extends Component {
 
 
-	componentWillMount() {
-
-	}
-
 	editShow = () => {
 		hashHistory.push(`shows/${this.props.show.id}/edit`);
-	}
+	};
 
 	render() {
 

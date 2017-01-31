@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
 import Show from './show';
+import Month from './month';
 import {Button, Icon, List} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
+import {each, padStart, map} from 'lodash';
+import moment from 'moment';
 
 @observer(['shows'])
 class Shows extends Component {
@@ -14,13 +17,62 @@ class Shows extends Component {
 	openCreate = () => {
 		hashHistory.push('/shows/add');
 	};
+	
+	generateMonthList = (shows, addEmptyMonths = true) => {
+		let firstMonth, lastMonth;
+
+		const months = {};
+
+		if (shows.length) {
+			firstMonth = moment(shows[0].startDate);
+			lastMonth = moment(shows[shows.length - 1].startDate);
+
+			const duration = moment.duration(lastMonth.diff(firstMonth));
+
+			const index = this.generateMonthNumber(firstMonth);
+
+			months[index] = [];
+
+			for(let i = 0; i < Math.round(duration.asMonths()); i++){
+				firstMonth.add(1, 'M');
+				const tempIndex = this.generateMonthNumber(firstMonth);
+				months[tempIndex] = [];
+			}
+
+			return months;
+
+		};
+
+	};
+
+	generateMonthNumber = (date) => {
+
+		if(!moment.isMoment)
+			date = moment(date);
+
+		return 0 + '' + date.year() + '' + padStart((date.month()+1), 2, '0');
+	};
+
+	insertShowsIntoMonthList = (shows) => {
+		const monthList = this.generateMonthList(shows);
+
+		each(shows, show => {
+			const monthIndex = this.generateMonthNumber(moment(show.startDate));
+			monthList[monthIndex].push(show);
+		});
+
+		return monthList;
+
+	};
 
     render(){
 
         let content = this.props.children;
 
-		const showList = this.props.shows.items.map(s => {
-			return <Show key={s.id} show={s} />
+        const monthList = this.insertShowsIntoMonthList(this.props.shows.items);
+
+		const itemList = map(monthList, (m, month) => {
+			return <Month key={month} shows={m} month={month} />
 		});
 
         if(!this.props.children){
@@ -28,9 +80,7 @@ class Shows extends Component {
             	<div>
 					<Button fluid content="Add show" icon="plus" onClick={this.openCreate} />
 					<br />
-					<List divided selection>
-						{showList}
-					</List>
+					{itemList}
 				</div>
 			);
         }

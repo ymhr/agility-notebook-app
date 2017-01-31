@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {observable} from 'mobx';
-import {observer} from 'mobx-react';
+import {observable, autorun} from 'mobx';
+import {observer, inject} from 'mobx-react';
 import {createViewModel} from 'mobx-utils';
 import {Form, Button, Grid} from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
@@ -9,11 +9,12 @@ import {hashHistory} from 'react-router';
 import moment from 'moment';
 import {resolve} from 'react-resolver';
 
-@observer(['shows', 'auth'])
-@resolve('show', (props) => {
+@inject('shows', 'auth')
+@resolve('existingShow', (props) => {
 	if (props.routeParams.id)
 		return props.shows.get(parseInt(props.routeParams.id));
 })
+@observer
 class Edit extends Component {
 
 	show;
@@ -25,8 +26,8 @@ class Edit extends Component {
 	constructor(props) {
 		super(props);
 
-		if (this.props.show) {
-			this.show = this.props.show;
+		if (this.props.existingShow) {
+			this.show = this.props.existingShow;
 		} else {
 			this.createMode = true;
 			this.show = new Show({});
@@ -34,15 +35,16 @@ class Edit extends Component {
 
 		this.vm = createViewModel(this.show);
 
-		if (this.editMode) {
-			this.vm.startDate = moment(this.show.startDate);
-			this.vm.endDate = moment(this.show.endDate);
-		} else {
+		if (this.createMode) {
 			this.vm.startDate = moment();
 			this.vm.endDate = moment();
+		} else {
+			this.vm.startDate = moment(this.show.startDate);
+			this.vm.endDate = moment(this.show.endDate);
 		}
 
 	}
+
 
 	onSubmit = (e, data) => {
 		e.preventDefault();
@@ -62,11 +64,11 @@ class Edit extends Component {
 					this.formLoading = false;
 				});
 		} else {
-			this.props.shows.update(this.props.show.id, data)
+			this.props.shows.update(this.show.id, data)
 				.then(res => {
 					this.vm.submit();
 					this.formLoading = false;
-					hashHistory.push(`/shows/${this.props.show.id}`)
+					hashHistory.push(`/shows/${this.show.id}`)
 				})
 				.catch(err => {
 					console.error('error', err);
@@ -83,6 +85,7 @@ class Edit extends Component {
 
 	setDate = (type = 'startDate', date) => {
 		this.vm[type] = date;
+		console.log(type, this.vm[type]);
 	};
 
 	render() {
@@ -99,12 +102,12 @@ class Edit extends Component {
 					<Form.Field>
 						<label htmlFor="postcode">Postcode</label>
 						<Form.Input name="postcode" placeholder="Where was the show?" onChange={this.onChange}
-									value={this.vm.postcode}/>
+									defaultValue={this.vm.postcode}/>
 					</Form.Field>
 					<Form.Field>
 						<label htmlFor="notes">Notes</label>
 						<Form.TextArea name="notes" placeholder="Do you have any notes for this show?"
-									   onChange={this.onChange} value={this.vm.notes}/>
+									   defaultValue={this.vm.notes} onChange={this.onChange} value={this.vm.notes}/>
 					</Form.Field>
 					<Grid columns={3}>
 						<Grid.Row>
@@ -112,7 +115,7 @@ class Edit extends Component {
 								<Form.Field>
 									<label htmlFor="startDate">Start date</label>
 									<DatePicker name="startDate" placeholder="Start date"
-												dateFormat="dddd Do MMMM, YYYY" maxDate={this.vm.endDate}
+												dateFormat="dddd Do MMMM, YYYY"
 												onChange={this.setDate.bind(this, 'startDate')}
 												selected={this.vm.startDate}/>
 								</Form.Field>

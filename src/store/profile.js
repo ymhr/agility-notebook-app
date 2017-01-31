@@ -1,36 +1,36 @@
 import {observable, computed, action} from 'mobx';
+import auth from './auth';
 
 class Profile {
 
-    @observable userId;
-    propsToUpdate = ['firstName', 'lastName', 'age'];
+	@observable userId;
 
-    @observable firstName = '';
-    @observable lastName = '';
-    @observable age = '';
-    @computed get fullName(){
-        return this.firstName + ' ' + this.lastName;
-    };
+	@observable firstName = '';
+	@observable lastName = '';
 
-    constructor(){
-        console.log('yeyeyey');
-    }
+	@computed get fullName() {
+		return this.firstName + ' ' + this.lastName;
+	};
 
-    persistData()
-    {
-        if(!this.userId) throw Exception;
+	constructor() {
+		console.log('yeyeyey');
+		auth.get('profile').then(res => this.populateProfile(res.data));
+	}
 
-        var dataToUpdate = this.propsToUpdate.reduce((updateData, prop) => {
-            updateData[prop] = this[prop];
-            return updateData;
-        }, {});
+	populateProfile(data){
+		this.firstName = data.firstName;
+		this.lastName = data.lastName;
+	};
 
-    }
+	persistData() {
+		if (!this.userId) throw Exception;
 
-    @action getData(){
-        if(!this.userId) throw Exception;
+	}
 
-    }
+	@action getData() {
+		if (!this.userId) throw Exception;
+
+	}
 
 
 }
