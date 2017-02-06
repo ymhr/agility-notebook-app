@@ -26,6 +26,7 @@
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
+    "webpack-dashboard": "^0.3.0",
     "webpack-dev-server": "^1.16.2",
     "webpack-livereload-plugin": "^0.8.2"
   },

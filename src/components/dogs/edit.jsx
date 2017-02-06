@@ -4,7 +4,7 @@ import {observer} from 'mobx-react';
 import {createViewModel} from 'mobx-utils';
 import {Form, Button} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
-import Dog from '../../store/dog';
+import Dog from '../../store/models/dog';
 
 @observer(['profile', 'dogs'])
 class Edit extends Component {

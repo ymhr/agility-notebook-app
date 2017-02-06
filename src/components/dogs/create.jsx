@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {observer} from 'mobx-react';
 import {Form, Button} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
-import Dog from '../../store/dog';
+import Dog from '../../store/models/dog';
 
 @observer(['profile'])
 class Create extends Component {

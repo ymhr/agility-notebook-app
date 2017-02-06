@@ -3,7 +3,7 @@ import {observer} from 'mobx-react';
 
 import HeaderContainer from './header';
 
-@observer(['global'])
+@observer
 class Root extends Component {
 
     render() {

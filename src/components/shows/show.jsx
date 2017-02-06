@@ -18,6 +18,7 @@ class Show extends Component {
 		return (
 
 			<List.Item onClick={this.itemClick.bind(this, show)}>
+				<List.Content floated="right">Runs: {show.runs.length}</List.Content>
 				<List.Content>
 					<List.Header>{show.name}</List.Header>
 					<List.Description>{moment(show.startDate).format('dddd, MMMM Do YYYY')} - {moment(show.endDate).format('dddd, MMMM Do YYYY')}</List.Description>

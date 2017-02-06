@@ -1,9 +1,10 @@
 import {observable} from 'mobx';
 import moment from 'moment';
-import Show from './show';
+import Show from './models/show';
 import auth from './auth';
+import ItemStore from './base/itemStore';
 
-class Shows {
+class Shows extends ItemStore{
 
 	@observable items = [];
 	loaded = false;
@@ -37,37 +38,12 @@ class Shows {
 			});
 	}
 
-	addOrReplaceInList(items) {
-
-		if (!this.items.length) {
-			return items;
-		}
-
-		const itemIds = items.map(i => i.id);
-
-		const filteredItems = this.items.filter((item) => {
-			return !itemIds.includes(item.id);
-		});
-
-		return filteredItems.concat(items);
-
-	}
-
 	create(data) {
 		return auth.post('/shows', data);
 	}
 
 	update(id, data) {
 		return auth.post(`/shows/${id}`, data);
-	}
-
-	sortList(items) {
-		return items.sort((a, b) => {
-			const aDate = moment(a.startDate);
-			const bDate = moment(b.startDate);
-
-			return aDate.diff(bDate);
-		});
 	}
 
 	itemsContains(id) {

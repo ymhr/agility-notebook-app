@@ -7,17 +7,17 @@ import {hashHistory} from 'react-router';
 import {each, padStart, map} from 'lodash';
 import moment from 'moment';
 
-@observer(['shows'])
+@observer(['shows', 'settings'])
 class Shows extends Component {
 
-	componentWillMount(){
+	componentWillMount() {
 		this.props.shows.load();
 	}
 
 	openCreate = () => {
 		hashHistory.push('/shows/add');
 	};
-	
+
 	generateMonthList = (shows, addEmptyMonths = true) => {
 		let firstMonth, lastMonth;
 
@@ -33,28 +33,34 @@ class Shows extends Component {
 
 			months[index] = [];
 
-			for(let i = 0; i < Math.round(duration.asMonths()); i++){
-				firstMonth.add(1, 'M');
-				const tempIndex = this.generateMonthNumber(firstMonth);
-				months[tempIndex] = [];
+			if (addEmptyMonths) {
+				for (let i = 0; i < Math.round(duration.asMonths()); i++) {
+					firstMonth.add(1, 'M');
+					const tempIndex = this.generateMonthNumber(firstMonth);
+					months[tempIndex] = [];
+				}
+			} else {
+				each(shows, s => {
+					months[this.generateMonthNumber(moment(s.startDate))] = [];
+				})
 			}
 
 			return months;
 
-		};
+		}
 
 	};
 
 	generateMonthNumber = (date) => {
 
-		if(!moment.isMoment)
+		if (!moment.isMoment)
 			date = moment(date);
 
-		return 0 + '' + date.year() + '' + padStart((date.month()+1), 2, '0');
+		return 0 + '' + date.year() + '' + padStart((date.month() + 1), 2, '0');
 	};
 
-	insertShowsIntoMonthList = (shows) => {
-		const monthList = this.generateMonthList(shows);
+	insertShowsIntoMonthList = (shows, showEmptyMonths = true) => {
+		const monthList = this.generateMonthList(shows, showEmptyMonths);
 
 		each(shows, show => {
 			const monthIndex = this.generateMonthNumber(moment(show.startDate));
@@ -65,35 +71,35 @@ class Shows extends Component {
 
 	};
 
-    render(){
+	render() {
 
-        let content = this.props.children;
+		let content = this.props.children;
 
-        const monthList = this.insertShowsIntoMonthList(this.props.shows.items);
+		const monthList = this.insertShowsIntoMonthList(this.props.shows.items, this.props.settings.showEmptyMonths);
 
 		const itemList = map(monthList, (m, month) => {
-			return <Month key={month} shows={m} month={month} />
+			return <Month key={month} shows={m} month={month}/>
 		});
 
-        if(!this.props.children){
-            content = (
-            	<div>
-					<Button fluid content="Add show" icon="plus" onClick={this.openCreate} />
+		if (!this.props.children) {
+			content = (
+				<div>
+					<Button fluid content="Add show" icon="plus" onClick={this.openCreate}/>
 					<br />
 					{itemList}
 				</div>
 			);
-        }
+		}
 
-        return(
+		return (
 
-            <div>
-                <h1>Shows</h1>
-                {content}
-            </div>
+			<div>
+				<h1>Shows</h1>
+				{content}
+			</div>
 
-        );
-    }
+		);
+	}
 
 }
 

@@ -4,7 +4,7 @@ import {createViewModel} from 'mobx-utils';
 import {Button, Header, Form} from 'semantic-ui-react';
 import {hashHistory, Link} from 'react-router';
 
-import Dog from '../../store/dog';
+import Dog from '../../store/models/dog';
 
 @observer(['dogs'])
 class Dogs extends Component {

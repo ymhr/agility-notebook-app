@@ -1,17 +1,17 @@
 import config from './config';
-import global from './global';
 import auth from './auth';
 import profile from './profile';
 // import dogs from './dogs';
 import shows from './shows';
+import settings from './settings';
 
 const store = {
     config,
-    global,
     auth,
     profile,
     // dogs,
     shows,
+    settings
 };
 
 export default store;

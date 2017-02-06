@@ -6,6 +6,7 @@ import Profile from './profile/index';
 import Dogs from './dogs/index';
 import CreateDog from './dogs/create';
 import EditDog from './dogs/edit';
+import Settings from './settings/index';
 
 const routes = [
 	{
@@ -28,6 +29,7 @@ const routes = [
 				{path: 'edit/:id', component: EditDog, label: 'Edit dog'}
 			]
 			},
+			{path: '/settings', component: Settings, label: 'Settings'}
 		]
 	}
 ];

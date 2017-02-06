@@ -12,8 +12,7 @@ class Profile {
 		return this.firstName + ' ' + this.lastName;
 	};
 
-	constructor() {
-		console.log('yeyeyey');
+	loadProfile(){
 		auth.get('profile').then(res => this.populateProfile(res.data));
 	}
 

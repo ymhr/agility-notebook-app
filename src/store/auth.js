@@ -43,15 +43,17 @@ class Auth {
 
 	//Make APi request
 	get(endpoint, data = {}){
-		return this.request(endpoint);
+		if(this.getToken() !== null)
+			return this.request(endpoint);
 	}
 
 	post(endpoint, data = {}){
-		return this.request.post(endpoint, data);
+		if(this.getToken() !== null)
+			return this.request.post(endpoint, data);
 	}
 
 	checkAuthFromBackend(){
-		this.get('/api/check')
+		return this.get('/api/check')
 			.catch(err => {
 				console.log('No auth!', err);
 				this.logout();

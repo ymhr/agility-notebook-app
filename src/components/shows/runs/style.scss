@@ -1,0 +1,20 @@
+.place {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 60px;
+  height: 60px;
+  background-color: yellow;
+  border-radius:1000px;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  color: #988e00;
+  font-weight:bold;
+  font-size: 25px;
+
+    span {
+      display:block;
+    }
+
+}
