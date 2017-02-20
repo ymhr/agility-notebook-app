@@ -22,6 +22,7 @@ if (store.auth.isAuthed) {
 		.then(() => {
 			store.profile.loadProfile();
 			store.settings.loadSettings();
+			store.dogs.load();
 		});
 }
 

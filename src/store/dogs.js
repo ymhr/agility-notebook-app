@@ -8,6 +8,13 @@ class Dogs extends ItemStore {
 
 	@observable items = [];
 
+	load() {
+		return auth.get('/dogs')
+			.then(res => res.data)
+			.then(data => data.map(d => new Dog(d)))
+			.then(dogs => this.items = dogs);
+	}
+
 	get(id) {
 		return this.getFromLocal(id)
 			.then(res => {

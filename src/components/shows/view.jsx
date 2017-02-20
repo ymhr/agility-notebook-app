@@ -5,6 +5,7 @@ import {Form, Button, Loader} from 'semantic-ui-react';
 import {resolve} from 'react-resolver';
 import {hashHistory} from 'react-router';
 import Run from './runs/run';
+import AddRunModal from './runs/addRunModal';
 
 @inject('shows')
 @resolve('show', (props) => {
@@ -33,7 +34,8 @@ class View extends Component {
 				<h1>{show.name}</h1>
 
 				<h2>Runs</h2>
-				<Button >Add a run!</Button>
+				{/*<Button >Add a run!</Button>*/}
+				<AddRunModal/>
 				{runs}
 
 			</div>

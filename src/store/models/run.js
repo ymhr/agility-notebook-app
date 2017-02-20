@@ -10,15 +10,19 @@ class Run {
 	@observable grade;
 	@observable notes;
 	@observable place;
+	@observable clear;
+	@observable faults;
 	@observable dog = false;
 
-	constructor({id, showId, order, grade, notes, place, dogId}){
+	constructor({id, showId, order, grade, notes, place, dogId, clear, faults}){
 		this.id = id;
 		this.showId = showId;
 		this.order = order;
 		this.grade = grade;
 		this.notes = notes;
 		this.place = place;
+		this.clear = clear;
+		this.faults = faults;
 		this.loadDog(dogId);
 	}
 

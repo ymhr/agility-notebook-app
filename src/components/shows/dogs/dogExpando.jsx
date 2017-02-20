@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Icon, Segment} from 'semantic-ui-react';
+import {Icon, Modal} from 'semantic-ui-react';
 
 class DogExpando extends Component {
 
@@ -21,19 +21,28 @@ class DogExpando extends Component {
 	render() {
 		const {dog} = this.props;
 
+		const openStyle = {
+			"display":"block"
+		};
+
 		if (!this.state.open) {
 			return (
-				<div>
+				<div className={this.props.className}>
 					<span onClick={this.expand}>{dog.name} <Icon name="edit" /></span>
 				</div>
 			);
 		} else {
 			return (
-				<Segment>
+				<Modal open={this.state.open} className={this.props.className}>
+					<Modal.Header>{dog.name}</Modal.Header>
 					<Icon name="close" onClick={this.close} />
-					<h5>{dog.name}</h5>
-					<p>Grade {dog.grade}</p>
-				</Segment>
+					<Modal.Content>
+						<Modal.Description>
+							<p>Current grade: {dog.grade}</p>
+							<p>Official name: {dog.officialName}</p>
+						</Modal.Description>
+					</Modal.Content>
+				</Modal>
 			);
 		}
 

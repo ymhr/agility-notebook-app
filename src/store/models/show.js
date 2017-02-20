@@ -24,6 +24,7 @@ class ShowData {
 		auth.get(`/shows/${this.id}/runs`)
 			.then(res => res.data)
 			.then(data => data.map(r => new Run(r)))
+			.then(runs => this.orderRuns(runs))
 			.then(data => {
 				if (data === null) {
 					this.runs = [];
@@ -37,8 +38,8 @@ class ShowData {
 
 	}
 
-	orderRuns() {
-		this.runs.sort((a,b) => {
+	orderRuns(runs) {
+		return runs.sort((a,b) => {
 			return a.order > b.order;
 		});
 	}
