@@ -1,5 +1,8 @@
 import sinon from 'sinon';
 import should from 'should';
+import {afterEach, beforeEach, describe, it} from "mocha";
+import auth from "../../../app/src/store/auth";
+import Settings from '../../../app/src/store/settings';
 require('should-sinon');
 
 beforeEach(function(){
@@ -16,6 +19,24 @@ beforeEach(function(){
 });
 
 afterEach(function(){
-	settings.showEmptyMonths = undefined;
+	Settings.showEmptyMonths = undefined;
 	auth.get.restore()
 });
+
+describe('applying a setting', function(){
+
+	it('should be able to set showEmptyMonths and have 1 converted to true', function(){
+
+	});
+
+	it('should be able to set showEmptyMonths and have 0 converted to false', function(){
+
+	});
+
+});
+
+describe('updating a setting', function(){});
+
+describe('loading the settings', function(){});
+
+describe('settings defaults', function(){});
