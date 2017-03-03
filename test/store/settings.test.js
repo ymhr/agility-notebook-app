@@ -1,8 +1,8 @@
 import sinon from 'sinon';
 import should from 'should';
 import {afterEach, beforeEach, describe, it} from "mocha";
-import auth from "../../../app/src/store/auth";
-import Settings from '../../../app/src/store/settings';
+import auth from "../../src/store/auth";
+import Settings from '../../src/store/settings';
 require('should-sinon');
 
 beforeEach(function(){
