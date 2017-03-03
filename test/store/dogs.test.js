@@ -5,8 +5,7 @@ import Dog from '../../src/store/models/dog';
 import should from 'should';
 
 import {stub} from 'sinon';
-import {beforeEach, afterEach, describe} from "mocha";
-import it from "moment/src/locale/it";
+import {beforeEach, afterEach, describe, it} from "mocha";
 
 require('should-sinon');
 
