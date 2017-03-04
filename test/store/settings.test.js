@@ -27,26 +27,53 @@ describe('settings', function(){
 
 
     afterEach(function(){
-    	Settings.showEmptyMonths = undefined;
+    	Settings.setDefaults();
     	authStub.restore();
     });
 
     describe('applying a setting', function(){
 
     	it('should be able to set showEmptyMonths and have 1 converted to true', function(){
+            Settings.setSettings([
+                {name:'showEmptyMonths', value: '1'}
+            ]);
+
+            should(Settings.showEmptyMonths).be.exactly(true);
+
+            Settings.setSettings([
+                {name:'showEmptyMonths', value: 1}
+            ]);
+
+            should(Settings.showEmptyMonths).be.exactly(true);
 
     	});
 
     	it('should be able to set showEmptyMonths and have 0 converted to false', function(){
+            Settings.setSettings([
+                {name:'showEmptyMonths', value: '0'}
+            ]);
 
+            should(Settings.showEmptyMonths).be.exactly(false);
+
+            Settings.setSettings([
+                {name:'showEmptyMonths', value: 0}
+            ]);
+
+            should(Settings.showEmptyMonths).be.exactly(false);
     	});
 
     });
 
-    describe('updating a setting', function(){});
+    describe('loading the settings', function(){
 
-    describe('loading the settings', function(){});
+        it('should load the settings from the web', function(){
+            should(Settings.showEmptyMonths).be.exactly(true);
 
-    describe('settings defaults', function(){});
+            Settings.loadSettings();
+
+            auth.get.should.be.calledWith('/settings');
+        })
+
+    });
 
 });
