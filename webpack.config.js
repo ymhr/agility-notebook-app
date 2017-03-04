@@ -24,7 +24,7 @@ module.exports = {
 		sourceMapFilename: './dist/bundle.map'
 	},
 	module: {
-		loaders: [{
+		rules: [{
 			exclude: /node_modules/,
 			loader: 'babel-loader',
 			query: {
@@ -32,17 +32,31 @@ module.exports = {
 				presets: ['es2015', 'stage-0', 'react']
 			}
 		},
-			{
-				test: /\.scss$/,
-				loaders: ['style', 'css', 'sass']
-			},
-			{
-				test: /\.css$/,
-				loaders: ['style', 'css']
-			}]
+		{
+			test: /\.scss$/,
+			use: ['style-loader', 'css-loader', 'sass-loader']
+		},
+		{
+			test: /\.css$/,
+			use: ['style-loader', 'css-loader']
+		},
+		{
+			test: /\.jsx$/,
+			exclude: /node_modules/,
+			use: [
+				{
+					loader: "babel-loader",
+					options: {
+						plugins: ['transform-runtime', 'transform-decorators-legacy', 'react-hot-loader/babel'],
+						presets: [['es2015', {"modules": false}], "react", "stage-0"]
+
+					}
+				}
+			]
+		}]
 	},
 	resolve: {
-		extensions: ['', '.js', '.jsx']
+		extensions: ['.js', '.jsx']
 	},
 	devServer: {
 		historyApiFallback: true,
