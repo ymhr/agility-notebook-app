@@ -1,4 +1,5 @@
 #Agility Notebook
+[https://github.com/ymhr/agility-notebook-api](https://github.com/ymhr/agility-notebook-api)
 I made this app so that someone can log their agility activity.
 It allows them to add which dogs they have, which shows they attended, which runs they did, and how well they did at those runs.
 
