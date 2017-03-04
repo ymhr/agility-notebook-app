@@ -1,7 +1,7 @@
 import {describe, beforeEach, afterEach, it} from 'mocha';
 import should from 'should';
 import {stub} from 'sinon';
-import auth from '../../src/store/auth';
+import auth from 'store/auth';
 
 require('should-sinon');
 

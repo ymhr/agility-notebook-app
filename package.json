@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register -r mock-local-storage test/**/*.test.js",
+    "test": "NODE_PATH=./src mocha --compilers js:babel-core/register -r mock-local-storage test/**/*.test.js",
     "testWatch": "mocha --compilers js:babel-core/register -r mock-local-storage test/**/*.test.js --watch",
     "dev": "webpack-dev-server --inline --hot"
   },
