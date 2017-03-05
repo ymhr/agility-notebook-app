@@ -21,7 +21,7 @@ class Month extends Component {
 
 		const styles = {
 			monthTitle: {
-				"background-color": "#eee",
+				"backgroundColor": "#eee",
 				padding: "5px",
 				margin: "0px"
 			},
@@ -49,5 +49,10 @@ class Month extends Component {
 	}
 
 }
+
+Month.propTypes = {
+	month: React.PropTypes.string.isRequired,
+	shows: React.PropTypes.array
+};
 
 export default Month;

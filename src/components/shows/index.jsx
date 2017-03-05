@@ -13,6 +13,7 @@ class Shows extends Component {
 
 	componentWillMount() {
 		this.props.shows.load();
+		this.generateMonthNumber = this.generateMonthNumber.bind(this);
 	}
 
 	openCreate = () => {
@@ -52,7 +53,7 @@ class Shows extends Component {
 
 	};
 
-	generateMonthNumber = (date) => {
+	generateMonthNumber(date) {
 
 		if (!moment.isMoment)
 			date = moment(date);
