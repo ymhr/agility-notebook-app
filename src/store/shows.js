@@ -21,7 +21,11 @@ class Shows extends ItemStore{
 				.then(res => res.data.map(i => new Show(i)))
 				.then(items => this.addOrReplaceInList(items))
 				.then(items => this.sortList(items))
-				.then(items => this.items = items);
+				.then(items => this.items = items)
+				.then(items => {
+					this.loaded = true;
+					resolve(this.items);
+				});
 		});
 
 	};
@@ -47,7 +51,7 @@ class Shows extends ItemStore{
 	}
 
 	itemsContains(id) {
-		return (this.items.filter(item => item.id = id));
+		return (this.items.filter(item => item.id === id));
 	}
 
 }

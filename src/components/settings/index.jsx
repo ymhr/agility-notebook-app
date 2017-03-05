@@ -45,7 +45,9 @@ class Index extends Component {
 			<div>
 				<h1>Settings</h1>
 				<table className="settings-list">
-					{settingsList}
+					<tbody>
+						{settingsList}
+					</tbody>
 				</table>
 				{/*Show Empty Months: <Checkbox toggle checked={settings.showEmptyMonths} />*/}
 			</div>
