@@ -30,4 +30,8 @@ class Show extends Component {
 	}
 }
 
+Show.propTypes = {
+	show: React.PropTypes.object.isRequired
+}
+
 export default Show;
