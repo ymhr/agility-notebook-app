@@ -1,6 +1,6 @@
 var LiveReloadPlugin = require('webpack-livereload-plugin');
 var CommonsChunkPlugin = require('./node_modules/webpack/lib/optimize/CommonsChunkPlugin');
-var DashboardPlugin = require('webpack-dashboard/plugin');
+// var DashboardPlugin = require('webpack-dashboard/plugin');
 var path = require('path');
 
 module.exports = {
@@ -63,15 +63,15 @@ module.exports = {
 		],
 		extensions: ['.js', '.jsx']
 	},
-	devServer: {
-		historyApiFallback: true,
-		contentBase: './dist/',
-		publicPath: '/',
-		inline: true
-	},
+	// devServer: {
+	// 	historyApiFallback: true,
+	// 	contentBase: './dist/',
+	// 	publicPath: '/',
+	// 	inline: true
+	// },
 	devtool: 'eval',
 	plugins: [
-		new DashboardPlugin(),
+		// new DashboardPlugin(),
 		new CommonsChunkPlugin({
 			name: 'vendor',
 			filename: './dist/commons.js',
