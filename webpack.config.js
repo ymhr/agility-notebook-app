@@ -1,5 +1,6 @@
 var LiveReloadPlugin = require('webpack-livereload-plugin');
 var CommonsChunkPlugin = require('./node_modules/webpack/lib/optimize/CommonsChunkPlugin');
+var DefinePlugin = require('./node_modules/webpack/lib/DefinePlugin');
 // var DashboardPlugin = require('webpack-dashboard/plugin');
 var path = require('path');
 
@@ -70,6 +71,9 @@ module.exports = {
 			name: 'vendor',
 			filename: './dist/commons.js',
 			minChunks: 0
+		}),
+		new DefinePlugin({
+			API_URL: JSON.stringify(process.env.API_URL || "http://localhost:8080")
 		})
 	]
 };
