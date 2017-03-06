@@ -8,5 +8,6 @@ const publicPath = express.static(path.join(__dirname, '/dist/'));
 app.use(publicPath);
 // app.use('/', function(_, res){res.sendFile(indexPath)});
 
-app.listen(8080);
-console.log('Listening on 8080');
+const port = process.env.PORT || 8080;
+app.listen(port);
+console.log(`Listening on ${port}`);
