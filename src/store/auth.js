@@ -19,7 +19,7 @@ class Auth {
 			() => this.token && typeof this.token !== 'undefined',
 			() => {
 				this.request = axios.create({
-					baseURL: apiUrl,
+					baseURL: API_URL,
 				});
 				this.request.defaults.headers.common['Authorization'] = 'Bearer '+this.token;
 			}
