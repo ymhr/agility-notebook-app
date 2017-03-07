@@ -4,7 +4,7 @@ import {Container, Button, Header, Icon} from 'semantic-ui-react';
 class Login extends Component {
 
     redirectToLogin = () => {
-        const endPoint = apiUrl + '/auth/facebook';
+        const endPoint = API_URL + '/auth/facebook';
         window.location.replace(endPoint);
     };
 
