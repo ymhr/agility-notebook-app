@@ -22,6 +22,9 @@ class Settings {
 	}
 
 	setSettings(data) {
+
+		if(data.length === 0) this.loaded = true;
+
 		let i = 0;
 		data.forEach(d => {
 			if (this.hasOwnProperty(d.name)) {

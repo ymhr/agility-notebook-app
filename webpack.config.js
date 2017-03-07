@@ -64,6 +64,12 @@ module.exports = {
 		],
 		extensions: ['.js', '.jsx']
 	},
+	 devServer: {
+ 		historyApiFallback: true,
+ 		contentBase: './dist/',
+	 	publicPath: '/',
+	 	inline: true
+ 	},
 	devtool: 'eval',
 	plugins: [
 		// new DashboardPlugin(),

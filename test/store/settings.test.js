@@ -75,4 +75,11 @@ describe('settings', function(){
 
     });
 
+    describe('No settings', function(){
+        it('should be able to load the application if there are no settings returned from the API', function(){
+            Settings.setSettings([]);
+            should(Settings.loaded).be.true();
+        });
+    });
+
 });
