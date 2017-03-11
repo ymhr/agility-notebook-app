@@ -59,16 +59,18 @@ class Edit extends Component {
         this.vm[e.target.name] = e.target.value;
     };
 
-    save = (e) => {
+    save = (e, data) => {
         e.preventDefault();
 
         this.loading = true;
 
         if(this.createMode){
             this.loading = false;
+            this.vm.submit();
         } else {
-            this.dogs.update(id)
+            this.props.dogs.update(this.props.routeParams.id, data)
                 .then((res) => {
+                    this.vm.submit();
                     this.loading = false;
                 });
         }
@@ -89,8 +91,9 @@ class Edit extends Component {
                     <Form.Input label="Name" name="name" placeholder="What is your dogs name?" value={this.vm.name} onChange={this.onChange} />
                     <Form.Input label="Registered Name" name="officialName" placeholder="What is your dogs KC name?" value={this.vm.officialName} onChange={this.onChange} />
                     <Form.Input type="number" label="Grade" name="grade" placeholder="What grade is your dog?" value={this.vm.grade} onChange={this.onChange} />
-                    <Form.Input label="Breed" name="breed" placeholder="What breed is your dog?" value={this.vm.breed} onChange={this.onChange} />
-                    <Select label="Size" name="size" placeholder="What size does your dog jump" options={sizeOptions} defaultValue={this.vm.size} onChange={this.onChange} />
+                    {/*<Form.Input label="Breed" name="breed" placeholder="What breed is your dog?" value={this.vm.breed} onChange={this.onChange} />*/}
+                    <Form.Select label="Height" name="height" placeholder="What size does your dog jump" options={sizeOptions} value={this.vm.height} onChange={this.onChange} />
+                    <Form.TextArea label="Notes" name="notes" placeholder="Notes" value={this.vm.notes} onChange={this.onChange} />
                     <Button type="submit">Submit</Button>
                 </Form>
 
