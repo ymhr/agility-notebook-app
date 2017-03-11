@@ -4,6 +4,8 @@ class ItemStore {
 
 	addOrReplaceInList(items) {
 
+		if(!Array.isArray(items)) items = [items];
+
 		if (!this.items.length) {
 			return items;
 		}
