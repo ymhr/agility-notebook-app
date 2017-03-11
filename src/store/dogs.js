@@ -15,25 +15,34 @@ class Dogs extends ItemStore {
 			.then(dogs => this.items = dogs);
 	}
 
-	get(id) {
-		return this.getFromLocal(id)
-			.then(res => {
-				return res;
-			})
-			.catch(err => {
-				return this.getFromRemote(id);
-			});
+	async get(id) {
+
+		try{
+			const localRes = await this.getFromLocal(id);
+
+			if(!localRes){
+				const remoteRes = await this.getFromRemote(id);
+
+				if(remoteRes)
+					return remoteRes;
+				else
+					throw new Error('No dogs found with that ID');
+
+			} else {
+				return localRes;
+			}
+
+		} catch(err){
+			console.error(err);
+			throw new Error('No dogs were found');
+		};
 
 	}
 
 	getFromLocal(id) {
 		return new Promise((resolve, reject) => {
 			const dog = this.items.filter(i => i.id === id)[0];
-			if(dog){
-				resolve(dog);
-			} else {
-				reject('No dog found');
-			}
+			resolve(dog);
 		});
 	}
 
@@ -45,8 +54,12 @@ class Dogs extends ItemStore {
 			.then(items => this.sortList(items))
 			.then(items => {
 				this.items = items;
-				return this.items.filter(i => i.id === id)[0]
+				return this.items.filter(i => i.id == id)[0];
 			});
+	}
+
+	update(id, data) {
+		return auth.post(`/dogs/${id}`, data);
 	}
 
 }

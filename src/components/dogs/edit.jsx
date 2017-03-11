@@ -1,17 +1,24 @@
 import React, {Component} from 'react';
 import {observable} from 'mobx';
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 import {createViewModel} from 'mobx-utils';
-import {Form, Button} from 'semantic-ui-react';
+import {Form, Button, Select} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
-import Dog from '../../store/models/dog';
+import Dog from 'store/models/dog';
+import {resolve} from 'react-resolver';
 
-@observer(['profile', 'dogs'])
+@inject('profile', 'dogs', 'auth')
+@observer
 class Edit extends Component {
 
     dog;
     @observable vm;
     @observable loading = false;
+    createMode = false;
+
+    constructor(props){
+        super(props);
+    }
 
     componentWillMount(){
         this.loadDog();
@@ -30,24 +37,42 @@ class Edit extends Component {
     loadDog = (id) => {
         this.loading = true;
         this.vm = {};
-        this.props.dogs.getDog(id || this.props.params.id)
-            .subscribe(
-                dog => {
-                    this.dog = new Dog(dog);
-                    this.vm = createViewModel(this.dog);
-                    this.loading = false;
-                }
-            );
+        this.props.dogs.get(id || this.props.params.id)
+            .then(d => {
+                this.dog = new Dog(d);
+        		this.createVm();
+            })
+            .catch(err => {
+                console.error('Failed to load dog with id', id || this.props.params.id);
+				this.dog = new Dog({});
+				this.createMode = true;
+				this.createVm();
+            });
     }
+
+	createVm = () => {
+		this.vm = createViewModel(this.dog);
+		this.loading = false;
+	}
 
     onChange = (e) => {
         this.vm[e.target.name] = e.target.value;
     };
 
-    saveEdit = (e) => {
+    save = (e) => {
         e.preventDefault();
-        this.vm.submit();
-        this.dog.persistData();
+
+        this.loading = true;
+
+        if(this.createMode){
+            this.loading = false;
+        } else {
+            this.dogs.update(id)
+                .then((res) => {
+                    this.loading = false;
+                });
+        }
+
     }
 
     render(){
@@ -60,12 +85,12 @@ class Edit extends Component {
 
             <div>
 
-                <Form loading={this.loading} onSubmit={this.saveEdit}>
+                <Form loading={this.loading} onSubmit={this.save}>
                     <Form.Input label="Name" name="name" placeholder="What is your dogs name?" value={this.vm.name} onChange={this.onChange} />
                     <Form.Input label="Registered Name" name="officialName" placeholder="What is your dogs KC name?" value={this.vm.officialName} onChange={this.onChange} />
                     <Form.Input type="number" label="Grade" name="grade" placeholder="What grade is your dog?" value={this.vm.grade} onChange={this.onChange} />
                     <Form.Input label="Breed" name="breed" placeholder="What breed is your dog?" value={this.vm.breed} onChange={this.onChange} />
-                    <Form.Select label="Size" name="size" placeholder="What size does your dog jump" options={sizeOptions} value={this.vm.size} onChange={this.onChange} />
+                    <Select label="Size" name="size" placeholder="What size does your dog jump" options={sizeOptions} defaultValue={this.vm.size} onChange={this.onChange} />
                     <Button type="submit">Submit</Button>
                 </Form>
 

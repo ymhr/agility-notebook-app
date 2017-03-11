@@ -4,7 +4,7 @@ import {observer, inject} from 'mobx-react';
 import {createViewModel} from 'mobx-utils';
 import {Form, Button, Grid} from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
-import Show from '../../store/models/show';
+import Show from 'store/models/show';
 import {hashHistory} from 'react-router';
 import moment from 'moment';
 import {resolve} from 'react-resolver';
