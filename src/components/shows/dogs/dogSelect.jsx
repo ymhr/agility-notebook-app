@@ -1,9 +1,10 @@
 import {Form} from 'semantic-ui-react';
 import React from 'react';
+import {observer, inject} from 'mobx-react';
 
-export default ({dogs}) => {
+export default inject('dogs')(observer(({dogs, value, onChange, name}) => {
 
-	const options = dogs.map(d => {
+	const options = dogs.items.map(d => {
 		return {
 			key: d.id,
 			text: d.name,
@@ -13,7 +14,7 @@ export default ({dogs}) => {
 
 	return (
 		<div>
-			<Form.Select label="Dog" name="dog" options={options} placeholder="Please select a dog" />
+			<Form.Select label="Dog" name={name} options={options} placeholder="Please select a dog" value={value} onChange={onChange} />
 		</div>
 	);
-};
+}));

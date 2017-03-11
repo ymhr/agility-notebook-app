@@ -6,6 +6,9 @@ import ItemStore from './base/itemStore';
 
 class Shows extends ItemStore{
 
+	itemClass = Show;
+	endpoint = 'shows';
+
 	@observable items = [];
 	loaded = false;
 
@@ -29,30 +32,6 @@ class Shows extends ItemStore{
 		});
 
 	};
-
-	get(showId) {
-		return auth.get(`/shows/${showId}`)
-			.then(res => res.data)
-			.then(item => new Show(item))
-			.then(item => this.addOrReplaceInList([item]))
-			.then(items => this.sortList(items))
-			.then(items => {
-				this.items = items;
-				return this.items.filter(i => i.id === showId)[0]
-			});
-	}
-
-	create(data) {
-		return auth.post('/shows', data);
-	}
-
-	update(id, data) {
-		return auth.post(`/shows/${id}`, data);
-	}
-
-	itemsContains(id) {
-		return (this.items.filter(item => item.id === id));
-	}
 
 }
 
