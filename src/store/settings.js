@@ -36,6 +36,7 @@ class Settings {
 				this.loaded = true;
 			}
 		});
+
 	}
 
 	setSetting(name, value){
