@@ -21,6 +21,8 @@ class ShowData {
 		this.postcode = postcode;
 		this.notes = notes;
 
+		console.trace('test');
+
 		auth.get(`/shows/${this.id}/runs`)
 			.then(res => res.data)
 			.then(data => data.map(r => new Run(r)))

@@ -10,7 +10,7 @@ class Shows extends ItemStore{
 	endpoint = 'shows';
 
 	@observable items = [];
-	loaded = false;
+	@observable loaded = false;
 
 	load = () => {
 		return new Promise((resolve, reject) => {

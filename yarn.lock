@@ -1750,7 +1750,7 @@ debug@2.3.3:
   dependencies:
     ms "0.7.2"
 
-debug@2.6.1, debug@^2.1.1, debug@^2.2.0:
+debug@2.6.1, debug@^2.1.1, debug@^2.2.0, debug@^2.4.5:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
@@ -5143,13 +5143,14 @@ select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
 
-semantic-ui-react@^0.56.0:
-  version "0.56.14"
-  resolved "https://registry.yarnpkg.com/semantic-ui-react/-/semantic-ui-react-0.56.14.tgz#505177bf22aa2a82d55b828e60002e3c7bcb1770"
+semantic-ui-react@^0.67.0:
+  version "0.67.0"
+  resolved "https://registry.yarnpkg.com/semantic-ui-react/-/semantic-ui-react-0.67.0.tgz#6a39b34b566bc0cb9ec2d7c0430b12d9a7e11dd4"
   dependencies:
+    babel-runtime "^6.22.0"
     classnames "^2.1.5"
-    debug "^2.2.0"
-    lodash "^4.6.1"
+    debug "^2.4.5"
+    lodash "^4.17.2"
 
 "semver@2 || 3 || 4 || 5", "semver@2.x || 3.x || 4 || 5", semver@^5.1.0, semver@^5.3.0, semver@~5.3.0:
   version "5.3.0"

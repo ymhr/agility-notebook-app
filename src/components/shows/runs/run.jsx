@@ -17,17 +17,24 @@ class Run extends Component {
 
 		const dogInfo = (run.dog) ? <DogExpando dog={run.dog} className="dogRunning" /> : <Loader active />;
 
+		if(run.loaded){
+			return (
+				<Segment clearing>
+					<h3><span style={{color:'#ddd'}}>Run #{run.order + 1}</span><br />Grade {run.grade}</h3>
+					Who ran: {dogInfo}
+					<h4>Your result: {results}</h4>
 
-		return (
-			<Segment clearing>
-				<h3><span style={{color:'#ddd'}}>Run #{run.order + 1}</span><br />Grade {run.grade}</h3>
-				Who ran: {dogInfo}
-				<h4>Your result: {results}</h4>
+					<p>{run.notes}</p>
+					{placed}
+				</Segment>
+			);
+		} else {
+			return (
+				<p>Loading</p>
+			)
+		}
 
-				<p>{run.notes}</p>
-				{placed}
-			</Segment>
-		);
+
 
 	}
 

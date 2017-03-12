@@ -10,12 +10,14 @@ class Dogs extends ItemStore {
 	endpoint = 'dogs'
 
 	@observable items = [];
+	@observable loaded = false;
 
 	load() {
 		return auth.get('/dogs')
 			.then(res => res.data)
 			.then(data => data.map(d => new Dog(d)))
-			.then(dogs => this.items = dogs);
+			.then(dogs => this.items = dogs)
+			.then(() => this.loaded = true);
 	}
 
 	update(id, data) {

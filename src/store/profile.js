@@ -7,13 +7,16 @@ class Profile {
 
 	@observable firstName = '';
 	@observable lastName = '';
+	@observable loaded = false;
 
 	@computed get fullName() {
 		return this.firstName + ' ' + this.lastName;
 	};
 
-	loadProfile(){
-		auth.get('profile').then(res => this.populateProfile(res.data));
+	@action loadProfile(){
+		auth.get('profile')
+			.then(res => this.populateProfile(res.data))
+			.then(() => this.loaded = true);
 	}
 
 	populateProfile(data){
