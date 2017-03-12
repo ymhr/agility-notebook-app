@@ -17,7 +17,10 @@ class Dogs extends ItemStore {
 			.then(res => res.data)
 			.then(data => data.map(d => new Dog(d)))
 			.then(dogs => this.items = dogs)
-			.then(() => this.loaded = true);
+			.then(dogs => {
+				this.loaded = true;
+				return dogs;
+			});
 	}
 
 	update(id, data) {
