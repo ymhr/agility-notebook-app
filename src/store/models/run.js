@@ -2,6 +2,7 @@ import {observable, computed} from 'mobx';
 import dogs from '../dogs';
 import shows from '../shows';
 import Dog from './dog';
+import moment from 'moment';
 
 class Run {
 
@@ -20,10 +21,16 @@ class Run {
 	@observable loaded = false;
 
 	@computed get clear(){
-		if(!(this.faults || this.faults < 0)){
-			console.log(this.show.startDate);
-			if(this.show && this.show.starteDate){}
+		if(!(this.faults || this.faults >= 0)){
+			console.log('faults', this.faults);
+			const showStartDate = moment(this.show.startDate);
+			const diff = moment().diff(showStartDate, 'day');
+			if(this.diff > 0){
+				return true;
+			}
 		}
+
+		return false;
 	}
 
 	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber}){
@@ -38,42 +45,44 @@ class Run {
 		this.ringNumber = ringNumber;
 		this.dogId = dogId;
 
-		let loadedArray = [
-			this.loadDog(),
-			this.loadShow()
-		];
+		if(this.id){
+			let loadedArray = [
+				this.loadDog(),
+				this.loadShow()
+			];
 
-		Promise.all(loadedArray, values => {
-			this.loaded = true;
-		})
-
-
+			Promise.all(loadedArray).then((values) => {
+				this.loaded = true;
+			})
+		}
 	}
 
 	loadDog(){
 		return new Promise((resolve, reject) => {
-			if(this.dog) resolve(this.dog); return;
+
+			if(this.dog){
+				resolve(this.dog);
+				return;
+			}
 
 			dogs.get(this.dogId)
 				.then(d => this.dog = d)
-				.then(() => resolve(this.dog));
+				.then(() => resolve(this.dog))
+				.catch(err => console.warn(err));
 
 		});
-		// return dogs.get(id)
-		// 	.then(d => this.dog = new Dog(d))
-		// 	.catch(err => {
-		// 		console.log('nothing to do here');
-		// 	});
 	}
 
 	loadShow(){
 		return new Promise((resolve, reject) => {
-			if(this.show) resolve(this.show); return;
+			if(this.show) {
+				resolve(this.show);
+				return;
+			}
 
 			shows.get(this.showId)
 				.then(s => this.show = s)
 				.then(() => resolve(this.show));
-
 		});
 	}
 

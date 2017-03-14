@@ -33,8 +33,6 @@ class App extends Component {
 
 	render() {
 
-		console.log(store.app.ready);
-
 		if (!store.auth.isAuthed) {
 			return (
 				<Login />

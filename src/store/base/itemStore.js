@@ -47,7 +47,7 @@ class ItemStore {
 				if(remoteRes)
 					item = new this.itemClass(remoteRes);
 				else
-					throw new Error('No item found with that ID', itemClass);
+					throw new Error(`No ${this.itemClass.name} found with that ID`, itemClass);
 
 			} else {
 				item = new this.itemClass(localRes);
@@ -59,7 +59,7 @@ class ItemStore {
 
 		} catch(err){
 			console.warn(err);
-			throw new Error('No items were found');
+			throw new Error(`No ${this.itemClass.name} were found on local or remote`);
 		};
 
 	}
@@ -78,7 +78,7 @@ class ItemStore {
 				if(res && res.id)
 					return res;
 				else
-					throw new Error('No item found on remote');
+					throw new Error(`No ${this.itemClass.name} found on remote`);
 			})
 			.then(data => new this.itemClass(data))
 			.then(item => this.addOrReplaceInList([item]))

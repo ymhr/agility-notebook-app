@@ -8,10 +8,7 @@ class App {
 
     constructor(){
         when(
-            () => {
-                console.log('shows', shows.loaded, 'settings', settings.loaded, 'dogs', dogs.loaded)
-                return (shows.loaded && settings.loaded && dogs.loaded)
-            },
+            () => (shows.loaded && settings.loaded && dogs.loaded),
             () => this.ready = true
         );
     }

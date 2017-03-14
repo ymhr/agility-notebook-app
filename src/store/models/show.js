@@ -1,6 +1,7 @@
 import {observable} from 'mobx';
 import auth from '../auth';
 import Run from './run';
+import runs from 'store/runs';
 
 class ShowData {
 
@@ -21,22 +22,26 @@ class ShowData {
 		this.postcode = postcode;
 		this.notes = notes;
 
-		console.trace('test');
-
-		auth.get(`/shows/${this.id}/runs`)
-			.then(res => res.data)
-			.then(data => data.map(r => new Run(r)))
-			.then(runs => this.orderRuns(runs))
-			.then(data => {
-				if (data === null) {
-					this.runs = [];
-				} else {
-					this.runs = data;
-				}
-
+		this.loadRuns()
+			.then(runs => {
 				this.runsLoaded = true;
-
 			});
+		// console.trace('test');
+
+		// auth.get(`/shows/${this.id}/runs`)
+		// 	.then(res => res.data)
+		// 	.then(data => data.map(r => new Run(r)))
+		// 	.then(runs => this.orderRuns(runs))
+		// 	.then(data => {
+		// 		if (data === null) {
+		// 			this.runs = [];
+		// 		} else {
+		// 			this.runs = data;
+		// 		}
+		//
+		// 		this.runsLoaded = true;
+		//
+		// 	});
 
 	}
 
@@ -44,6 +49,19 @@ class ShowData {
 		return runs.sort((a,b) => {
 			return a.order > b.order;
 		});
+	}
+
+	loadRuns(){
+		return runs.getForShow(this.id)
+			.then(runs => this.orderRuns(runs))
+			.then(runs => this.runs = runs)
+			.then(runs => {
+				this.runsLoaded = true;
+				return runs;
+			})
+			.catch((err) =>{
+				console.warn(err)
+			});
 	}
 
 }

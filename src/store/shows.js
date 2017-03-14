@@ -28,7 +28,8 @@ class Shows extends ItemStore{
 				.then(items => {
 					this.loaded = true;
 					resolve(this.items);
-				});
+				})
+				.catch(err => console.warn('load runs err', err));
 		});
 
 	};
