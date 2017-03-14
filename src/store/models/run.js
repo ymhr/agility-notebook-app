@@ -1,8 +1,9 @@
-import {observable, computed} from 'mobx';
+import {observable, computed, toJS} from 'mobx';
 import dogs from '../dogs';
 import shows from '../shows';
 import Dog from './dog';
 import moment from 'moment';
+import auth from '../auth';
 
 class Run {
 
@@ -18,6 +19,15 @@ class Run {
 	@observable runningOrder;
 	@observable ringNumber;
 	@observable dogId;
+	@observable classSize;
+	@observable judge;
+	@observable type; //Agility, jumping or special
+	@observable graded; //true = graded, false = combined
+	@observable classNumber;
+	@observable courseTime;
+	@observable runTime; //my time
+	@observable courseLength;
+	//Weather, surface type, indoor/outdoor?
 	@observable loaded = false;
 
 	@computed get clear(){
@@ -25,7 +35,7 @@ class Run {
 			console.log('faults', this.faults);
 			const showStartDate = moment(this.show.startDate);
 			const diff = moment().diff(showStartDate, 'day');
-			if(this.diff > 0){
+			if(this.diff >	 0){
 				return true;
 			}
 		}
@@ -33,7 +43,7 @@ class Run {
 		return false;
 	}
 
-	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber}){
+	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber, classSize, judge, type, gradeType, classNumber, courseTime, runTime, courseLength}){
 		this.id = id;
 		this.showId = showId;
 		this.order = order;
@@ -44,6 +54,14 @@ class Run {
 		this.runningOrder = runningOrder;
 		this.ringNumber = ringNumber;
 		this.dogId = dogId;
+		this.classSize = classSize;
+		this.judge = judge;
+		this.type = type;
+		this.gradeType = gradeType;
+		this.classNumber = classNumber;
+		this.courseTime = courseTime;
+		this.runTime = runTime;
+		this.courseLength = courseLength;
 
 		if(this.id){
 			let loadedArray = [
@@ -84,6 +102,27 @@ class Run {
 				.then(s => this.show = s)
 				.then(() => resolve(this.show));
 		});
+	}
+
+	save(){
+		return new Promise((resolve, reject) => {
+			if(this.id){
+				//update mode
+			} else {
+				//create mode
+				auth.post(`/shows/${this.showId}/runs`, this.serialize())
+					.then(res => res.data)
+					.then(data => data.data)
+					.then(run => {
+						this.id = run.id;
+						resolve(this.id);
+					});
+			}
+		});
+	}
+
+	serialize(){
+		return toJS(this);
 	}
 
 }

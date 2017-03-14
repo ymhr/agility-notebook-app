@@ -51,11 +51,13 @@ class Edit extends Component {
 		this.formLoading = true;
 
 		if (this.createMode) {
-			this.props.shows.create(data)
+			// this.props.shows.create(data)
+			this.vm.submit();
+
+			this.show.save()
 				.then(res => {
 					console.log('success', res);
-					this.vm.submit();
-					this.props.shows.items.push(new Show(res.data.data));
+					this.props.shows.items.push(new Show(res.data));
 					this.formLoading = false;
 					hashHistory.push('/');
 				})

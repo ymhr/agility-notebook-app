@@ -6,6 +6,7 @@ import Profile from './profile/index';
 import Dogs from './dogs/index';
 import EditDog from './dogs/edit';
 import Settings from './settings/index';
+import EditRun from './shows/runs/edit';
 
 const routes = [
 	{
@@ -18,7 +19,9 @@ const routes = [
 				path: '/shows', component: Shows, hideFromNav: true, childRoutes: [
 					{path: 'add', component: EditShow, label: 'Add show'},
 					{path: ':id/edit', component: EditShow, label: 'Edit show'},
-					{path: ':id', component: ViewShow, label: 'View show'}
+					{path: ':id', component: ViewShow, label: 'View show', childRoutes: [
+						{path: 'run/add', component: EditRun, label: 'Add run'}
+					]}
 			]
 			},
 			{path: '/profile', component: Profile, label: 'Profile'},

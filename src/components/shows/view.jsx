@@ -28,20 +28,26 @@ class View extends Component {
 			runs = show.runs.map(r => <Run key={r.id} run={r} show={show}/>);
 		}
 
-		return (
-			<div>
-				<Button style={{'float':'right'}} onClick={this.editShow}>Edit</Button>
-				<h1>{show.name}</h1>
+		if(this.props.children){
+			return (
+				<div>
+					{this.props.children}
+				</div>
+			)
+		} else {
+			return (
+				<div>
+					<Button style={{'float':'right'}} onClick={this.editShow}>Edit</Button>
+					<h1>{show.name}</h1>
 
-				<h2>Runs</h2>
-				{/*<Button >Add a run!</Button>*/}
-				<AddRunModal/>
-				{runs}
+					<h2>Runs</h2>
+					{/*<Button >Add a run!</Button>*/}
+					<AddRunModal showId={show.id}/>
+					{runs}
 
-			</div>
-		);
-
-
+				</div>
+			);
+		}
 	}
 
 }

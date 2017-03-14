@@ -1,7 +1,8 @@
-import {observable} from 'mobx';
+import {observable, toJS} from 'mobx';
 import auth from '../auth';
 import Run from './run';
 import runs from 'store/runs';
+import shows from 'store/shows';
 
 class ShowData {
 
@@ -26,23 +27,6 @@ class ShowData {
 			.then(runs => {
 				this.runsLoaded = true;
 			});
-		// console.trace('test');
-
-		// auth.get(`/shows/${this.id}/runs`)
-		// 	.then(res => res.data)
-		// 	.then(data => data.map(r => new Run(r)))
-		// 	.then(runs => this.orderRuns(runs))
-		// 	.then(data => {
-		// 		if (data === null) {
-		// 			this.runs = [];
-		// 		} else {
-		// 			this.runs = data;
-		// 		}
-		//
-		// 		this.runsLoaded = true;
-		//
-		// 	});
-
 	}
 
 	orderRuns(runs) {
@@ -62,6 +46,28 @@ class ShowData {
 			.catch((err) =>{
 				console.warn(err)
 			});
+	}
+
+	save(){
+		return new Promise((resolve, reject) => {
+			if(this.id){
+				//update
+			} else {
+				//create
+				auth.post('/shows', this.serialize())
+					.then(res => res.data)
+					.then(data => data.data)
+					.then(show => {
+						this.id = show.id;
+						shows.items.push(this);
+						resolve(show);
+					});
+			}
+		});
+	}
+
+	serialize(){
+		return toJS(this);
 	}
 
 }

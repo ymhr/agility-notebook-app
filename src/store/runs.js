@@ -49,6 +49,10 @@ class Runs {
 
     }
 
+    create(showId, data) {
+		return auth.post(`/shows/${showId}/runs`, data);
+	}
+
 }
 
 const instance = new Runs();
