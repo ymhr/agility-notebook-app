@@ -5,6 +5,7 @@ import {observable, computed} from 'mobx';
 import DogSelect from '../dogs/dogSelect';
 import Run from 'store/models/run';
 import {createViewModel} from 'mobx-utils';
+import {hashHistory} from 'react-router';
 
 @inject('dogs', 'runs')
 @observer
@@ -52,7 +53,10 @@ class EditRun extends Component {
 
 		if(this.createMode){
 			this.run.save()
-				.then(id => this.formLoading = false);
+				.then(id => {
+					this.formLoading = false;
+					hashHistory.push(`/show/${this.run.showId}/run/${id}`);
+				});
 		} else {
 			this.run.save()
 				.then(res => console.log(res))

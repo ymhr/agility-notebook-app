@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
-import {Segment, Loader, Button} from 'semantic-ui-react';
+import {Segment, Loader, Button, Label} from 'semantic-ui-react';
 import DogExpando from '../dogs/dogExpando';
 
 import './style.scss';
@@ -12,10 +12,10 @@ class Run extends Component {
 
 	conditionallyAddDetails = (sectionTitle, values) => {
 		const {run} = this.props;
-
+// <span style={{marginRight:10, marginBottom:10, display: "inline-block"}} key={Math.random()}><strong>{v.label}</strong>: {run[v.value]}</span>
 		values = values
 			.map(v => {
-				return run[v.value] ?  <span style={{marginRight:10, marginBottom:10, display: "inline-block"}} key={Math.random()}><strong>{v.label}</strong>: {run[v.value]}</span> : null;
+				return run[v.value] ?  <Label style={{marginBottom: 10}} key={Math.random()}><strong>{v.label}</strong> <Label.Detail>{run[v.value]}</Label.Detail></Label> : null;
 			})
 			.filter(v => v);
 
