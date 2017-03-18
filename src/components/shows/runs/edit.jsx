@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Form} from 'semantic-ui-react';
+import {Button, Form, Loader} from 'semantic-ui-react';
 import {inject, observer} from 'mobx-react';
 import {observable, computed} from 'mobx';
 import DogSelect from '../dogs/dogSelect';
@@ -18,13 +18,25 @@ class EditRun extends Component {
 
 	constructor(props){
 		super(props);
-		this.state = {open: false};
-		this.run = new Run({showId: this.props.params.id});
-	}
 
-	toggleOpen = () => {
-		this.setState({'open': !this.state.open});
-	};
+		this.formLoading = true;
+
+		if(this.props.params.runId){
+			// this.run = {};
+			this.props.runs.get(this.props.params.id, this.props.params.runId)
+				.then(run => {
+					this.run = run;
+					return this.run;
+				})
+				.then(run => this.formLoading = false);
+
+			this.formLoading = false;
+		} else {
+			this.run = new Run({showId: this.props.params.id});
+			this.formLoading = false;
+		}
+
+	}
 
 	onChange = (e) => {
 		this.run[e.target.name] = e.target.value;
@@ -37,11 +49,22 @@ class EditRun extends Component {
 	onSubmit = (e, data) => {
 		e.preventDefault();
 		this.formLoading = true;
-		this.run.save()
-			.then(id => this.formLoading = false);
+
+		if(this.createMode){
+			this.run.save()
+				.then(id => this.formLoading = false);
+		} else {
+			this.run.save()
+				.then(res => console.log(res))
+				.then(res => this.formLoading = false);
+		}
+
 	};
 
 	render(){
+
+		if(!this.run) return <Loader />;
+
 		const typeOptions = [
 			{key: 'agility', text: 'Agility', value: 'agility'},
 			{key: 'jumping', text: 'Jumping', value: 'jumping'},

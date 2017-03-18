@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
-import {Segment, Loader} from 'semantic-ui-react';
+import {Segment, Loader, Button} from 'semantic-ui-react';
 import DogExpando from '../dogs/dogExpando';
 
 import './style.scss';
@@ -66,10 +66,14 @@ class Run extends Component {
 				</div>
 			);
 
+			const editButton = (
+				<Button circular icon="edit" onClick={this.props.editButtonClickHandler} />
+			);
+
 			return (
 				<Segment clearing>
 					{/*<h3><span style={{color:'#ddd'}}>Run #{run.order + 1}</span><br />Grade {run.grade}</h3>*/}
-					<h3>Grade {run.grade}</h3>
+					<h3>Grade {run.grade} {editButton}</h3>
 					<h4>{dogInfo} ran {run.currentGrade ? <span>at grade {run.currentGrade}</span> : ''}</h4>
 					{/*Who ran:
 					{ results ? <h4>Your result: {results}</h4> : ''}*/}

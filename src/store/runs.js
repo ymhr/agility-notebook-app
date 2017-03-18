@@ -25,13 +25,12 @@ class Runs {
         });
     }
 
-    async get(id){
-
+    async get(showId, id){
         try{
-            let item = await this.getFromLocal(id);
+            let item = await this.getFromLocal(showId, id);
 
             if(!item){
-                item = this.getFromRemote(id);
+                item = await this.getFromRemote(showId, id);
             }
             return item;
         } catch (err) {
@@ -39,14 +38,45 @@ class Runs {
         }
     }
 
-    getFromLocal(id){
-        for(let show in Object.keys(this.items)){
-            console.log(show);
-        }
+    getFromLocal(showId, id){
+        return new Promise((resolve, reject) => {
+
+            if(!Object.keys(this.items).length) resolve(null);
+
+            Object.keys(this.items).forEach(show => {
+                if(show == showId){
+                    const runs = this.items[show];
+                    if(!runs){
+                        resolve(null);
+                        return;
+                    }
+
+                    const run = runs.filter(r => r.id == id)[0];
+
+                    if(run) {
+                        resolve(run);
+                        return;
+                    } else {
+                        resolve(null);
+                        return;
+                    }
+                }
+            });
+            resolve(null);
+        });
     }
 
-    getFromRemote(id){
-
+    getFromRemote(showId, id){
+        return new Promise((resolve, reject) => {
+            auth.get(`/shows/${showId}/runs/${id}`)
+                .then(res => {
+                    const run = new Run(res.data);
+                    if(!Array.isArray(this.items[showId])) this.items[showId] = [];
+                    this.items[showId].push(run);
+                    resolve(run);
+                })
+                .catch(err => reject(err));
+        });
     }
 
     create(showId, data) {

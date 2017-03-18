@@ -20,7 +20,8 @@ const routes = [
 					{path: 'add', component: EditShow, label: 'Add show'},
 					{path: ':id/edit', component: EditShow, label: 'Edit show'},
 					{path: ':id', component: ViewShow, label: 'View show', childRoutes: [
-						{path: 'run/add', component: EditRun, label: 'Add run'}
+						{path: 'run/add', component: EditRun, label: 'Add run'},
+						{path: 'run/:runId', component: EditRun, label: 'Edit run'}
 					]}
 			]
 			},
@@ -28,8 +29,7 @@ const routes = [
 			{
 				path: '/dogs', component: Dogs, label: 'Dogs', childRoutes: [
 					{path: 'add', component: EditDog, label: 'New Dog'},
-					{path: ':id/edit', component: EditDog, label: 'Edit dog'},
-					// {path: ':id', component: ViewDog, label: 'View Dog'}
+					{path: ':id/edit', component: EditDog, label: 'Edit dog'}
 			]
 			},
 			{path: '/settings', component: Settings, label: 'Settings'}

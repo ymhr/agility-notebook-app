@@ -22,6 +22,10 @@ class View extends Component {
 		hashHistory.push(`shows/${this.props.show.id}/run/add`);
 	};
 
+	editButtonClickHandler = (id) => {
+		hashHistory.push(`shows/${this.props.show.id}/run/${id}`)
+	}
+
 	render() {
 
 		const {show} = this.props;
@@ -29,7 +33,7 @@ class View extends Component {
 		let runs = <Loader active inline />;
 		if(show.runsLoaded)
 		{
-			runs = show.runs.map(r => <Run key={r.id} run={r} show={show}/>);
+			runs = show.runs.map(r => <Run key={r.id} run={r} show={show} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.id)}/>);
 		}
 
 		if(this.props.children){

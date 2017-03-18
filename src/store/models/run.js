@@ -111,7 +111,12 @@ class Run {
 	save(){
 		return new Promise((resolve, reject) => {
 			if(this.id){
-				// auth.post(`/shows/${this.showId}/runs`, this.serialize())
+				auth.post(`/shows/${this.showId}/runs/${this.id}`, this.serialize())
+					.then(res => resolve(res))
+					.catch(err => {
+						console.warn(err);
+						reject(err);
+					})
 			} else {
 				//create mode
 				auth.post(`/shows/${this.showId}/runs`, this.serialize())
@@ -126,7 +131,12 @@ class Run {
 	}
 
 	serialize(){
-		return toJS(this);
+		const serializableObject = Object.assign({}, this, {
+				show: undefined,
+				dog: undefined
+		});
+
+		return serializableObject;
 	}
 
 }
