@@ -41,6 +41,7 @@ class Shows extends Component {
 					const tempIndex = this.generateMonthNumber(firstMonth);
 					months[tempIndex] = [];
 				}
+				months[this.generateMonthNumber(lastMonth)] = [];
 			} else {
 				each(shows, s => {
 					months[this.generateMonthNumber(moment(s.startDate))] = [];
