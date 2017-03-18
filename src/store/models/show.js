@@ -4,7 +4,7 @@ import Run from './run';
 import runs from 'store/runs';
 import shows from 'store/shows';
 
-class ShowData {
+class Show {
 
 	@observable id;
 	@observable name;
@@ -56,7 +56,6 @@ class ShowData {
 				//create
 				auth.post('/shows', this.serialize())
 					.then(res => res.data)
-					.then(data => data.data)
 					.then(show => {
 						this.id = show.id;
 						shows.items.push(this);
@@ -72,4 +71,4 @@ class ShowData {
 
 }
 
-export default ShowData;
+export default Show;

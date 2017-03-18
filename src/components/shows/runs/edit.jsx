@@ -56,27 +56,32 @@ class EditRun extends Component {
 			<div>
 				<p>Add a run here, etc {this.run.clear ? 'clear' : 'faults'}</p>
 				<Form onSubmit={this.onSubmit} loading={this.formLoading}>
-					<Form.Field>
-						<label>
-							Class grade
-							<input type="text" name="grade" placeholder="e.g. 1-3" value={this.run.grade} onChange={this.onChange}/>
-						</label>
-					</Form.Field>
+					<Form.Group widths="equal">
+						<Form.Field>
+							<label>
+								Class grade
+								<input type="text" name="grade" placeholder="e.g. 1-3" value={this.run.grade} onChange={this.onChange}/>
+							</label>
+						</Form.Field>
+						<Form.Input label="Grade at the time" placeholder="When you did this run, what grade were you?" name="currentGrade" value={this.run.currentGrade} onChange={this.onChange} />
+					</Form.Group>
 					<Form.Field>
 						<DogSelect name="dogId" value={this.run.dogId} onChange={this.onSelectChange}/>
 					</Form.Field>
-					<Form.Field>
-						<label>
-							What place did you get? (leave blank if you did not place)
-							<input type="text" name="place" placeholder="e.g. 1" value={this.run.place} onChange={this.onChange}/>
-						</label>
-					</Form.Field>
-					<Form.Field>
-						<label>
-							How many faults did you get? (leave blank if you were clear!)
-							<input type="number" min="0" step="0.001" name="faults" placeholder="Faults" value={this.run.faults} onChange={this.onChange}/>
-						</label>
-					</Form.Field>
+					<Form.Group widths="equal">
+						<Form.Field>
+							<label>
+								What place did you get? (leave blank if you did not place)
+								<input type="text" name="place" placeholder="e.g. 1" value={this.run.place} onChange={this.onChange}/>
+							</label>
+						</Form.Field>
+						<Form.Field>
+							<label>
+								How many faults did you get? (leave blank if you were clear!)
+								<input type="number" min="0" step="0.001" name="faults" placeholder="Faults" value={this.run.faults} onChange={this.onChange}/>
+							</label>
+						</Form.Field>
+					</Form.Group>
 					<Form.Group widths="equal">
 						<Form.Input label="Running Order" placeholder="Which number are you?" name="runningOrder" value={this.run.runningOrder} onChange={this.onChange} />
 						<Form.Input label="Ring Number" placeholder="Which ring is it in?" name="ringNumber" value={this.run.ringNumber} onChange={this.onChange} />
@@ -90,9 +95,8 @@ class EditRun extends Component {
 						</Form.Field>
 						<Form.Input label="Judge" placeholder="Who was the judge" name="judge" value={this.run.judge} onChange={this.onChange} />
 					</Form.Group>
-					<Form.Group>
+					<Form.Group widths="equal">
 						<Form.Select label="Type" placeholder="Type of class" options={typeOptions} value={this.run.type} name="type" onChange={this.onSelectChange} />
-						<Form.Input label="Judge" placeholder="Who was the judge" name="judge" value={this.run.judge} value={this.run.judge} onChange={this.onChange}/>
 						<Form.Field>
 							<label>
 								Course length
@@ -100,7 +104,7 @@ class EditRun extends Component {
 							</label>
 						</Form.Field>
 					</Form.Group>
-					<Form.Group>
+					<Form.Group widths="equal">
 						<Form.Select label="Graded or combined" options={gradeTypeOptions} name="gradeType" value={this.run.gradeType} onChange={this.onSelectChange} />
 						<Form.Field>
 							<label>
@@ -109,7 +113,7 @@ class EditRun extends Component {
 							</label>
 						</Form.Field>
 					</Form.Group>
-					<Form.Group>
+					<Form.Group widths="equal">
 						<Form.Field>
 							<label>
 								Course time

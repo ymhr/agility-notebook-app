@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Icon, Modal} from 'semantic-ui-react';
+import {Icon, Modal, Popup} from 'semantic-ui-react';
 
 class DogExpando extends Component {
 
@@ -26,9 +26,12 @@ class DogExpando extends Component {
 		};
 
 		if (!this.state.open) {
+			const label = "Click this to view details of " + dog.name;
 			return (
 				<div className={this.props.className}>
-					<span onClick={this.expand}>{dog.name} <Icon name="edit" /></span>
+					<Popup
+						trigger={<span onClick={this.expand}>{dog.name} <Icon name="external" /></span>}
+						content={label} />
 				</div>
 			);
 		} else {

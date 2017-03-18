@@ -18,6 +18,10 @@ class View extends Component {
 		hashHistory.push(`shows/${this.props.show.id}/edit`);
 	};
 
+	addRun = () => {
+		hashHistory.push(`shows/${this.props.show.id}/run/add`);
+	};
+
 	render() {
 
 		const {show} = this.props;
@@ -41,8 +45,8 @@ class View extends Component {
 					<h1>{show.name}</h1>
 
 					<h2>Runs</h2>
-					{/*<Button >Add a run!</Button>*/}
-					<AddRunModal showId={show.id}/>
+					<Button onClick={this.addRun}>Add run</Button>
+					{/*}<AddRunModal showId={show.id}/>*/}
 					{runs}
 
 				</div>

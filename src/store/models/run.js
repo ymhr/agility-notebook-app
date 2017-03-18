@@ -27,23 +27,26 @@ class Run {
 	@observable courseTime;
 	@observable runTime; //my time
 	@observable courseLength;
+	@observable currentGrade;
 	//Weather, surface type, indoor/outdoor?
 	@observable loaded = false;
 
 	@computed get clear(){
-		if(!(this.faults || this.faults >= 0)){
+		if(!(this.faults || this.faults == 0)){
 			console.log('faults', this.faults);
 			const showStartDate = moment(this.show.startDate);
 			const diff = moment().diff(showStartDate, 'day');
-			if(this.diff >	 0){
-				return true;
+			if(this.diff > 0){
+				return 'clear';
+			} else {
+				return 'Not run';
 			}
 		}
 
-		return false;
+		return 'faults';
 	}
 
-	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber, classSize, judge, type, gradeType, classNumber, courseTime, runTime, courseLength}){
+	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber, classSize, judge, type, gradeType, classNumber, courseTime, runTime, courseLength, currentGrade}){
 		this.id = id;
 		this.showId = showId;
 		this.order = order;
@@ -62,6 +65,7 @@ class Run {
 		this.courseTime = courseTime;
 		this.runTime = runTime;
 		this.courseLength = courseLength;
+		this.currentGrade = currentGrade;
 
 		if(this.id){
 			let loadedArray = [

@@ -56,8 +56,6 @@ class Edit extends Component {
 
 			this.show.save()
 				.then(res => {
-					console.log('success', res);
-					this.props.shows.items.push(new Show(res.data));
 					this.formLoading = false;
 					hashHistory.push('/');
 				})
@@ -77,8 +75,6 @@ class Edit extends Component {
 					this.formLoading = false;
 				})
 		}
-
-
 	};
 
 	onChange = (e) => {
@@ -87,7 +83,6 @@ class Edit extends Component {
 
 	setDate = (type = 'startDate', date) => {
 		this.vm[type] = date;
-		console.log(type, this.vm[type]);
 	};
 
 	render() {

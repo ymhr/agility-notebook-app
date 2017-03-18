@@ -48,7 +48,7 @@ class Shows extends Component {
 			}
 
 			return months;
-			
+
 		}
 
 	};
