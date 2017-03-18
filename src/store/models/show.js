@@ -51,7 +51,8 @@ class Show {
 	save(){
 		return new Promise((resolve, reject) => {
 			if(this.id){
-				//update
+					auth.post(`/shows/${this.id}`, this.serialize())
+						.then(res = resolve(this));
 			} else {
 				//create
 				auth.post('/shows', this.serialize())

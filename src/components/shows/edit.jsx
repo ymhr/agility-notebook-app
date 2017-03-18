@@ -17,7 +17,7 @@ import {resolve} from 'react-resolver';
 @observer
 class Edit extends Component {
 
-	show;
+	@observable show;
 	vm;
 	createMode = false;
 
@@ -33,14 +33,12 @@ class Edit extends Component {
 			this.show = new Show({});
 		}
 
-		this.vm = createViewModel(this.show);
-
 		if (this.createMode) {
-			this.vm.startDate = moment();
-			this.vm.endDate = moment();
+			this.show.startDate = moment();
+			this.show.endDate = moment();
 		} else {
-			this.vm.startDate = moment(this.show.startDate);
-			this.vm.endDate = moment(this.show.endDate);
+			this.show.startDate = moment(this.show.startDate);
+			this.show.endDate = moment(this.show.endDate);
 		}
 
 	}
@@ -52,8 +50,6 @@ class Edit extends Component {
 
 		if (this.createMode) {
 			// this.props.shows.create(data)
-			this.vm.submit();
-
 			this.show.save()
 				.then(res => {
 					this.formLoading = false;
@@ -64,9 +60,8 @@ class Edit extends Component {
 					this.formLoading = false;
 				});
 		} else {
-			this.props.shows.update(this.show.id, data)
+			this.show.save()
 				.then(res => {
-					this.vm.submit();
 					this.formLoading = false;
 					hashHistory.push(`/shows/${this.show.id}`)
 				})
@@ -78,11 +73,11 @@ class Edit extends Component {
 	};
 
 	onChange = (e) => {
-		this.vm[e.target.name] = e.target.value;
+		this.show[e.target.name] = e.target.value;
 	};
 
 	setDate = (type = 'startDate', date) => {
-		this.vm[type] = date;
+		this.show[type] = date;
 	};
 
 	render() {
@@ -94,17 +89,17 @@ class Edit extends Component {
 					<Form.Field>
 						<label htmlFor="name">Name</label>
 						<Form.Input name="name" placeholder="What is the name of the show?" onChange={this.onChange}
-									defaultValue={this.vm.name}/>
+									defaultValue={this.show.name}/>
 					</Form.Field>
 					<Form.Field>
 						<label htmlFor="postcode">Postcode</label>
 						<Form.Input name="postcode" placeholder="Where was the show?" onChange={this.onChange}
-									defaultValue={this.vm.postcode}/>
+									defaultValue={this.show.postcode}/>
 					</Form.Field>
 					<Form.Field>
 						<label htmlFor="notes">Notes</label>
 						<Form.TextArea name="notes" placeholder="Do you have any notes for this show?"
-									   defaultValue={this.vm.notes} onChange={this.onChange} value={this.vm.notes}/>
+									   defaultValue={this.show.notes} onChange={this.onChange} value={this.show.notes}/>
 					</Form.Field>
 					<Grid columns={3}>
 						<Grid.Row>
@@ -114,16 +109,16 @@ class Edit extends Component {
 									<DatePicker name="startDate" placeholder="Start date"
 												dateFormat="dddd Do MMMM, YYYY"
 												onChange={this.setDate.bind(this, 'startDate')}
-												selected={this.vm.startDate}/>
+												selected={this.show.startDate}/>
 								</Form.Field>
 							</Grid.Column>
 							<Grid.Column>
 								<Form.Field>
 									<label htmlFor="endDate">End date</label>
 									<DatePicker name="endDate" placeholder="End date" dateFormat="dddd Do MMMM, YYYY"
-												minDate={this.vm.startDate}
+												minDate={this.show.startDate}
 												onChange={this.setDate.bind(this, 'endDate')}
-												selected={this.vm.endDate}/>
+												selected={this.show.endDate}/>
 								</Form.Field>
 							</Grid.Column>
 						</Grid.Row>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {observable} from 'mobx';
 import {observer, inject} from 'mobx-react';
 import {createViewModel} from 'mobx-utils';
-import {Form, Button, Select} from 'semantic-ui-react';
+import {Form, Button, Select, Loader} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
 import Dog from 'store/models/dog';
 import {resolve} from 'react-resolver';
@@ -11,10 +11,10 @@ import {resolve} from 'react-resolver';
 @observer
 class Edit extends Component {
 
-    dog;
+    @observable dog;
     @observable vm;
     @observable loading = false;
-    createMode = false;
+    @observable createMode = false;
 
     constructor(props){
         super(props);
@@ -36,27 +36,28 @@ class Edit extends Component {
 
     loadDog = (id) => {
         this.loading = true;
-        this.vm = {};
+        // this.dog = {};
         this.props.dogs.get(id || this.props.params.id)
             .then(d => {
+                this.loading = false;
                 this.dog = d;
-        		this.createVm();
+        		// this.createVm();
             })
             .catch(err => {
                 console.error('Failed to load dog with id', id || this.props.params.id);
+                this.loading = false;
 				this.dog = new Dog({});
 				this.createMode = true;
-				this.createVm();
+				// this.createVm();
             });
     }
 
-	createVm = () => {
-		this.vm = createViewModel(this.dog);
-		this.loading = false;
-	}
-
     onChange = (e) => {
-        this.vm[e.target.name] = e.target.value;
+        this.dog[e.target.name] = e.target.value;
+    };
+
+    onSelectChange = (e, selectedItem) => {
+        this.dog[selectedItem.name] = selectedItem.value;
     };
 
     save = (e, data) => {
@@ -65,20 +66,15 @@ class Edit extends Component {
         this.loading = true;
 
         if(this.createMode){
-            this.props.dogs.create(data)
+            this.dog.save()
                 .then(res => {
                     this.loading = false;
-                    this.vm.submit();
-                    // const newDog = new Dog(res.data.data);
-                    // this.props.dogs.addToLocal(newDog);
-                    hashHistory.push(`/dogs/${newDog.id}/edit`);
+                    hashHistory.push(`/dogs/${this.dog.id}/edit`);
                 });
 
         } else {
-            this.props.dogs.update(this.props.routeParams.id, data)
+            this.dog.save()
                 .then((res) => {
-                    this.vm.submit();
-                    // this.props.dogs.get(this.dog.id);
                     this.loading = false;
                 });
         }
@@ -87,13 +83,15 @@ class Edit extends Component {
 
     render(){
 
+        if(!this.dog) return <Loader />;
+
         const sizeOptions = [
             {text: 'Small', value: 'small'}, {text: 'Medium', value: 'medium'}, {text: 'Large', value: 'large'}
         ];
 
         const heightSelect = (
-            this.vm.height ?
-                <Form.Select label="Height" name="height" placeholder="What size does your dog jump" options={sizeOptions} value={this.vm.height} onChange={this.onChange} /> :
+            this.dog.height ?
+                <Form.Select label="Height" name="height" placeholder="What size does your dog jump" options={sizeOptions} value={this.dog.height} onChange={this.onChange} /> :
                 <Form.Select label="Height" name="height" placeholder="What size does your dog jump" options={sizeOptions} onChange={this.onChange} />
         )
 
@@ -102,12 +100,12 @@ class Edit extends Component {
             <div>
 
                 <Form loading={this.loading} onSubmit={this.save}>
-                    <Form.Input label="Name" name="name" placeholder="What is your dogs name?" value={this.vm.name} onChange={this.onChange} />
-                    <Form.Input label="Registered Name" name="officialName" placeholder="What is your dogs KC name?" value={this.vm.officialName} onChange={this.onChange} />
-                    <Form.Input type="number" label="Grade" name="grade" placeholder="What grade is your dog?" value={this.vm.grade} onChange={this.onChange} />
-                    {/*<Form.Input label="Breed" name="breed" placeholder="What breed is your dog?" value={this.vm.breed} onChange={this.onChange} />*/}
-                    {heightSelect}
-                    <Form.TextArea label="Notes" name="notes" placeholder="Notes" value={this.vm.notes} onChange={this.onChange} />
+                    <Form.Input label="Name" name="name" placeholder="What is your dogs name?" value={this.dog.name} onChange={this.onChange} />
+                    <Form.Input label="Registered Name" name="officialName" placeholder="What is your dogs KC name?" value={this.dog.officialName} onChange={this.onChange} />
+                    <Form.Input type="number" label="Grade" name="grade" placeholder="What grade is your dog?" value={this.dog.grade} onChange={this.onChange} />
+                    {/*<Form.Input label="Breed" name="breed" placeholder="What breed is your dog?" value={this.dog.breed} onChange={this.onChange} />*/}
+                    <Form.Select label="Height" name="height" placeholder="What size does your dog jump" options={sizeOptions} defaultValue={this.dog.height} onChange={this.onSelectChange} />
+                    <Form.TextArea label="Notes" name="notes" placeholder="Notes" value={this.dog.notes} onChange={this.onChange} />
                     <Button type="submit">Submit</Button>
                 </Form>
 

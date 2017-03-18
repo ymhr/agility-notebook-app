@@ -111,7 +111,7 @@ class Run {
 	save(){
 		return new Promise((resolve, reject) => {
 			if(this.id){
-				//update mode
+				// auth.post(`/shows/${this.showId}/runs`, this.serialize())
 			} else {
 				//create mode
 				auth.post(`/shows/${this.showId}/runs`, this.serialize())
