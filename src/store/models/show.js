@@ -12,16 +12,33 @@ class Show {
 	@observable endDate;
 	@observable postcode;
 	@observable notes;
+	@observable closingDate;
+	@observable bookedIn;
+	@observable paid;
+	@observable bookingPlatform;
+	@observable hotelNeeded;
+	@observable hotelBooked;
+	@observable holidayNeeded;
+	@observable holidayBooked;
+
 	@observable runs = [];
 	@observable runsLoaded = false;
 
-	constructor({id, name, startDate, endDate, postcode, notes}) {
+	constructor({id, name, startDate, endDate, postcode, notes, closingDate, bookedIn, paid, bookingPlatform, hotelNeeded, hotelBooked, holidayNeeded, holidayBooked}) {
 		this.id = id;
 		this.name = name;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.postcode = postcode;
 		this.notes = notes;
+		this.closingDate = closingDate;
+		this.bookedIn = bookedIn;
+		this.paid = paid;
+		this.bookingPlatform = bookingPlatform;
+		this.hotelNeeded = hotelNeeded;
+		this.hotelBooked = hotelBooked;
+		this.holidayNeeded = holidayNeeded;
+		this.holidayBooked = holidayBooked;
 
 		this.loadRuns()
 			.then(runs => {

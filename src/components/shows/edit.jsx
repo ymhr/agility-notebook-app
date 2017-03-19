@@ -36,9 +36,11 @@ class Edit extends Component {
 		if (this.createMode) {
 			this.show.startDate = moment();
 			this.show.endDate = moment();
+			this.show.closingDate = moment();
 		} else {
 			this.show.startDate = moment(this.show.startDate);
 			this.show.endDate = moment(this.show.endDate);
+			this.show.closingDate = moment(this.show.closingDate);
 		}
 
 	}
@@ -75,6 +77,10 @@ class Edit extends Component {
 	onChange = (e) => {
 		this.show[e.target.name] = e.target.value;
 	};
+
+	onCheckboxChange = (e, data) => {
+		this.show[data.name] = data.checked;
+	}
 
 	setDate = (type = 'startDate', date) => {
 		this.show[type] = date;
@@ -121,8 +127,29 @@ class Edit extends Component {
 												selected={this.show.endDate}/>
 								</Form.Field>
 							</Grid.Column>
+							<Grid.Column>
+								<Form.Field>
+									<label htmlFor="closingDate">Closing date</label>
+									<DatePicker name="closingDate" placeholder="Closing date"
+												dateFormat="dddd Do MMMM, YYYY"
+												onChange={this.setDate.bind(this, 'closingDate')}
+												selected={this.show.closingDate}/>
+								</Form.Field>
+							</Grid.Column>
 						</Grid.Row>
 					</Grid>
+					<br />
+					<Form.Group widths="equal">
+						<Form.Checkbox label="Booked?" toggle value={this.show.bookedIn} name="bookedIn" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Paid?" toggle value={this.show.paid} name="paid" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Hotel Needed?" toggle value={this.show.hotelNeeded} name="hotelNeeded" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Holiday Needed?" toggle value={this.show.holidayNeeded} name="holidayNeeded" onChange={this.onCheckboxChange}/>
+					</Form.Group>
+					<Form.Group widths="equal">
+						<Form.Checkbox label="Hotel Booked?" toggle value={this.show.hotelBooked} name="hotelBooked" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Holiday Booked?" toggle value={this.show.holidayBooked} name="holidayBooked" onChange={this.onCheckboxChange}/>
+					</Form.Group>
+					<Form.Input label="Booking Platform" value={this.show.bookingPlatform} name="bookingPlatform" placeholder="Booking Platform" onChange={this.onChange}/>
 					<Button primary>{this.createMode ? 'Add show' : 'Save changes'}</Button>
 				</Form>
 			</div>
