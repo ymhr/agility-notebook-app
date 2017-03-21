@@ -140,14 +140,14 @@ class Edit extends Component {
 					</Grid>
 					<br />
 					<Form.Group widths="equal">
-						<Form.Checkbox label="Booked?" toggle value={this.show.bookedIn} name="bookedIn" onChange={this.onCheckboxChange}/>
-						<Form.Checkbox label="Paid?" toggle value={this.show.paid} name="paid" onChange={this.onCheckboxChange}/>
-						<Form.Checkbox label="Hotel Needed?" toggle value={this.show.hotelNeeded} name="hotelNeeded" onChange={this.onCheckboxChange}/>
-						<Form.Checkbox label="Holiday Needed?" toggle value={this.show.holidayNeeded} name="holidayNeeded" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Booked?" toggle checked={this.show.bookedIn} name="bookedIn" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Paid?" toggle checked={this.show.paid} name="paid" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Hotel Needed?" toggle checked={this.show.hotelNeeded} name="hotelNeeded" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Holiday Needed?" toggle checked={this.show.holidayNeeded} name="holidayNeeded" onChange={this.onCheckboxChange}/>
 					</Form.Group>
 					<Form.Group widths="equal">
-						<Form.Checkbox label="Hotel Booked?" toggle value={this.show.hotelBooked} name="hotelBooked" onChange={this.onCheckboxChange}/>
-						<Form.Checkbox label="Holiday Booked?" toggle value={this.show.holidayBooked} name="holidayBooked" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Hotel Booked?" toggle checked={this.show.hotelBooked} name="hotelBooked" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Holiday Booked?" toggle checked={this.show.holidayBooked} name="holidayBooked" onChange={this.onCheckboxChange}/>
 					</Form.Group>
 					<Form.Input label="Booking Platform" value={this.show.bookingPlatform} name="bookingPlatform" placeholder="Booking Platform" onChange={this.onChange}/>
 					<Button primary>{this.createMode ? 'Add show' : 'Save changes'}</Button>

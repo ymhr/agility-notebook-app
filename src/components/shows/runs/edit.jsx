@@ -7,7 +7,7 @@ import Run from 'store/models/run';
 import {createViewModel} from 'mobx-utils';
 import {hashHistory} from 'react-router';
 
-@inject('dogs', 'runs')
+@inject('dogs', 'runs', 'shows')
 @observer
 class EditRun extends Component {
 

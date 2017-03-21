@@ -4,6 +4,7 @@ import shows from '../shows';
 import Dog from './dog';
 import moment from 'moment';
 import auth from '../auth';
+import runs from '../runs';
 
 class Run {
 
@@ -68,15 +69,19 @@ class Run {
 		this.currentGrade = currentGrade;
 
 		if(this.id){
-			let loadedArray = [
-				this.loadDog(),
-				this.loadShow()
-			];
-
-			Promise.all(loadedArray).then((values) => {
-				this.loaded = true;
-			})
+			this.load();
 		}
+	}
+
+	load(){
+		let loadedArray = [
+			this.loadDog(),
+			this.loadShow()
+		];
+
+		Promise.all(loadedArray).then((values) => {
+			this.loaded = true;
+		})
 	}
 
 	loadDog(){
@@ -124,6 +129,9 @@ class Run {
 					.then(data => data.data)
 					.then(run => {
 						this.id = run.id;
+						console.log(run.id);
+						runs.addRunToShowList(this);
+						this.load();
 						resolve(this.id);
 					});
 			}

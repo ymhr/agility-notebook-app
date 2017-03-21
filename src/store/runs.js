@@ -71,7 +71,7 @@ class Runs {
             auth.get(`/shows/${showId}/runs/${id}`)
                 .then(res => {
                     const run = new Run(res.data);
-                    if(!Array.isArray(this.items[showId])) this.items[showId] = [];
+                    if(!Array.isArray(this.items[showId])) this.items[showId] = observable([]);
                     this.items[showId].push(run);
                     resolve(run);
                 })
@@ -82,6 +82,14 @@ class Runs {
     create(showId, data) {
 		return auth.post(`/shows/${showId}/runs`, data);
 	}
+
+    addRunToShowList(run){
+        if(Array.isArray(this.items[run.showId])){
+            this.items[run.showId].push(run);
+        } else {
+            this.items[run.showId] = observable([run]);
+        }
+    }
 
 }
 
