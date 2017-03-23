@@ -45,7 +45,7 @@ class Run extends Component {
 
 			const dogInfo = (run.dog) ? <DogExpando dog={run.dog} className="dogRunning" /> : <Loader active />;
 
-			const day = (run.date) ? run.date.format('dddd do') : '';
+			const day = (run.date) ? run.date.format('dddd Do') : '';
 
 			const expandedContent = (
 				<div>
