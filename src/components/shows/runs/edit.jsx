@@ -6,6 +6,7 @@ import DogSelect from '../dogs/dogSelect';
 import Run from 'store/models/run';
 import {createViewModel} from 'mobx-utils';
 import {hashHistory} from 'react-router';
+import DatePicker from 'react-datepicker';
 
 @inject('dogs', 'runs', 'shows')
 @observer
@@ -16,6 +17,7 @@ class EditRun extends Component {
 	@computed get createMode(){
 		return (this.run.id ? false : true);
 	}
+	@observable show;
 
 	constructor(props){
 		super(props);
@@ -23,18 +25,20 @@ class EditRun extends Component {
 		this.formLoading = true;
 
 		if(this.props.params.runId){
-			// this.run = {};
 			this.props.runs.get(this.props.params.id, this.props.params.runId)
 				.then(run => {
 					this.run = run;
 					return this.run;
 				})
-				.then(run => this.formLoading = false);
+				// .then(this.props.shows.get(this.props.params.id).then(show => this.show = show))
+				.then(this.props.shows.get(this.props.params.id).then(show => {this.show = show; console.log(show); this.formLoading = false;}))
+				// .then(run => this.formLoading = false);
 
-			this.formLoading = false;
+			// this.formLoading = false;
 		} else {
 			this.run = new Run({showId: this.props.params.id});
-			this.formLoading = false;
+			this.props.shows.get(this.props.params.id).then(show => this.show = show)
+				.then(() => this.formLoading = false);
 		}
 
 	}
@@ -45,6 +49,10 @@ class EditRun extends Component {
 
 	onSelectChange = (e, selectedItem) => {
 		this.run[selectedItem.name] = selectedItem.value;
+	};
+
+	setDate = (type = 'date', date) => {
+		this.run[type] = date;
 	};
 
 	onSubmit = (e, data) => {
@@ -78,6 +86,13 @@ class EditRun extends Component {
 			{key: 'graded', text: 'Graded', value: 'graded'},
 			{key: 'combined', text: 'Combined', value: 'combined'}
 		];
+
+		if(!this.run.date) this.run.date = this.show.startDate;
+		console.log(this.run.date);
+
+		if(this.formLoading){
+			return <Loader />
+		}
 
 		return (
 			<div>
@@ -154,6 +169,17 @@ class EditRun extends Component {
 							</label>
 						</Form.Field>
 					</Form.Group>
+					<Form.Field>
+						<label htmlFor="date">Run Date</label>
+						<DatePicker name="date" placeholder="Run Date"
+									dateFormat="dddd Do MMMM, YYYY"
+									minDate={this.show.startDate}
+									maxDate={this.show.endDate}
+									onChange={this.setDate.bind(this, 'date')}
+									selected={this.run.date}
+									style={{width: "50%"}}
+									/>
+					</Form.Field>
 					<Form.TextArea autoHeight value={this.run.notes} onChange={this.onChange} name="notes" label="Notes" placeholder="Enter any other notes you have about this show. This space will expand as you type." />
 					<Button primary type="submit">{this.createMode ? 'Add run' : 'Save changes'}</Button>
 				</Form>

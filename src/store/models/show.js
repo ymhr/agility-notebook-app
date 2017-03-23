@@ -3,6 +3,7 @@ import auth from '../auth';
 import Run from './run';
 import runs from 'store/runs';
 import shows from 'store/shows';
+import moment from 'moment';
 
 class Show {
 
@@ -39,6 +40,9 @@ class Show {
 		this.hotelBooked = hotelBooked;
 		this.holidayNeeded = holidayNeeded;
 		this.holidayBooked = holidayBooked;
+
+		this.startDate = moment(startDate);
+		this.endDate = moment(endDate);
 
 		this.loadRuns()
 			.then(runs => {

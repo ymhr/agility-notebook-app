@@ -29,6 +29,7 @@ class Run {
 	@observable runTime; //my time
 	@observable courseLength;
 	@observable currentGrade;
+	@observable date;
 	//Weather, surface type, indoor/outdoor?
 	@observable loaded = false;
 
@@ -47,7 +48,7 @@ class Run {
 		return 'faults';
 	}
 
-	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber, classSize, judge, type, gradeType, classNumber, courseTime, runTime, courseLength, currentGrade}){
+	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber, classSize, judge, type, gradeType, classNumber, courseTime, runTime, courseLength, currentGrade, date}){
 		this.id = id;
 		this.showId = showId;
 		this.order = order;
@@ -67,6 +68,12 @@ class Run {
 		this.runTime = runTime;
 		this.courseLength = courseLength;
 		this.currentGrade = currentGrade;
+		this.date = date;
+
+		if(!date)
+			this.date = moment();
+		else
+			this.date = moment(date);
 
 		if(this.id){
 			this.load();
