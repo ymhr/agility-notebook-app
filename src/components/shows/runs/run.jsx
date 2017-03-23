@@ -45,6 +45,7 @@ class Run extends Component {
 
 			const dogInfo = (run.dog) ? <DogExpando dog={run.dog} className="dogRunning" /> : <Loader active />;
 
+			const day = (run.date) ? run.date.format('dddd do') : '';
 
 			const expandedContent = (
 				<div>
@@ -73,7 +74,7 @@ class Run extends Component {
 			return (
 				<Segment clearing>
 					{/*<h3><span style={{color:'#ddd'}}>Run #{run.order + 1}</span><br />Grade {run.grade}</h3>*/}
-					<h3>Grade {run.grade} {editButton}</h3>
+					<h3>Grade {run.grade}, {day} {editButton}</h3>
 					<h4>{dogInfo} ran {run.currentGrade ? <span>at grade {run.currentGrade}</span> : ''}</h4>
 					{/*Who ran:
 					{ results ? <h4>Your result: {results}</h4> : ''}*/}

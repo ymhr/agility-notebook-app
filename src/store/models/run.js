@@ -70,9 +70,9 @@ class Run {
 		this.currentGrade = currentGrade;
 		this.date = date;
 
-		if(!date)
-			this.date = moment();
-		else
+		// if(!date)
+		// 	this.date = moment();
+		if(date)
 			this.date = moment(date);
 
 		if(this.id){

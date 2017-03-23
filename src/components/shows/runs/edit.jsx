@@ -7,6 +7,7 @@ import Run from 'store/models/run';
 import {createViewModel} from 'mobx-utils';
 import {hashHistory} from 'react-router';
 import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
 @inject('dogs', 'runs', 'shows')
 @observer
@@ -87,12 +88,14 @@ class EditRun extends Component {
 			{key: 'combined', text: 'Combined', value: 'combined'}
 		];
 
-		if(!this.run.date) this.run.date = this.show.startDate;
-		console.log(this.run.date);
+		// if(!this.run.date) this.run.date = this.show.startDate;
+		// console.log(this.run.date);
 
 		if(this.formLoading){
 			return <Loader />
 		}
+
+		const selectedDate = (this.run.date) ? this.run.date : this.show.startDate;
 
 		return (
 			<div>
@@ -176,7 +179,7 @@ class EditRun extends Component {
 									minDate={this.show.startDate}
 									maxDate={this.show.endDate}
 									onChange={this.setDate.bind(this, 'date')}
-									selected={this.run.date}
+									selected={selectedDate}
 									style={{width: "50%"}}
 									/>
 					</Form.Field>
