@@ -12,7 +12,6 @@ class Run extends Component {
 
 	conditionallyAddDetails = (sectionTitle, values) => {
 		const {run} = this.props;
-// <span style={{marginRight:10, marginBottom:10, display: "inline-block"}} key={Math.random()}><strong>{v.label}</strong>: {run[v.value]}</span>
 		values = values
 			.map(v => {
 				return run[v.value] ?  <Label style={{marginBottom: 10}} key={Math.random()}><strong>{v.label}</strong> <Label.Detail>{run[v.value]}</Label.Detail></Label> : null;
@@ -73,11 +72,14 @@ class Run extends Component {
 
 			return (
 				<Segment clearing>
-					{/*<h3><span style={{color:'#ddd'}}>Run #{run.order + 1}</span><br />Grade {run.grade}</h3>*/}
-					<h3>Grade {run.grade}, {day} {editButton}</h3>
+					{/*<h3>Grade {run.grade}, {day} {editButton}</h3>*/}
+					<h3>
+						{run.classNumber ? `Class #${run.classNumber}, ` : ''}
+						{run.type ? `${run.type}, ` : ''}
+						{run.gradeType ? `${run.gradeType}, ` : ''}
+						{run.grade ? `${run.grade}` : ''}
+					</h3>
 					<h4>{dogInfo} ran {run.currentGrade ? <span>at grade {run.currentGrade}</span> : ''}</h4>
-					{/*Who ran:
-					{ results ? <h4>Your result: {results}</h4> : ''}*/}
 
 					<p>{run.notes}</p>
 
