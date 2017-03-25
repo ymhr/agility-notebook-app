@@ -70,8 +70,6 @@ class Run {
 		this.currentGrade = currentGrade;
 		this.date = date;
 
-		// if(!date)
-		// 	this.date = moment();
 		if(date)
 			this.date = moment(date);
 
@@ -88,6 +86,9 @@ class Run {
 
 		Promise.all(loadedArray).then((values) => {
 			this.loaded = true;
+
+			if(!this.date)
+				this.date = this.show.startDate;
 		})
 	}
 
