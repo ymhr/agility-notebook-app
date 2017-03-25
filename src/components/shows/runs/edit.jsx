@@ -16,9 +16,13 @@ class EditRun extends Component {
 	@observable run;
 	@observable formLoading = false;
 	@computed get createMode(){
-		return (this.run.id ? false : true);
+		return !this.run.id;
 	}
 	@observable show;
+
+	@computed get shouldSpecialTypeFieldBeDisabled() {
+		return !(this.run.type === 'special');
+	}
 
 	constructor(props){
 		super(props);
@@ -31,17 +35,13 @@ class EditRun extends Component {
 					this.run = run;
 					return this.run;
 				})
-				// .then(this.props.shows.get(this.props.params.id).then(show => this.show = show))
 				.then(this.props.shows.get(this.props.params.id).then(show => {this.show = show; console.log(show); this.formLoading = false;}))
-				// .then(run => this.formLoading = false);
 
-			// this.formLoading = false;
 		} else {
 			this.run = new Run({showId: this.props.params.id});
 			this.props.shows.get(this.props.params.id).then(show => this.show = show)
 				.then(() => this.formLoading = false);
 		}
-
 	}
 
 	onChange = (e) => {
@@ -49,6 +49,12 @@ class EditRun extends Component {
 	};
 
 	onSelectChange = (e, selectedItem) => {
+
+		if(selectedItem.name === 'type') {
+			console.log(selectedItem);
+			this.run.specialType = '';
+		}
+
 		this.run[selectedItem.name] = selectedItem.value;
 	};
 
@@ -88,9 +94,6 @@ class EditRun extends Component {
 			{key: 'combined', text: 'Combined', value: 'combined'}
 		];
 
-		// if(!this.run.date) this.run.date = this.show.startDate;
-		// console.log(this.run.date);
-
 		if(this.formLoading){
 			return <Loader />
 		}
@@ -99,7 +102,8 @@ class EditRun extends Component {
 
 		return (
 			<div>
-				<p>Add a run here, etc {this.run.clear ? 'clear' : 'faults'}</p>
+				<p>Please add the details of your run here. Bear in mind, this may include details that are only relevant
+					once you have <em>completed</em> your run, so you do not need to fill them all in now.</p>
 				<Form onSubmit={this.onSubmit} loading={this.formLoading}>
 					<Form.Group widths="equal">
 						<Form.Field>
@@ -142,6 +146,7 @@ class EditRun extends Component {
 					</Form.Group>
 					<Form.Group widths="equal">
 						<Form.Select label="Type" placeholder="Type of class" options={typeOptions} value={this.run.type} name="type" onChange={this.onSelectChange} />
+						<Form.Input label="Type of special class" type="text" name="specialType" placeholder="What type of special class?" disabled={this.shouldSpecialTypeFieldBeDisabled} value={this.run.specialType} onChange={this.onChange} />
 						<Form.Field>
 							<label>
 								Course length
@@ -181,7 +186,7 @@ class EditRun extends Component {
 									onChange={this.setDate.bind(this, 'date')}
 									selected={selectedDate}
 									style={{width: "50%"}}
-									/>
+						/>
 					</Form.Field>
 					<Form.TextArea autoHeight value={this.run.notes} onChange={this.onChange} name="notes" label="Notes" placeholder="Enter any other notes you have about this show. This space will expand as you type." />
 					<Button primary type="submit">{this.createMode ? 'Add run' : 'Save changes'}</Button>

@@ -30,15 +30,16 @@ class Run {
 	@observable courseLength;
 	@observable currentGrade;
 	@observable date;
+	@observable specialType;
 	//Weather, surface type, indoor/outdoor?
 	@observable loaded = false;
 
-	@computed get clear(){
-		if(!(this.faults || this.faults == 0)){
+	@computed get clear() {
+		if (!(this.faults || this.faults == 0)) {
 			console.log('faults', this.faults);
 			const showStartDate = moment(this.show.startDate);
 			const diff = moment().diff(showStartDate, 'day');
-			if(this.diff > 0){
+			if (this.diff > 0) {
 				return 'clear';
 			} else {
 				return 'Not run';
@@ -48,7 +49,7 @@ class Run {
 		return 'faults';
 	}
 
-	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber, classSize, judge, type, gradeType, classNumber, courseTime, runTime, courseLength, currentGrade, date}){
+	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber, classSize, judge, type, gradeType, classNumber, courseTime, runTime, courseLength, currentGrade, date, specialType}) {
 		this.id = id;
 		this.showId = showId;
 		this.order = order;
@@ -69,16 +70,17 @@ class Run {
 		this.courseLength = courseLength;
 		this.currentGrade = currentGrade;
 		this.date = date;
+		this.specialType = specialType;
 
-		if(date)
+		if (date)
 			this.date = moment(date);
 
-		if(this.id){
+		if (this.id) {
 			this.load();
 		}
 	}
 
-	load(){
+	load() {
 		let loadedArray = [
 			this.loadDog(),
 			this.loadShow()
@@ -87,15 +89,15 @@ class Run {
 		Promise.all(loadedArray).then((values) => {
 			this.loaded = true;
 
-			if(!this.date)
+			if (!this.date)
 				this.date = this.show.startDate;
 		})
 	}
 
-	loadDog(){
+	loadDog() {
 		return new Promise((resolve, reject) => {
 
-			if(this.dog){
+			if (this.dog) {
 				resolve(this.dog);
 				return;
 			}
@@ -108,9 +110,9 @@ class Run {
 		});
 	}
 
-	loadShow(){
+	loadShow() {
 		return new Promise((resolve, reject) => {
-			if(this.show) {
+			if (this.show) {
 				resolve(this.show);
 				return;
 			}
@@ -121,9 +123,9 @@ class Run {
 		});
 	}
 
-	save(){
+	save() {
 		return new Promise((resolve, reject) => {
-			if(this.id){
+			if (this.id) {
 				auth.post(`/shows/${this.showId}/runs/${this.id}`, this.serialize())
 					.then(res => resolve(res))
 					.catch(err => {
@@ -146,10 +148,10 @@ class Run {
 		});
 	}
 
-	serialize(){
+	serialize() {
 		const serializableObject = Object.assign({}, this, {
-				show: undefined,
-				dog: undefined
+			show: undefined,
+			dog: undefined
 		});
 
 		return serializableObject;
