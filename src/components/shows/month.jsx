@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
-import Show from './show';
+import Show from './show/show';
 import moment from 'moment';
 import {List} from 'semantic-ui-react';
 

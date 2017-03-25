@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
-// import Show from './show';
-import Show from 'components/shows/show';
 import Month from './month';
 import {Button, Icon, List} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
