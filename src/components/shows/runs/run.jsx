@@ -72,7 +72,6 @@ class Run extends Component {
 
 			return (
 				<Segment clearing>
-					{/*<h3>Grade {run.grade}, {day} {editButton}</h3>*/}
 					<h3>
 						{run.classNumber ? `Class #${run.classNumber}, ` : ''}
 						{run.type ? `${run.type}, ` : ''}

@@ -42,6 +42,7 @@ class HeaderContainer extends Component {
                 <Menu>
                     {menu}
                 </Menu>
+                <br />
             </header>
 
         );

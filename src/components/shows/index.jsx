@@ -97,7 +97,6 @@ class Shows extends Component {
 		return (
 
 			<div>
-				<h1>Shows</h1>
 				{content}
 			</div>
 

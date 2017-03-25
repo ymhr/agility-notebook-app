@@ -18,7 +18,6 @@ import {resolve} from 'react-resolver';
 class Edit extends Component {
 
 	@observable show;
-	vm;
 	createMode = false;
 
 	@observable formLoading = false;
