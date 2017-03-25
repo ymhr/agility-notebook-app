@@ -77,7 +77,7 @@ class Run extends Component {
 						{run.classNumber ? `Class #${run.classNumber}, ` : ''}
 						{run.type ? `${run.type}, ` : ''}
 						{run.gradeType ? `${run.gradeType}, ` : ''}
-						{run.grade ? `${run.grade}` : ''}
+						{run.grade ? `Grade ${run.grade}` : ''}
 						{editButton}
 					</h3>
 					<h4>{dogInfo} ran {run.currentGrade ? <span>at grade {run.currentGrade}</span> : ''}</h4>
