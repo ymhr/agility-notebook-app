@@ -3,7 +3,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import Month from 'components/shows/month';
-import Show from 'components/shows/show';
+import Show from 'components/shows/show/show';
 
 import 'should-sinon';
 import 'jsdom-global';

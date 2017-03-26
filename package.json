@@ -7,7 +7,7 @@
     "node": "7.3.0"
   },
   "scripts": {
-    "test": "NODE_PATH=./src ./node_modules/mocha/bin/mocha --recursive --compilers js:babel-core/register -r mock-local-storage",
+    "test": "NODE_PATH=./src ./node_modules/mocha/bin/mocha --recursive --compilers js:babel-core/register -r mock-local-storage -r ignore-styles",
     "testWatch": "mocha --compilers js:babel-core/register -r mock-local-storage test/**/*.test.js --watch",
     "dev": "webpack-dev-server --inline --hot",
     "push": "git push origin master && git push github master",
@@ -30,6 +30,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.25.0",
     "enzyme": "^2.7.1",
+    "ignore-styles": "^5.0.1",
     "jest": "^19.0.2",
     "jest-cli": "^18.1.0",
     "jsdom": "^9.11.0",

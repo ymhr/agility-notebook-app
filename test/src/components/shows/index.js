@@ -6,7 +6,7 @@ import {Provider} from 'mobx-react';
 
 import Shows from 'components/shows/index';
 import Month from 'components/shows/month';
-import Show from 'components/shows/show';
+import Show from 'components/shows/show/show';
 
 import 'should-sinon';
 import 'should-enzyme';

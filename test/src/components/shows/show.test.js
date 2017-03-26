@@ -5,7 +5,7 @@ import should from 'should';
 import {List} from 'semantic-ui-react';
 import {stub} from 'sinon';
 
-import Show from 'components/shows/show.jsx';
+import Show from 'components/shows/show/show.jsx';
 
 import 'should-sinon';
 import 'should-enzyme';
