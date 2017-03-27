@@ -5,3 +5,4 @@ dist/*
 .DS_Store
 .idea
 src/config.js
+/src/store/shows.js

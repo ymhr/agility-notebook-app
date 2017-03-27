@@ -34,6 +34,16 @@ class Shows extends ItemStore{
 
 	};
 
+	sortList(items) {
+		//TODO: Secodary sort by ID
+		return items.sort((a, b) => {
+			const aDate = moment(a.startDate);
+			const bDate = moment(b.startDate);
+
+			return aDate.diff(bDate);
+		});
+	}
+
 }
 
 const instance = new Shows();
