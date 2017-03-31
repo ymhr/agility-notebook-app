@@ -79,6 +79,7 @@ class Run extends Component {
 						{run.grade ? `Grade ${run.grade}` : ''}
 						{editButton}
 					</h3>
+					<h4>{run.date.format("dddd Do MMMM, YYYY")}</h4>
 					<h4>{dogInfo} ran {run.currentGrade ? <span>at grade {run.currentGrade}</span> : ''}</h4>
 
 					<p>{run.notes}</p>
