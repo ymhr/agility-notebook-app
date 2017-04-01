@@ -30,7 +30,9 @@ class Show {
 
 		if(!this.closingDate) return false;
 
-		return (this.closingDate.diff(moment(), 'days') <= soonInDays);
+		var diff = this.closingDate.diff(moment(), 'days');
+
+		return (diff <= soonInDays && diff >= 0);
 	}
 
 	constructor({id, name, startDate, endDate, postcode, notes, closingDate, bookedIn, paid, bookingPlatform, hotelNeeded, hotelBooked, holidayNeeded, holidayBooked}) {
