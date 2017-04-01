@@ -90,7 +90,7 @@ class Show {
 				auth.post('/shows', this.serialize())
 					.then(res => res.data)
 					.then(show => {
-						this.id = show.id;
+						this.id = show.data.id;
 						shows.items.push(this);
 						resolve(show);
 					});
