@@ -83,7 +83,7 @@ class Run {
 	load() {
 		let loadedArray = [
 			this.loadDog(),
-			this.loadShow()
+			// this.loadShow()
 		];
 
 		Promise.all(loadedArray).then((values) => {
@@ -96,7 +96,6 @@ class Run {
 
 	loadDog() {
 		return new Promise((resolve, reject) => {
-
 			if (this.dog) {
 				resolve(this.dog);
 				return;

@@ -23,19 +23,19 @@ class Show {
 	@observable holidayBooked;
 
 	@observable runs = [];
-	@observable runsLoaded = false;
+	@observable runsLoaded = true;
 
 	@computed get closingSoon(){
 		const soonInDays = 7;
 
 		if(!this.closingDate) return false;
 
-		var diff = this.closingDate.diff(moment(), 'days');
+		const diff = this.closingDate.diff(moment(), 'days');
 
 		return (diff <= soonInDays && diff >= 0);
 	}
 
-	constructor({id, name, startDate, endDate, postcode, notes, closingDate, bookedIn, paid, bookingPlatform, hotelNeeded, hotelBooked, holidayNeeded, holidayBooked}) {
+	constructor({id, name, startDate, endDate, postcode, notes, closingDate, bookedIn, paid, bookingPlatform, hotelNeeded, hotelBooked, holidayNeeded, holidayBooked, runs}) {
 		this.id = id;
 		this.name = name;
 		// this.startDate = startDate;
@@ -55,30 +55,32 @@ class Show {
 		this.endDate = moment(endDate);
 		this.closingDate = moment(closingDate);
 
-		this.loadRuns()
-			.then(runs => {
-				this.runsLoaded = true;
-			});
+		this.runs = runs.map(r => new Run(r));
+
+		// this.loadRuns()
+		// 	.then(runs => {
+		// 		this.runsLoaded = true;
+		// 	});
 	}
 
-	orderRuns(runs) {
-		return runs.sort((a,b) => {
-			return a.order > b.order;
-		});
-	}
+	// orderRuns(runs) {
+	// 	return runs.sort((a,b) => {
+	// 		return a.order > b.order;
+	// 	});
+	// }
 
-	loadRuns(){
-		return runs.getForShow(this.id)
-			.then(runs => this.orderRuns(runs))
-			.then(runs => this.runs = runs)
-			.then(runs => {
-				this.runsLoaded = true;
-				return runs;
-			})
-			.catch((err) =>{
-				console.warn(err)
-			});
-	}
+	// loadRuns(){
+	// 	return runs.getForShow(this.id)
+	// 		.then(runs => this.orderRuns(runs))
+	// 		.then(runs => this.runs = runs)
+	// 		.then(runs => {
+	// 			this.runsLoaded = true;
+	// 			return runs;
+	// 		})
+	// 		.catch((err) =>{
+	// 			console.warn(err)
+	// 		});
+	// }
 
 	save(){
 		return new Promise((resolve, reject) => {

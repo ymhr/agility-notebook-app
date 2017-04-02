@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {Segment, Loader, Button, Label} from 'semantic-ui-react';
+import {isMoment} from 'moment';
 import DogExpando from '../dogs/dogExpando';
 
 import './style.scss';
@@ -70,6 +71,8 @@ class Run extends Component {
 				<Button circular icon="edit" onClick={this.props.editButtonClickHandler} />
 			);
 
+			var date = (run.date ? run.date.format("dddd Do MMMM, YYYY") : '');
+
 			return (
 				<Segment clearing>
 					<h3>
@@ -79,7 +82,7 @@ class Run extends Component {
 						{run.grade ? `Grade ${run.grade}` : ''}
 						{editButton}
 					</h3>
-					<h4>{run.date.format("dddd Do MMMM, YYYY")}</h4>
+					<h4>{date}</h4>
 					<h4>{dogInfo} ran {run.currentGrade ? <span>at grade {run.currentGrade}</span> : ''}</h4>
 
 					<p>{run.notes}</p>

@@ -1,33 +1,41 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
-import {autorun} from 'mobx';
+import {autorun, observable} from 'mobx';
 import {Form, Button, Loader} from 'semantic-ui-react';
 import {resolve} from 'react-resolver';
 import {hashHistory} from 'react-router';
 import Run from './runs/run';
 
 @inject('shows')
-@resolve('show', (props) => {
-	return props.shows.get(parseInt(props.routeParams.id));
-})
 @observer
 class View extends Component {
 
+	@observable show;
+	@observable loaded = false;
+
+	componentDidMount(){
+		this.props.shows.get(this.props.routeParams.id)
+			.then(show => this.show = show)
+			.then(() => this.loaded = true);
+	}
+
 	editShow = () => {
-		hashHistory.push(`shows/${this.props.show.id}/edit`);
+		hashHistory.push(`shows/${this.show.id}/edit`);
 	};
 
 	addRun = () => {
-		hashHistory.push(`shows/${this.props.show.id}/run/add`);
+		hashHistory.push(`shows/${this.show.id}/run/add`);
 	};
 
 	editButtonClickHandler = (id) => {
-		hashHistory.push(`shows/${this.props.show.id}/run/${id}`)
+		hashHistory.push(`shows/${this.show.id}/run/${id}`)
 	}
 
 	render() {
 
-		const {show} = this.props;
+		const {show} = this;
+
+		if(!this.loaded) return <h1>LOADING</h1>;
 
 		let runs = <Loader active inline />;
 		if(show.runsLoaded)
