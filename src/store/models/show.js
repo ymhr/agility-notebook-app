@@ -35,7 +35,7 @@ class Show {
 		return (diff <= soonInDays && diff >= 0);
 	}
 
-	constructor({id, name, startDate, endDate, postcode, notes, closingDate, bookedIn, paid, bookingPlatform, hotelNeeded, hotelBooked, holidayNeeded, holidayBooked, runs}) {
+	constructor({id, name, startDate, endDate, postcode, notes, closingDate, bookedIn, paid, bookingPlatform, hotelNeeded, hotelBooked, holidayNeeded, holidayBooked, runs = []}) {
 		this.id = id;
 		this.name = name;
 		// this.startDate = startDate;
