@@ -54,7 +54,7 @@ class Edit extends Component {
 			this.show.save()
 				.then(res => {
 					this.formLoading = false;
-					hashHistory.push('/');
+					hashHistory.push(`/shows/${this.show.id}`);
 				})
 				.catch(err => {
 					console.error('error', err);
@@ -79,7 +79,7 @@ class Edit extends Component {
 
 	onCheckboxChange = (e, data) => {
 		this.show[data.name] = data.checked;
-	}
+	};
 
 	setDate = (type = 'startDate', date) => {
 		this.show[type] = date;
