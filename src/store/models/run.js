@@ -1,4 +1,4 @@
-import {observable, computed, toJS} from 'mobx';
+import {observable, computed, toJS, when, action} from 'mobx';
 import dogs from '../dogs';
 import shows from '../shows';
 import Dog from './dog';
@@ -39,7 +39,7 @@ class Run {
 			console.log('faults', this.faults);
 			const showStartDate = moment(this.show.startDate);
 			const diff = moment().diff(showStartDate, 'day');
-			if (this.diff > 0) {
+			if (diff > 0) {
 				return 'clear';
 			} else {
 				return 'Not run';
@@ -75,23 +75,37 @@ class Run {
 		if (date)
 			this.date = moment(date);
 
-		if (this.id) {
-			this.load();
-		}
+		// if (this.id) {
+		// 	this.load();
+		// }
+
+		//Make sure that the shows are loaded before we try to get a ref to this runs show
+		when(
+			() => shows.loaded,
+			() => this.load()
+		);
+
 	}
 
 	load() {
-		let loadedArray = [
-			this.loadDog(),
-			// this.loadShow()
+		console.log(this.id, 'loading');
+		const dataToLoad = [
+			this.loadShow(),
+			this.loadDog()
 		];
 
-		Promise.all(loadedArray).then((values) => {
-			this.loaded = true;
+		Promise.all(dataToLoad).then((values) => {
+			console.log(this.id, 'loaded');
+			this.markLoaded();
 
 			if (!this.date)
 				this.date = this.show.startDate;
 		})
+	}
+
+	@action
+	markLoaded(){
+		this.loaded = true;
 	}
 
 	loadDog() {
@@ -138,8 +152,9 @@ class Run {
 					.then(data => data.data)
 					.then(run => {
 						this.id = run.id;
-						console.log(run.id);
-						runs.addRunToShowList(this);
+						// runs.addRunToShowList(this)
+						console.log(this.show);
+						// this.show.runs.push(this);
 						this.load();
 						resolve(this.id);
 					});

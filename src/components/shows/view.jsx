@@ -13,8 +13,20 @@ class View extends Component {
 	@observable show;
 	@observable loaded = false;
 
-	componentDidMount(){
-		this.props.shows.get(this.props.routeParams.id)
+	componentWillMount(){
+		console.log('componentWillMount');
+		const {id} = this.props.routeParams;
+		this.loadShow(id);
+	}
+
+	componentWillReceiveProps(nextProps){
+		const {id} = nextProps.routeParams;
+		console.log('componentWillReceiveProps');
+		this.loadShow(id);
+	}
+
+	loadShow(id){
+		this.props.shows.get(id)
 			.then(show => this.show = show)
 			.then(() => this.loaded = true);
 	}
@@ -29,19 +41,15 @@ class View extends Component {
 
 	editButtonClickHandler = (id) => {
 		hashHistory.push(`shows/${this.show.id}/run/${id}`)
-	}
+	};
 
 	render() {
 
 		const {show} = this;
 
-		if(!this.loaded) return <h1>LOADING</h1>;
+		if(!this.loaded) return <Loader />;
 
-		let runs = <Loader active inline />;
-		if(show.runsLoaded)
-		{
-			runs = show.runs.map(r => <Run key={r.id} run={r} show={show} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.id)}/>);
-		}
+		const runs = show.runs.map(r => <Run key={r.id} run={r} show={show} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.id)}/>);
 
 		if(this.props.children){
 			return (

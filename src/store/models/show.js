@@ -1,7 +1,6 @@
 import {observable, toJS, computed} from 'mobx';
 import auth from '../auth';
 import Run from './run';
-import runs from 'store/runs';
 import shows from 'store/shows';
 import moment from 'moment';
 
@@ -38,11 +37,8 @@ class Show {
 	constructor({id, name, startDate, endDate, postcode, notes, closingDate, bookedIn, paid, bookingPlatform, hotelNeeded, hotelBooked, holidayNeeded, holidayBooked, runs = []}) {
 		this.id = id;
 		this.name = name;
-		// this.startDate = startDate;
-		// this.endDate = endDate;
 		this.postcode = postcode;
 		this.notes = notes;
-		// this.closingDate = closingDate;
 		this.bookedIn = bookedIn;
 		this.paid = paid;
 		this.bookingPlatform = bookingPlatform;
@@ -55,32 +51,9 @@ class Show {
 		this.endDate = moment(endDate);
 		this.closingDate = moment(closingDate);
 
-		this.runs = runs.map(r => new Run(r));
+		this.runs = observable(runs.map(r => new Run(r)));
 
-		// this.loadRuns()
-		// 	.then(runs => {
-		// 		this.runsLoaded = true;
-		// 	});
 	}
-
-	// orderRuns(runs) {
-	// 	return runs.sort((a,b) => {
-	// 		return a.order > b.order;
-	// 	});
-	// }
-
-	// loadRuns(){
-	// 	return runs.getForShow(this.id)
-	// 		.then(runs => this.orderRuns(runs))
-	// 		.then(runs => this.runs = runs)
-	// 		.then(runs => {
-	// 			this.runsLoaded = true;
-	// 			return runs;
-	// 		})
-	// 		.catch((err) =>{
-	// 			console.warn(err)
-	// 		});
-	// }
 
 	save(){
 		return new Promise((resolve, reject) => {

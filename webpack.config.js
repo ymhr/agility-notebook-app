@@ -70,7 +70,7 @@ module.exports = {
 	 	publicPath: '/',
 	 	inline: true
  	},
-	devtool: 'eval',
+	devtool: 'eval-source-map',
 	plugins: [
 		// new DashboardPlugin(),
 		new CommonsChunkPlugin({

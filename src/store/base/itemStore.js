@@ -38,7 +38,6 @@ class ItemStore {
 		let item;
 
 		try{
-
 			const localRes = await this.getFromLocal(id);
 
 			if(!localRes){
@@ -50,7 +49,7 @@ class ItemStore {
 					throw new Error(`No ${this.itemClass.name} found with that ID`, itemClass);
 
 			} else {
-				item = new this.itemClass(localRes);
+				item = localRes;
 			}
 
 			this.items = this.sortList(this.addOrReplaceInList(item));
@@ -66,7 +65,7 @@ class ItemStore {
 
 	getFromLocal(id) {
 		return new Promise((resolve, reject) => {
-			const item = this.items.filter(i => i.id === id)[0];
+			const item = this.items.filter(i => parseInt(i.id) === parseInt(id))[0];
 			resolve(item);
 		});
 	}

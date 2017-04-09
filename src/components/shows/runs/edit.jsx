@@ -69,7 +69,7 @@ class EditRun extends Component {
 			this.run.save()
 				.then(id => {
 					this.formLoading = false;
-					hashHistory.push(`/show/${this.run.showId}/run/${id}`);
+					hashHistory.push(`/shows/${this.run.showId}`);
 				});
 		} else {
 			this.run.save()

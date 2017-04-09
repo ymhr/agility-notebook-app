@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import DevTools from 'mobx-react-devtools';
 import {observer, Provider} from 'mobx-react';
 import {when} from 'mobx';
 import store from '../store/index';
@@ -45,6 +46,7 @@ class App extends Component {
 			return (
 				<Dimmer active page>
 					<Loader>Getting a few things in order</Loader>
+					<DevTools />
 				</Dimmer>
 			);
 		}
@@ -54,6 +56,7 @@ class App extends Component {
 				<Provider {...store}>
 					<Router history={hashHistory} routes={routes}/>
 				</Provider>
+				<DevTools />
 			</Container>
 		)
 	}
