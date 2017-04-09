@@ -153,8 +153,7 @@ class Run {
 					.then(run => {
 						this.id = run.id;
 						// runs.addRunToShowList(this)
-						console.log(this.show);
-						// this.show.runs.push(this);
+						this.show.runs.push(this);
 						this.load();
 						resolve(this.id);
 					});

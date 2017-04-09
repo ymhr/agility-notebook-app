@@ -46,7 +46,6 @@ class App extends Component {
 			return (
 				<Dimmer active page>
 					<Loader>Getting a few things in order</Loader>
-					<DevTools />
 				</Dimmer>
 			);
 		}
@@ -56,7 +55,6 @@ class App extends Component {
 				<Provider {...store}>
 					<Router history={hashHistory} routes={routes}/>
 				</Provider>
-				<DevTools />
 			</Container>
 		)
 	}

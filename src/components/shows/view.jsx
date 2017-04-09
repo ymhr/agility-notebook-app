@@ -22,11 +22,11 @@ class View extends Component {
 	componentWillReceiveProps(nextProps){
 		const {id} = nextProps.routeParams;
 		console.log('componentWillReceiveProps');
-		this.loadShow(id);
+		this.loadShow(id).then(() => console.log);
 	}
 
 	loadShow(id){
-		this.props.shows.get(id)
+		return this.props.shows.get(id)
 			.then(show => this.show = show)
 			.then(() => this.loaded = true);
 	}
