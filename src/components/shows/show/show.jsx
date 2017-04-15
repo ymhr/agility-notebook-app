@@ -17,7 +17,7 @@ class Show extends Component {
 
 		const {show} = this.props;
 
-		const closingSoon = (show.closingSoon ? <div className="showClosingSoon">Registration is ending in {show.closingDate.diff(moment(), 'days')} day(s)</div> : '');
+		const closingSoon = (show.closingSoon && !show.bookedIn ? <div className="showClosingSoon">Registration is ending in {show.closingDate.diff(moment(), 'days')} day(s)</div> : '');
 
 		return (
 

@@ -74,7 +74,7 @@ class Show {
 	}
 
 	serialize(){
-		return toJS(this);
+		return Object.assign({}, this, {runs: undefined});
 	}
 
 }
