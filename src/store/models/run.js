@@ -88,14 +88,12 @@ class Run {
 	}
 
 	load() {
-		console.log(this.id, 'loading');
 		const dataToLoad = [
 			this.loadShow(),
 			this.loadDog()
 		];
 
 		Promise.all(dataToLoad).then((values) => {
-			console.log(this.id, 'loaded');
 			this.markLoaded();
 
 			if (!this.date)
@@ -162,7 +160,7 @@ class Run {
 	}
 
 	serialize() {
-		const serializableObject = Object.assign({}, this, {
+		const serializableObject = Object.assign({}, toJS(this), {
 			show: undefined,
 			dog: undefined
 		});

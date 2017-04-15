@@ -43,13 +43,29 @@ class View extends Component {
 		hashHistory.push(`shows/${this.show.id}/run/${id}`)
 	};
 
+	sortRuns(runs){
+		return runs.sort((a,b) => {
+			//compare date
+			const dateDiff = a.date.diff(b.date, 'days');
+
+			if(dateDiff !== 0) return dateDiff;
+
+			//dog
+			if(a.dog.name !== b.dog.name) return a.dog.name > b.dog.name;
+
+			//class number
+
+			return a.classNumber > b.classNumber;
+		});
+	}
+
 	render() {
 
 		const {show} = this;
 
 		if(!this.loaded) return <Loader />;
 
-		const runs = show.runs.map(r => <Run key={r.id} run={r} show={show} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.id)}/>);
+		const runs = this.sortRuns(show.runs).map(r => <Run key={r.id} run={r} show={show} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.id)}/>);
 
 		if(this.props.children){
 			return (
