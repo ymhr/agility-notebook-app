@@ -117,7 +117,7 @@ class EditRun extends Component {
 								<input type="number" min="1" name="classNumber" value={this.run.classNumber} onChange={this.onChange} placeholder="Class number" />
 							</label>
 						</Form.Field>
-						<Form.Input label="Judge" placeholder="Who was the judge" name="judge" value={this.run.judge} onChange={this.onChange} />
+						<Form.Input label="Judge" placeholder="Who is the judge" name="judge" value={this.run.judge} onChange={this.onChange} />
 						<Form.Field>
 							<label htmlFor="date">Run Date</label>
 							<DatePicker name="date" placeholder="Run Date"
