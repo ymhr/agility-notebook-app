@@ -82,6 +82,7 @@ class Edit extends Component {
 	};
 
 	setDate = (type = 'startDate', date) => {
+		date.hour(11);
 		this.show[type] = date;
 	};
 

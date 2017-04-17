@@ -58,6 +58,7 @@ class EditRun extends Component {
 	};
 
 	setDate = (type = 'date', date) => {
+		date.hour(11);
 		this.run[type] = date;
 	};
 
