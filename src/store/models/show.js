@@ -77,6 +77,10 @@ class Show {
 		return Object.assign({}, this, {runs: undefined});
 	}
 
+	getRun(id){
+		return this.runs.filter(r => parseInt(r.id) === parseInt(id))[0];
+	}
+
 }
 
 export default Show;

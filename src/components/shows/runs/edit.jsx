@@ -8,7 +8,7 @@ import {hashHistory} from 'react-router';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
-@inject('dogs', 'runs', 'shows')
+@inject('dogs', 'shows')
 @observer
 class EditRun extends Component {
 
@@ -29,12 +29,10 @@ class EditRun extends Component {
 		this.formLoading = true;
 
 		if(this.props.params.runId){
-			this.props.runs.get(this.props.params.id, this.props.params.runId)
-				.then(run => {
-					this.run = run;
-					return this.run;
-				})
-				.then(this.props.shows.get(this.props.params.id).then(show => {this.show = show; console.log(show); this.formLoading = false;}))
+			this.props.shows.get(this.props.params.id)
+				.then(show => this.show = show)
+				.then(() => this.run = this.show.getRun(this.props.params.runId))
+				.then(() => this.formLoading = false);
 
 		} else {
 			this.run = new Run({showId: this.props.params.id});
