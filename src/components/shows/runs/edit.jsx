@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {Button, Form, Loader, Divider} from 'semantic-ui-react';
+import {Button, Form, Loader, Divider, Breadcrumb} from 'semantic-ui-react';
 import {inject, observer} from 'mobx-react';
 import {observable, computed} from 'mobx';
 import DogSelect from '../dogs/dogSelect';
 import Run from 'store/models/run';
-import {hashHistory} from 'react-router';
+import {hashHistory, Link} from 'react-router';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
@@ -100,6 +100,11 @@ class EditRun extends Component {
 
 		return (
 			<div>
+				<Breadcrumb>
+					<Breadcrumb.Section><Link to={`/shows/${this.show.id}`}>{this.show.name}</Link></Breadcrumb.Section>
+					<Breadcrumb.Divider />
+					{ this.createMode ? <Breadcrumb.Section>Add run</Breadcrumb.Section> : <Breadcrumb.Section>Edit run</Breadcrumb.Section> }
+				</Breadcrumb>
 				<h2>Add a run</h2>
 				<p>Please add the details of your run here. Bear in mind, this may include details that are only relevant
 					once you have <em>completed</em> your run, so you do not need to fill them all in now.</p>
