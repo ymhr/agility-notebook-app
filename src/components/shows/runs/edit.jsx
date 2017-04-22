@@ -55,6 +55,10 @@ class EditRun extends Component {
 		this.run[selectedItem.name] = selectedItem.value;
 	};
 
+	onCheckboxChange = (e, data) => {
+		this.run[data.name] = data.checked;
+	};
+
 	setDate = (type = 'date', date) => {
 		date.hour(11);
 		this.run[type] = date;
@@ -177,6 +181,12 @@ class EditRun extends Component {
 								<input type="number" min="0" step="0.001" name="courseTime" placeholder="Course time" value={this.run.courseTime} onChange={this.onChange}/>
 							</label>
 						</Form.Field>
+						<Form.Field>
+							<label>
+								Winning time
+								<input type="number" min="0" step="0.001" name="winningTime" placeholder="Winning time" value={this.run.winningTime} onChange={this.onChange}/>
+							</label>
+						</Form.Field>
 					</Form.Group>
 
 					<Form.Group widths="equal">
@@ -198,6 +208,11 @@ class EditRun extends Component {
 								<input type="number" min="0" step="0.001" name="runTime" placeholder="Your run time" value={this.run.runTime} onChange={this.onChange}/>
 							</label>
 						</Form.Field>
+					</Form.Group>
+
+					<Form.Group>
+						<Form.Checkbox label="Clear?" toggle checked={this.run.clear} name="clear" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Eliminated?" toggle checked={this.run.eliminated} name="eliminated" onChange={this.onCheckboxChange}/>
 					</Form.Group>
 
 					<Form.TextArea autoHeight value={this.run.notes} onChange={this.onChange} name="notes" label="Notes" placeholder="Enter any other notes you have about this show. This space will expand as you type." />

@@ -31,25 +31,28 @@ class Run {
 	@observable currentGrade;
 	@observable date;
 	@observable specialType;
+	@observable clear;
+	@observable eliminated;
+	@observable winningTime;
 	//Weather, surface type, indoor/outdoor?
 	@observable loaded = false;
 
-	@computed get clear() {
-		if (!(this.faults || this.faults == 0)) {
-			console.log('faults', this.faults);
-			const showStartDate = moment(this.show.startDate);
-			const diff = moment().diff(showStartDate, 'day');
-			if (diff > 0) {
-				return 'clear';
-			} else {
-				return 'Not run';
-			}
-		}
+	// @computed get clear() {
+	// 	if (!(this.faults || this.faults == 0)) {
+	// 		console.log('faults', this.faults);
+	// 		const showStartDate = moment(this.show.startDate);
+	// 		const diff = moment().diff(showStartDate, 'day');
+	// 		if (diff > 0) {
+	// 			return 'clear';
+	// 		} else {
+	// 			return 'Not run';
+	// 		}
+	// 	}
+	//
+	// 	return 'faults';
+	// }
 
-		return 'faults';
-	}
-
-	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber, classSize, judge, type, gradeType, classNumber, courseTime, runTime, courseLength, currentGrade, date, specialType}) {
+	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber, classSize, judge, type, gradeType, classNumber, courseTime, runTime, courseLength, currentGrade, date, specialType, winningTime, clear, eliminated}) {
 		this.id = id;
 		this.showId = showId;
 		this.order = order;
@@ -71,13 +74,12 @@ class Run {
 		this.currentGrade = currentGrade;
 		this.date = date;
 		this.specialType = specialType;
+		this.clear = clear;
+		this.eliminated = eliminated;
+		this.winningTime = winningTime;
 
 		if (date)
 			this.date = moment(date);
-
-		// if (this.id) {
-		// 	this.load();
-		// }
 
 		//Make sure that the shows are loaded before we try to get a ref to this runs show
 		when(
