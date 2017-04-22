@@ -37,7 +37,7 @@ class Run extends Component {
 
 	expand = () => {
 		const {expanded} = this.state;
-		this.setState({expanded: !expanded}, () => console.log(this.state));
+		this.setState({expanded: !expanded});
 	};
 
 	render(){
