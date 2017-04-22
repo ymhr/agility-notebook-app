@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {autorun, observable} from 'mobx';
-import {Form, Button, Loader} from 'semantic-ui-react';
+import {Form, Button, Loader, Grid} from 'semantic-ui-react';
 import {resolve} from 'react-resolver';
 import {hashHistory} from 'react-router';
 import Run from './runs/run';
@@ -65,7 +65,7 @@ class View extends Component {
 
 		if(!this.loaded) return <Loader />;
 
-		const runs = this.sortRuns(show.runs).map(r => <Run key={r.id} run={r} show={show} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.id)}/>);
+		const runs = this.sortRuns(show.runs).map(r => <Grid.Column mobile={16} tablet={8} computer={4}><Run key={r.id} run={r} show={show} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.id)}/></Grid.Column>);
 
 		if(this.props.children){
 			return (
@@ -81,7 +81,9 @@ class View extends Component {
 
 					<h2>Runs</h2>
 					<Button onClick={this.addRun}>Add run</Button>
-					{runs}
+					<Grid>
+						{runs}
+					</Grid>
 
 				</div>
 			);

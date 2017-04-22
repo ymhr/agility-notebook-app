@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
-import {Segment, Loader, Button, Label} from 'semantic-ui-react';
+import {Segment, Loader, Button, Label, Icon} from 'semantic-ui-react';
 import {isMoment} from 'moment';
 import DogExpando from '../dogs/dogExpando';
 
@@ -9,7 +9,10 @@ import './style.scss';
 @observer
 class Run extends Component {
 
-	static state = {expanded: false};
+	constructor(props){
+		super(props);
+		this.state = {expanded: false};
+}
 
 	conditionallyAddDetails = (sectionTitle, values) => {
 		const {run} = this.props;
@@ -32,8 +35,14 @@ class Run extends Component {
 
 	};
 
+	expand = () => {
+		const {expanded} = this.state;
+		this.setState({expanded: !expanded}, () => console.log(this.state));
+	};
+
 	render(){
-		const {run, show, expanded} = this.props;
+		const {run, show} = this.props;
+		const {expanded} = this.state;
 
 		if(run.loaded){
 
@@ -47,8 +56,9 @@ class Run extends Component {
 
 			const day = (run.date) ? run.date.format('dddd Do') : '';
 
-			const expandedContent = (
+			const expandedContent = ( expanded ?
 				<div>
+					<Button basic size="mini" onClick={this.expand}><Icon name="chevron up" />Show less</Button>
 					{this.conditionallyAddDetails('Ring Details', [
 						{value:'runningOrder', label: 'Running order'},
 						{value:'ringNumber', label: 'Ring number'},
@@ -64,7 +74,7 @@ class Run extends Component {
 						{value:'currentGrade', label: 'Grade at the time'},
 						{value:'runTime', label: 'Your time'}
 					])}
-				</div>
+				</div> : <Button basic size="mini" onClick={this.expand}><Icon name="chevron down" />Show more</Button>
 			);
 
 			const editButton = (
