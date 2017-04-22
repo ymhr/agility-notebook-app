@@ -41,7 +41,7 @@ class Run extends Component {
 	};
 
 	render(){
-		const {run, show} = this.props;
+		const {run} = this.props;
 		const {expanded} = this.state;
 
 		if(run.loaded){

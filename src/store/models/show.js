@@ -3,6 +3,7 @@ import auth from '../auth';
 import Run from './run';
 import shows from 'store/shows';
 import moment from 'moment';
+import {reduce} from 'lodash';
 
 class Show {
 
@@ -24,10 +25,10 @@ class Show {
 	@observable runs = [];
 	@observable runsLoaded = true;
 
-	@computed get closingSoon(){
+	@computed get closingSoon() {
 		const soonInDays = 7;
 
-		if(!this.closingDate) return false;
+		if (!this.closingDate) return false;
 
 		const diff = this.closingDate.diff(moment(), 'days');
 
@@ -55,11 +56,11 @@ class Show {
 
 	}
 
-	save(){
+	save() {
 		return new Promise((resolve, reject) => {
-			if(this.id){
-					auth.post(`/shows/${this.id}`, this.serialize())
-						.then(res = resolve(this));
+			if (this.id) {
+				auth.post(`/shows/${this.id}`, this.serialize())
+					.then(res = resolve(this));
 			} else {
 				//create
 				auth.post('/shows', this.serialize())
@@ -73,12 +74,104 @@ class Show {
 		});
 	}
 
-	serialize(){
+	serialize() {
 		return Object.assign({}, this, {runs: undefined});
 	}
 
-	getRun(id){
+	getRun(id) {
 		return this.runs.filter(r => parseInt(r.id) === parseInt(id))[0];
+	}
+
+	splitRunsByDateAndDog() {
+		let runs = this.runs.reduce((acc, r) => {
+			const date = r.date.toString();
+
+			if(Array.isArray(acc[date])) {
+				acc[date].push(r);
+			} else {
+				acc[date] = [r];
+			}
+
+			return acc;
+
+		}, {});
+
+
+		Object.keys(runs)
+			// .sort(this.sortRunsByClass)
+			.forEach(d => {
+
+				const byDog = runs[d].reduce((acc, r) => {
+
+					if(Array.isArray(acc[r.dog.id])) {
+						acc[r.dog.id].push(r);
+					} else {
+						acc[r.dog.id] = [r];
+					}
+
+					return acc;
+				},{});
+
+				runs[d] = byDog;
+
+			});
+
+
+		return runs;
+	}
+
+	// splitRunsByDateAndDog() {
+	// 	const byDate = this.splitRunByDate(this.runs);
+	//	
+	// }
+	//
+	// splitRunByDate(runs) {
+	// 	let splitRuns = {};
+	// 	runs.forEach((r) => {
+	//
+	// 		const date = r.date.toString();
+	//
+	// 		if(Array.isArray( splitRuns[date )){
+	// 			splitRuns[date].push(r);
+	// 		} else {
+	// 			splitRuns[date] = [r];
+	// 		};
+	// 	});
+	//
+	// 	return splitRuns;
+	// }
+	//
+	// splitRunsByDogs(runs) {
+	//
+	// 	let splitRuns = {};
+	// 	runs.forEach((r) => {
+	//
+	// 		if(Array.isArray( splitRuns[r.dog.id] )){
+	// 			splitRuns[r.dog.id].push(r);
+	// 		} else {
+	// 			splitRuns[r.dog.id] = [r];
+	// 		};
+	// 	});
+	//
+	//
+	// 	return splitRuns;
+	//
+	// }
+	//
+	// sortRunsByClass(runs) {
+	// 	return runs.sort((a,b) => a.classNumber - b.classNumber);
+	// }
+	//
+	sortRunsByClass(a,b){
+
+		// return runs.sort((a,b) => {
+		// 	const dateDiff = a.date.diff(b.date, 'days');
+		//
+		// 	if(dateDiff !== 0) return dateDiff;
+
+			return a.classNumber - b.classNumber;
+		// });
+
 	}
 
 }

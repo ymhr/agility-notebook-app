@@ -4,7 +4,9 @@ import {autorun, observable} from 'mobx';
 import {Form, Button, Loader, Grid} from 'semantic-ui-react';
 import {resolve} from 'react-resolver';
 import {hashHistory} from 'react-router';
+import {reduce} from 'lodash';
 import Run from './runs/run';
+import RunsByDate from './runs/RunsByDate';
 
 @inject('shows')
 @observer
@@ -14,15 +16,13 @@ class View extends Component {
 	@observable loaded = false;
 
 	componentWillMount(){
-		console.log('componentWillMount');
 		const {id} = this.props.routeParams;
 		this.loadShow(id);
 	}
 
 	componentWillReceiveProps(nextProps){
 		const {id} = nextProps.routeParams;
-		console.log('componentWillReceiveProps');
-		this.loadShow(id).then(() => console.log);
+		this.loadShow(id);
 	}
 
 	loadShow(id){
@@ -39,9 +39,6 @@ class View extends Component {
 		hashHistory.push(`shows/${this.show.id}/run/add`);
 	};
 
-	editButtonClickHandler = (id) => {
-		hashHistory.push(`shows/${this.show.id}/run/${id}`)
-	};
 
 	sortRuns(runs){
 		return runs.sort((a,b) => {
@@ -65,7 +62,11 @@ class View extends Component {
 
 		if(!this.loaded) return <Loader />;
 
-		const runs = this.sortRuns(show.runs).map(r => <Grid.Column mobile={16} tablet={8} computer={4}><Run key={r.id} run={r} show={show} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.id)}/></Grid.Column>);
+		// const runs = show.splitRunsByDogs().map(r => <Grid.Column key={r.id} mobile={16} tablet={8} computer={4}><Run key={r.id} run={r} show={show} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.id)}/></Grid.Column>);
+
+		const runs = show.splitRunsByDateAndDog();
+
+		const runsForDisplay = Object.keys(runs).map(date => <RunsByDate key={date} date={date} dogs={runs[date]} />);
 
 		if(this.props.children){
 			return (
@@ -81,9 +82,10 @@ class View extends Component {
 
 					<h2>Runs</h2>
 					<Button onClick={this.addRun}>Add run</Button>
-					<Grid>
-						{runs}
-					</Grid>
+					{runsForDisplay}
+					{/*<Grid>*/}
+						{/*{runs}*/}
+					{/*</Grid>*/}
 
 				</div>
 			);
