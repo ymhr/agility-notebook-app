@@ -12,24 +12,37 @@
   color: #988e00;
   font-weight: bold;
   font-size: 15px;
+  transition: 0.3s ease all;
+  border-color: darken(yellow, 30%);
 
   &.place-first {
     background-color: red;
+    border-color: darken(red, 30%);
     color: white;
   }
 
   &.place-second {
     background-color: blue;
+    border-color: darken(blue, 30%);
     color: white;
   }
 
   &.place-third {
     background-color: yellow;
+    border-color: darken(yellow, 30%);
   }
 
   &.place-clear {
     background-color: #a7ff48;
+    border-color: darken( #a7ff48, 30%);
     color: #4f9800;
+  }
+
+  &:hover {
+    transform: rotateZ(45deg) scale(3);
+    //border: 5px solid;
+    border-width: 5px;
+    border-style: solid;
   }
 
   span {

@@ -3,6 +3,7 @@ import {observer, inject} from 'mobx-react';
 import {Segment, Loader, Button, Label, Icon} from 'semantic-ui-react';
 import {isMoment} from 'moment';
 import DogExpando from '../dogs/dogExpando';
+import Rosette from './rosette';
 
 import './style.scss';
 
@@ -47,28 +48,6 @@ class Run extends Component {
 			let results = 'Faults';
 			if(run.clear === 'clear') results = 'Clear!';
 			else if (run.clear === 'Not run') results = false;
-
-			const placeClasses = [];
-
-			if((run.place !== null && run.place > 0)) {
-				placeClasses.push('place');
-
-				switch(parseInt(run.place)) {
-					case 1:
-						placeClasses.push('place-first');
-						break;
-					case 2:
-						placeClasses.push('place-second');
-						break;
-					case 3:
-						placeClasses.push('place-third');
-						break;
-				}
-			}
-
-			let placement = (run.place !== null && run.place > 0) ? <div className={placeClasses.join(' ')}><span>{run.place}</span></div> : null;
-
-			placement = (!placement && run.clear) ? <div className='place place-clear'><span>C</span></div> : placement;
 
 			const dogInfo = (run.dog) ? <DogExpando dog={run.dog} className="dogRunning" /> : <Loader active />;
 
@@ -121,7 +100,7 @@ class Run extends Component {
 
 					{expandedContent}
 
-					{placement}
+					<Rosette run={run} />
 
 				</Segment>
 			);
