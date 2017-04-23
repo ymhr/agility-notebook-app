@@ -96,7 +96,7 @@ class Show {
 
 		}, {});
 
-
+		//TODO: Can probably simplify this into a map
 		Object.keys(runs)
 			// .sort(this.sortRunsByClass)
 			.forEach(d => {

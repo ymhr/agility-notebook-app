@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {autorun, observable} from 'mobx';
-import {Form, Button, Loader, Grid} from 'semantic-ui-react';
+import {Form, Button, Loader, Grid, Header} from 'semantic-ui-react';
 import {resolve} from 'react-resolver';
 import {hashHistory} from 'react-router';
 import {reduce} from 'lodash';
@@ -55,6 +55,8 @@ class View extends Component {
 
 		const runsForDisplay = Object.keys(runs).map(date => <RunsByDate key={date} date={date} dogs={runs[date]} />);
 
+		const subHeading = (show.startDate.diff(show.endDate, 'days') ? show.startDate.format('dddd Do MMMM YYYY') + ' - ' + show.endDate.format('dddd Do MMMM YYYY') : show.startDate.format('dddd Do MMMM'));
+
 		if(this.props.children){
 			return (
 				<div>
@@ -65,7 +67,10 @@ class View extends Component {
 			return (
 				<div>
 					<Button style={{'float':'right'}} onClick={this.editShow}>Edit</Button>
-					<h1>{show.name}</h1>
+					<Header as="h1">
+						<Header.Content>{show.name}</Header.Content>
+						<Header.Subheader>{subHeading}</Header.Subheader>
+					</Header>
 
 					<h2>Runs</h2>
 					<Button onClick={this.addRun}>Add run</Button>
