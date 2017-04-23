@@ -108,9 +108,9 @@ class Run {
 		this.loaded = true;
 	}
 
-	loadDog() {
+	loadDog(forceReload) {
 		return new Promise((resolve, reject) => {
-			if (this.dog) {
+			if (this.dog && !forceReload) {
 				resolve(this.dog);
 				return;
 			}
@@ -140,7 +140,10 @@ class Run {
 		return new Promise((resolve, reject) => {
 			if (this.id) {
 				auth.post(`/shows/${this.showId}/runs/${this.id}`, this.serialize())
-					.then(res => resolve(res))
+					.then(res => {
+						this.loadDog(true).then(() => console.log('loaded new dog', this.dog, this.dogId));
+						resolve(res);
+					})
 					.catch(err => {
 						console.warn(err);
 						reject(err);

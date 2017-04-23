@@ -21,6 +21,7 @@ class View extends Component {
 	}
 
 	componentWillReceiveProps(nextProps){
+		console.log('will receive props');
 		const {id} = nextProps.routeParams;
 		this.loadShow(id);
 	}
@@ -39,30 +40,16 @@ class View extends Component {
 		hashHistory.push(`shows/${this.show.id}/run/add`);
 	};
 
-
-	sortRuns(runs){
-		return runs.sort((a,b) => {
-			//compare date
-			const dateDiff = a.date.diff(b.date, 'days');
-
-			if(dateDiff !== 0) return dateDiff;
-
-			//dog
-			if(a.dog.name !== b.dog.name) return a.dog.name > b.dog.name;
-
-			//class number
-
-			return a.classNumber > b.classNumber;
-		});
-	}
+	editButtonClickHandler = (id) => {
+		hashHistory.push(`shows/${this.props.routeParams.id}/run/${id}`)
+	};
 
 	render() {
-
 		const {show} = this;
 
 		if(!this.loaded) return <Loader />;
 
-		// const runs = show.splitRunsByDogs().map(r => <Grid.Column key={r.id} mobile={16} tablet={8} computer={4}><Run key={r.id} run={r} show={show} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.id)}/></Grid.Column>);
+		// const runs = show.runs.map(r => <Grid.Column key={r.id} mobile={16} tablet={8} computer={4}><Run key={r.id} run={r} show={show} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.id)}/></Grid.Column>);
 
 		const runs = show.splitRunsByDateAndDog();
 

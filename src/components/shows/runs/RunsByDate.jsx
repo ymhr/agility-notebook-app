@@ -15,14 +15,14 @@ class RunsByDate extends Component {
 
 		const {dogs} = this.props;
 		let {date} = this.props;
-		// const items = dogs.map((r) => <RunByDog runs={runs} />);
+
 		const items = map(dogs, (r, dogId) => <RunsByDog key={date + dogId} runs={r} />);
 
 		date = moment(date);
 
 		return (
 			<div>
-				<Divider horizontal>{date.toString()}</Divider>
+				<Divider horizontal>{date.format('dddd Do MMMM')}</Divider>
 				{items}
 			</div>
 		);

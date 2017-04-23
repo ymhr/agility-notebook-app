@@ -83,7 +83,7 @@ class Show {
 	}
 
 	splitRunsByDateAndDog() {
-		let runs = this.runs.reduce((acc, r) => {
+		let runs = this.runs.sort((a,b) => a.date.diff(b.date, 'days')).reduce((acc, r) => {
 			const date = r.date.toString();
 
 			if(Array.isArray(acc[date])) {
@@ -101,16 +101,17 @@ class Show {
 			// .sort(this.sortRunsByClass)
 			.forEach(d => {
 
-				const byDog = runs[d].reduce((acc, r) => {
-
-					if(Array.isArray(acc[r.dog.id])) {
-						acc[r.dog.id].push(r);
-					} else {
-						acc[r.dog.id] = [r];
-					}
-
-					return acc;
-				},{});
+				const byDog = runs[d]
+					.sort((a,b) => a.dog.name < b.dog.name)
+					.reduce((acc, r) => {
+						if(Array.isArray(acc[r.dog.name])) {
+							acc[r.dog.name].push(r);
+						} else {
+							acc[r.dog.name] = [r];
+						}
+						acc[r.dog.name] = acc[r.dog.name].sort((a, b) => a.classNumber > b.classNumber);
+						return acc;
+					},{});
 
 				runs[d] = byDog;
 
