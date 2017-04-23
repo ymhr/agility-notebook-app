@@ -81,13 +81,17 @@ class Run extends Component {
 
 			var date = (run.date ? run.date.format("dddd Do MMMM, YYYY") : '');
 
+			var runTitle = [
+				run.classNumber ? `Class #${run.classNumber} ` : '',
+				run.type ? `${this.makeTitleCase(run.type)} ` : '',
+				run.gradeType ? `${this.makeTitleCase(run.gradeType)} ` : '',
+				run.grade ? `Grade ${run.grade}` : ''
+			].filter(item => item !== '').join(', ');
+
 			return (
 				<Segment clearing>
 					<h3>
-						{run.classNumber ? `Class #${run.classNumber}, ` : ''}
-						{run.type ? `${this.makeTitleCase(run.type)}, ` : ''}
-						{run.gradeType ? `${this.makeTitleCase(run.gradeType)}, ` : ''}
-						{run.grade ? `Grade ${run.grade}` : ''}
+						{runTitle}
 						{editButton}
 					</h3>
 					<h4>{date}</h4>
