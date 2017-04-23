@@ -9,11 +9,6 @@ import './style.scss';
 @observer
 class Run extends Component {
 
-	constructor(props){
-		super(props);
-		this.state = {expanded: false};
-}
-
 	conditionallyAddDetails = (sectionTitle, values) => {
 		const {run} = this.props;
 		values = values
@@ -36,13 +31,12 @@ class Run extends Component {
 	};
 
 	expand = () => {
-		const {expanded} = this.state;
-		this.setState({expanded: !expanded});
+		this.props.run.expandToggle();
 	};
 
 	render(){
 		const {run} = this.props;
-		const {expanded} = this.state;
+		const {expanded} = run;
 
 		if(run.loaded){
 

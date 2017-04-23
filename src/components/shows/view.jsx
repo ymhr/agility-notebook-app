@@ -44,6 +44,12 @@ class View extends Component {
 		hashHistory.push(`shows/${this.props.routeParams.id}/run/${id}`)
 	};
 
+	toggleAllRunsExpanded = () => {
+		const {show} = this;
+
+		show.runs.forEach(r => r.expandToggle())
+	};
+
 	render() {
 		const {show} = this;
 
@@ -84,6 +90,7 @@ class View extends Component {
 
 					<h2>Runs</h2>
 					<Button onClick={this.addRun}>Add run</Button>
+					<Button basic size="mini" style={{float: 'right'}} onClick={this.toggleAllRunsExpanded}>Toggle all</Button>
 					{runsForDisplay}
 
 				</div>

@@ -36,6 +36,7 @@ class Run {
 	@observable winningTime;
 	//Weather, surface type, indoor/outdoor?
 	@observable loaded = false;
+	@observable expanded = false;
 
 	// @computed get clear() {
 	// 	if (!(this.faults || this.faults == 0)) {
@@ -106,6 +107,11 @@ class Run {
 	@action
 	markLoaded(){
 		this.loaded = true;
+	}
+
+	@action
+	expandToggle() {
+		this.expanded = !this.expanded;
 	}
 
 	loadDog(forceReload) {
