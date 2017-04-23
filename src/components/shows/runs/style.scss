@@ -13,6 +13,25 @@
   font-weight: bold;
   font-size: 15px;
 
+  &.place-first {
+    background-color: red;
+    color: white;
+  }
+
+  &.place-second {
+    background-color: blue;
+    color: white;
+  }
+
+  &.place-third {
+    background-color: yellow;
+  }
+
+  &.place-clear {
+    background-color: #a7ff48;
+    color: #4f9800;
+  }
+
   span {
     display: block;
   }
