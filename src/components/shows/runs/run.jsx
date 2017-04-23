@@ -34,6 +34,10 @@ class Run extends Component {
 		this.props.run.expandToggle();
 	};
 
+	makeTitleCase = (text) => {
+		return text.charAt(0).toUpperCase() + text.slice(1);
+	};
+
 	render(){
 		const {run} = this.props;
 		const {expanded} = run;
@@ -81,8 +85,8 @@ class Run extends Component {
 				<Segment clearing>
 					<h3>
 						{run.classNumber ? `Class #${run.classNumber}, ` : ''}
-						{run.type ? `${run.type}, ` : ''}
-						{run.gradeType ? `${run.gradeType}, ` : ''}
+						{run.type ? `${this.makeTitleCase(run.type)}, ` : ''}
+						{run.gradeType ? `${this.makeTitleCase(run.gradeType)}, ` : ''}
 						{run.grade ? `Grade ${run.grade}` : ''}
 						{editButton}
 					</h3>
