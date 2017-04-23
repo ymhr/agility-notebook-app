@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {autorun, observable} from 'mobx';
-import {Form, Button, Loader, Grid, Header} from 'semantic-ui-react';
+import {Form, Button, Loader, Grid, Header, Label, Icon} from 'semantic-ui-react';
 import {resolve} from 'react-resolver';
 import {hashHistory} from 'react-router';
 import {reduce} from 'lodash';
@@ -72,12 +72,19 @@ class View extends Component {
 						<Header.Subheader>{subHeading}</Header.Subheader>
 					</Header>
 
+					<p>{show.notes}</p>
+
+					<Label>Booking platform <Label.Detail>{show.bookingPlatform}</Label.Detail></Label>
+					<Label>Booked <Label.Detail>{show.bookedIn ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+					<Label>Paid <Label.Detail>{show.paid ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+					<Label>Hotel needed <Label.Detail>{show.hotelNeeded ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+					<Label>Hotel booked <Label.Detail>{show.hotelBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+					<Label>Holiday needed <Label.Detail>{show.holidayNeeded ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+					<Label>Holiday booked <Label.Detail>{show.holidayBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+
 					<h2>Runs</h2>
 					<Button onClick={this.addRun}>Add run</Button>
 					{runsForDisplay}
-					{/*<Grid>*/}
-						{/*{runs}*/}
-					{/*</Grid>*/}
 
 				</div>
 			);
