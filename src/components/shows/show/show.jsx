@@ -19,9 +19,13 @@ class Show extends Component {
 
 		const closingSoon = (show.closingSoon && !show.bookedIn ? <div className="showClosingSoon">Registration is ending in {show.closingDate.diff(moment(), 'days')} day(s)</div> : '');
 
+		const classNames = [];
+
+		if(show.endDate.diff(moment(), 'days') < 0) classNames.push('oldShow')
+
 		return (
 
-			<List.Item onClick={this.itemClick.bind(this, show)}>
+			<List.Item onClick={this.itemClick.bind(this, show)} className={classNames.join(' ')}>
 				<List.Content floated="right">Runs: {show.runs.length}</List.Content>
 				<List.Content>
 					<List.Header>{show.name}</List.Header>
