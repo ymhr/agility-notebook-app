@@ -156,8 +156,8 @@ class EditRun extends Component {
 					<Divider horizontal>Running order for run</Divider>
 
 					<Form.Group widths="equal">
-						<Form.Input label="Running Order" placeholder="Which number are you?" name="runningOrder" value={this.run.runningOrder} onChange={this.onChange} />
 						<Form.Input label="Ring Number" placeholder="Which ring is it in?" name="ringNumber" value={this.run.ringNumber} onChange={this.onChange} />
+						<Form.Input label="Running Order" placeholder="Which number are you?" name="runningOrder" value={this.run.runningOrder} onChange={this.onChange} />
 						<Form.Field>
 							<label>
 								Class size
