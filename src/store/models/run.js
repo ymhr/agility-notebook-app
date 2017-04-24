@@ -81,6 +81,8 @@ class Run {
 
 		if (date)
 			this.date = moment(date);
+		else
+			this.date = moment();
 
 		//Make sure that the shows are loaded before we try to get a ref to this runs show
 		when(
