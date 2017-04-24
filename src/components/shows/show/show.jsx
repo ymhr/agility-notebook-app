@@ -21,7 +21,7 @@ class Show extends Component {
 
 		const classNames = [];
 
-		if(show.endDate.diff(moment(), 'days') < 0) classNames.push('oldShow')
+		if(show.endDate && show.endDate.diff(moment(), 'days') < 0) classNames.push('oldShow');
 
 		return (
 

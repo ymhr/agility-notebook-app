@@ -4,6 +4,7 @@ import {shallow, mount} from 'enzyme';
 import should from 'should';
 import {List} from 'semantic-ui-react';
 import {stub} from 'sinon';
+import moment from 'moment';
 
 import Show from 'components/shows/show/show.jsx';
 
@@ -14,8 +15,8 @@ import 'jsdom-global/register';
 describe('Show item', function(){
     const testShow = {
         name: 'Test show',
-        startDate: 1488710377000,
-        endDate: 1488710377000,
+        startDate: moment.unix(1488710377),
+        endDate: moment.unix(1488710377),
         runs: [{},{}]
     };
     const component = <Show show={testShow}/>
