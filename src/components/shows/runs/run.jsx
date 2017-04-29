@@ -78,16 +78,16 @@ class Run extends Component {
 				<Button circular icon="edit" onClick={this.props.editButtonClickHandler} />
 			);
 
-			var date = (run.date ? run.date.format("dddd Do MMMM, YYYY") : '');
+			const date = (run.date ? run.date.format("dddd Do MMMM, YYYY") : '');
 
-			var runTitle = [
+			const runTitle = [
 				run.classNumber ? `Class #${run.classNumber} ` : null,
 				run.type ? `${this.makeTitleCase(run.type)} ` : null,
 				run.gradeType ? `${this.makeTitleCase(run.gradeType)} ` : null,
 				run.grade ? `Grade ${run.grade}` : null
 			].filter(item => item !== null).join(', ');
 
-			const descriptionClass = (expanded ? 'description-limited' : '');
+			const descriptionClass = (!expanded ? 'description-limit' : '');
 
 			return (
 				<Segment clearing>
@@ -98,7 +98,7 @@ class Run extends Component {
 					<h4>{date}</h4>
 					<h4>{dogInfo} ran {run.currentGrade ? <span>at grade {run.currentGrade}</span> : ''}</h4>
 
-					<p>{run.notes}</p>
+					<p className={descriptionClass}>{run.notes}</p>
 
 					{expandedContent}
 
