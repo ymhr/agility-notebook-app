@@ -34,7 +34,7 @@
 
   &.place-clear {
     background-color: #a7ff48;
-    border-color: darken( #a7ff48, 30%);
+    border-color: darken(#a7ff48, 30%);
     color: #4f9800;
   }
 
@@ -53,4 +53,11 @@
 
 .dogRunning {
   display: inline-block;
+}
+
+.description-limit {
+  max-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
 }

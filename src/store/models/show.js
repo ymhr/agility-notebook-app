@@ -84,7 +84,7 @@ class Show {
 
 	splitRunsByDateAndDog() {
 		let runs = this.runs.sort((a,b) => a.date.diff(b.date, 'days')).reduce((acc, r) => {
-			const date = r.date.toString();
+			const date = r.date.format('YYYY MMMM DD');
 
 			if(Array.isArray(acc[date])) {
 				acc[date].push(r);

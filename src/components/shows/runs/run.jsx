@@ -87,6 +87,8 @@ class Run extends Component {
 				run.grade ? `Grade ${run.grade}` : null
 			].filter(item => item !== null).join(', ');
 
+			const descriptionClass = (expanded ? 'description-limited' : '');
+
 			return (
 				<Segment clearing>
 					<h3>
