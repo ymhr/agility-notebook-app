@@ -172,6 +172,16 @@ class Run {
 		});
 	}
 
+	delete(){
+		return new Promise((resolve, reject) => {
+			auth.post(`/shows/${this.showId}/runs/${this.id}/delete`)
+				.then(() => {
+					this.show.removeRun(this.id);
+					resolve();
+				});
+		});
+	}
+
 	serialize() {
 		const serializableObject = Object.assign({}, toJS(this), {
 			show: undefined,

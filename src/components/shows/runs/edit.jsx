@@ -82,6 +82,13 @@ class EditRun extends Component {
 
 	};
 
+	deleteRun = (e) => {
+		e.preventDefault();
+		const {showId} = this.run;
+		this.run.delete()
+			.then(() => hashHistory.push(`/shows/${this.showId}`));
+	};
+
 	render(){
 
 		if(!this.run) return <Loader />;
@@ -217,6 +224,7 @@ class EditRun extends Component {
 
 					<Form.TextArea autoHeight value={this.run.notes} onChange={this.onChange} name="notes" label="Notes" placeholder="Enter any other notes you have about this show. This space will expand as you type." />
 					<Button primary type="submit">{this.createMode ? 'Add run' : 'Save changes'}</Button>
+					<Button onClick={this.deleteRun}>Delete</Button>
 				</Form>
 			</div>
 		);

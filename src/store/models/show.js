@@ -121,57 +121,16 @@ class Show {
 		return runs;
 	}
 
-	// splitRunsByDateAndDog() {
-	// 	const byDate = this.splitRunByDate(this.runs);
-	//	
-	// }
-	//
-	// splitRunByDate(runs) {
-	// 	let splitRuns = {};
-	// 	runs.forEach((r) => {
-	//
-	// 		const date = r.date.toString();
-	//
-	// 		if(Array.isArray( splitRuns[date )){
-	// 			splitRuns[date].push(r);
-	// 		} else {
-	// 			splitRuns[date] = [r];
-	// 		};
-	// 	});
-	//
-	// 	return splitRuns;
-	// }
-	//
-	// splitRunsByDogs(runs) {
-	//
-	// 	let splitRuns = {};
-	// 	runs.forEach((r) => {
-	//
-	// 		if(Array.isArray( splitRuns[r.dog.id] )){
-	// 			splitRuns[r.dog.id].push(r);
-	// 		} else {
-	// 			splitRuns[r.dog.id] = [r];
-	// 		};
-	// 	});
-	//
-	//
-	// 	return splitRuns;
-	//
-	// }
-	//
-	// sortRunsByClass(runs) {
-	// 	return runs.sort((a,b) => a.classNumber - b.classNumber);
-	// }
-	//
-	sortRunsByClass(a,b){
+	removeRun(id){
+		let runIndex = null;
 
-		// return runs.sort((a,b) => {
-		// 	const dateDiff = a.date.diff(b.date, 'days');
-		//
-		// 	if(dateDiff !== 0) return dateDiff;
+		this.runs.forEach((run, index) => {
+			if(run.id === id) {
+				runIndex = index;
+			}
+		});
 
-			return a.classNumber - b.classNumber;
-		// });
+		this.runs.splice(runIndex, 1);
 
 	}
 
