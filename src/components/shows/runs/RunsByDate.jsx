@@ -6,6 +6,7 @@ import {map} from 'lodash';
 import Run from './run';
 import moment from "moment";
 import RunsByDog from './RunsByDog';
+import {StickyContainer, Sticky} from 'react-sticky';
 
 @inject('dogs', 'shows')
 @observer
@@ -21,10 +22,10 @@ class RunsByDate extends Component {
 		date = moment(date);
 
 		return (
-			<div>
-				<Divider horizontal>{date.format('dddd Do MMMM')}</Divider>
+			<StickyContainer>
+				<Sticky className="sticky-headers"><Divider horizontal style={{'backgroundColor': '#fff'}}>{date.format('dddd Do MMMM')}</Divider></Sticky>
 				{items}
-			</div>
+			</StickyContainer>
 		);
 
 	}

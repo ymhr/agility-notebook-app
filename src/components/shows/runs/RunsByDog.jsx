@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {Divider, Grid} from 'semantic-ui-react';
+import {StickyContainer, Sticky} from 'react-sticky';
 
 import Run from './run';
 import {hashHistory} from "react-router";
@@ -22,12 +23,12 @@ class RunsByDog extends Component {
 		const items = runs.map((r) => <Grid.Column mobile={16} tablet={8} computer={4} key={r.id}><Run run={r} editButtonClickHandler={this.editButtonClickHandler.bind(this, r.showId, r.id)} /></Grid.Column>);
 
 		return (
-			<div>
-				<Divider horizontal clearing>{runs[0].dog.name}</Divider>
+			<StickyContainer>
+				<Sticky className="sticky-headers" topOffset={30}><Divider horizontal clearing style={{'backgroundColor': '#fff'}}>{runs[0].dog.name}</Divider></Sticky>
 				<Grid>
 					{items}
 				</Grid>
-			</div>
+			</StickyContainer>
 		);
 
 	}
