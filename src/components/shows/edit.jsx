@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {observable, autorun} from 'mobx';
 import {observer, inject} from 'mobx-react';
 import {createViewModel} from 'mobx-utils';
-import {Form, Button, Grid} from 'semantic-ui-react';
+import {Form, Button, Grid, Confirm} from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import Show from 'store/models/show';
 import {hashHistory} from 'react-router';
@@ -24,6 +24,8 @@ class Edit extends Component {
 
 	constructor(props) {
 		super(props);
+
+		this.state = {deleteConfirm: false};
 
 		if (this.props.existingShow) {
 			this.show = this.props.existingShow;
@@ -84,6 +86,11 @@ class Edit extends Component {
 	setDate = (type = 'startDate', date) => {
 		date.hour(11);
 		this.show[type] = date;
+	};
+
+	confirmDelete = (e) => {
+		e.preventDefault();
+		this.setState({deleteConfirm: true});
 	};
 
 	deleteShow = (e) => {
@@ -156,8 +163,15 @@ class Edit extends Component {
 					</Form.Group>
 					<Form.Input label="Booking Platform" value={this.show.bookingPlatform} name="bookingPlatform" placeholder="Booking Platform" onChange={this.onChange}/>
 					<Button primary>{this.createMode ? 'Add show' : 'Save changes'}</Button>
-					<Button basic color="red" style={{float:'right'}} onClick={this.deleteShow}>Delete</Button>
+					<Button basic color="red" style={{float:'right'}} onClick={this.confirmDelete}>Delete</Button>
 				</Form>
+
+				<Confirm
+					open={this.state.deleteConfirm}
+					onCancel={() => this.setState({deleteConfirm: false})}
+					onConfirm={this.deleteShow}
+				/>
+
 			</div>
 
 		)
