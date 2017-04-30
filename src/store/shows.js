@@ -1,6 +1,7 @@
 import {observable} from 'mobx';
 import moment from 'moment';
 import Show from './models/show';
+import {hashHistory} from 'react-router';
 import auth from './auth';
 import ItemStore from './base/itemStore';
 
@@ -42,6 +43,22 @@ class Shows extends ItemStore{
 
 			return aDate.diff(bDate);
 		});
+	}
+
+	delete(id){
+		return auth.post(`/shows/${id}/delete`)
+			.then(() => {
+				let showIndex = null;
+				this.items.forEach((show, index) => {
+					if(show.id === id)
+						showIndex = index;
+				});
+
+				this.items.splice(showIndex, 1);
+
+				hashHistory.push('/shows');
+
+			});
 	}
 
 }

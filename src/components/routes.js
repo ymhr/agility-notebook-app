@@ -25,7 +25,7 @@ const routes = [
 					]}
 			]
 			},
-			{path: '/profile', component: Profile, label: 'Profile'},
+			{path: '/profile', component: Profile, label: 'Profile', hideFromNav: true},
 			{
 				path: '/dogs', component: Dogs, label: 'Dogs', childRoutes: [
 					{path: 'add', component: EditDog, label: 'New Dog'},

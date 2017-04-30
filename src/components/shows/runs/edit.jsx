@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Form, Loader, Divider, Breadcrumb} from 'semantic-ui-react';
+import {Button, Form, Loader, Divider, Breadcrumb, Confirm} from 'semantic-ui-react';
 import {inject, observer} from 'mobx-react';
 import {observable, computed} from 'mobx';
 import DogSelect from '../dogs/dogSelect';
@@ -25,6 +25,8 @@ class EditRun extends Component {
 
 	constructor(props){
 		super(props);
+
+		this.state = {deleteConfirm: false};
 
 		this.formLoading = true;
 
@@ -82,11 +84,16 @@ class EditRun extends Component {
 
 	};
 
+	confirmDelete = (e) => {
+		e.preventDefault();
+		this.setState({deleteConfirm: true});
+	};
+
 	deleteRun = (e) => {
 		e.preventDefault();
 		const {showId} = this.run;
 		this.run.delete()
-			.then(() => hashHistory.push(`/shows/${this.showId}`));
+			.then(() => hashHistory.push(`/shows/${showId}`));
 	};
 
 	render(){
@@ -224,8 +231,15 @@ class EditRun extends Component {
 
 					<Form.TextArea autoHeight value={this.run.notes} onChange={this.onChange} name="notes" label="Notes" placeholder="Enter any other notes you have about this show. This space will expand as you type." />
 					<Button primary type="submit">{this.createMode ? 'Add run' : 'Save changes'}</Button>
-					<Button onClick={this.deleteRun}>Delete</Button>
+					<Button basic color="red" style={{float: 'right'}} onClick={this.confirmDelete}>Delete</Button>
 				</Form>
+
+				<Confirm
+					open={this.state.deleteConfirm}
+					onCancel={() => this.setState({deleteConfirm: false})}
+					onConfirm={this.deleteRun}
+				/>
+
 			</div>
 		);
 

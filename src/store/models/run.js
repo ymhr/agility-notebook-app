@@ -173,10 +173,11 @@ class Run {
 	}
 
 	delete(){
+		const id = this.id;
 		return new Promise((resolve, reject) => {
-			auth.post(`/shows/${this.showId}/runs/${this.id}/delete`)
+			auth.post(`/shows/${this.showId}/runs/${id}/delete`)
 				.then(() => {
-					this.show.removeRun(this.id);
+					this.show.removeRun(id);
 					resolve();
 				});
 		});

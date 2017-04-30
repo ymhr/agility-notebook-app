@@ -86,6 +86,11 @@ class Edit extends Component {
 		this.show[type] = date;
 	};
 
+	deleteShow = (e) => {
+		e.preventDefault();
+		this.props.shows.delete(this.show.id);
+	};
+
 	render() {
 		return (
 
@@ -151,6 +156,7 @@ class Edit extends Component {
 					</Form.Group>
 					<Form.Input label="Booking Platform" value={this.show.bookingPlatform} name="bookingPlatform" placeholder="Booking Platform" onChange={this.onChange}/>
 					<Button primary>{this.createMode ? 'Add show' : 'Save changes'}</Button>
+					<Button basic color="red" style={{float:'right'}} onClick={this.deleteShow}>Delete</Button>
 				</Form>
 			</div>
 
