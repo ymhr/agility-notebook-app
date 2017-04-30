@@ -81,8 +81,8 @@ class Run {
 
 		if (date)
 			this.date = moment(date);
-		else
-			this.date = moment();
+		// else
+		// 	this.date = moment();
 
 		//Make sure that the shows are loaded before we try to get a ref to this runs show
 		when(
@@ -139,7 +139,13 @@ class Run {
 			}
 
 			shows.get(this.showId)
-				.then(s => this.show = s)
+				.then(s => {
+					this.show = s;
+
+					if(!this.date)
+						this.date = moment(this.show.startDate);
+
+				})
 				.then(() => resolve(this.show));
 		});
 	}
