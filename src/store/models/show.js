@@ -109,7 +109,7 @@ class Show {
 						} else {
 							acc[r.dog.name] = [r];
 						}
-						acc[r.dog.name] = acc[r.dog.name].sort((a, b) => a.classNumber > b.classNumber);
+						acc[r.dog.name] = acc[r.dog.name].sort((a, b) => a.classNumber - b.classNumber);
 						return acc;
 					},{});
 
