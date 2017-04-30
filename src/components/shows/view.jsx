@@ -87,6 +87,9 @@ class View extends Component {
 					<Label>Hotel booked <Label.Detail>{show.hotelBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
 					<Label>Holiday needed <Label.Detail>{show.holidayNeeded ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
 					<Label>Holiday booked <Label.Detail>{show.holidayBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+					<Label>Camping needed <Label.Detail>{show.campingRequired ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+					<Label>Camping booked <Label.Detail>{show.campingBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+					<Label>Camping confirmed <Label.Detail>{show.campingConfirmed ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
 
 					<h2>Runs</h2>
 					<Button onClick={this.addRun}>Add run</Button>

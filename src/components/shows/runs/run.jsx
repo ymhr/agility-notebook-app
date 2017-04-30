@@ -69,7 +69,9 @@ class Run extends Component {
 					{this.conditionallyAddDetails('Your Run', [
 						{value:'place', label: 'Your place'},
 						{value:'currentGrade', label: 'Grade at the time'},
-						{value:'runTime', label: 'Your time'}
+						{value:'runTime', label: 'Your time'},
+						{value:'clear', label: 'Clear'},
+						{value:'eliminated', label: 'Eliminated'}
 					])}
 				</div> : <Button basic size="mini" onClick={this.expand}><Icon name="chevron down" />Show more</Button>
 			);

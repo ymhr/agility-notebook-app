@@ -34,27 +34,10 @@ class Run {
 	@observable clear;
 	@observable eliminated;
 	@observable winningTime;
-	@observable campingRequired;
-	@observable campingBooked;
-	@observable campingConfirmed;
+
 	//Weather, surface type, indoor/outdoor?
 	@observable loaded = false;
 	@observable expanded = false;
-
-	// @computed get clear() {
-	// 	if (!(this.faults || this.faults == 0)) {
-	// 		console.log('faults', this.faults);
-	// 		const showStartDate = moment(this.show.startDate);
-	// 		const diff = moment().diff(showStartDate, 'day');
-	// 		if (diff > 0) {
-	// 			return 'clear';
-	// 		} else {
-	// 			return 'Not run';
-	// 		}
-	// 	}
-	//
-	// 	return 'faults';
-	// }
 
 	constructor(data) {
 		this.id = data.id;
@@ -81,9 +64,6 @@ class Run {
 		this.clear = data.clear;
 		this.eliminated = data.eliminated;
 		this.winningTime = data.winningTime;
-		this.campingRequired = data.campingRequired;
-		this.campingBooked = data.campingBooked;
-		this.campingConfirmed = data.campingConfirmed;
 
 		if (data.date)
 			this.date = moment(data.date);

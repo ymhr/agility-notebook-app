@@ -21,6 +21,9 @@ class Show {
 	@observable hotelBooked;
 	@observable holidayNeeded;
 	@observable holidayBooked;
+	@observable campingRequired;
+	@observable campingBooked;
+	@observable campingConfirmed;
 
 	@observable runs = [];
 	@observable runsLoaded = true;
@@ -35,7 +38,7 @@ class Show {
 		return (diff <= soonInDays && diff >= 0);
 	}
 
-	constructor({id, name, startDate, endDate, postcode, notes, closingDate, bookedIn, paid, bookingPlatform, hotelNeeded, hotelBooked, holidayNeeded, holidayBooked, runs = []}) {
+	constructor({id, name, startDate, endDate, postcode, notes, closingDate, bookedIn, paid, bookingPlatform, hotelNeeded, hotelBooked, holidayNeeded, holidayBooked, runs = [], campingRequired, campingBooked, campingConfirmed}) {
 		this.id = id;
 		this.name = name;
 		this.postcode = postcode;
@@ -47,6 +50,9 @@ class Show {
 		this.hotelBooked = hotelBooked;
 		this.holidayNeeded = holidayNeeded;
 		this.holidayBooked = holidayBooked;
+		this.campingRequired = campingRequired;
+		this.campingBooked = campingBooked;
+		this.campingConfirmed = campingConfirmed;
 
 		this.startDate = moment(startDate);
 		this.endDate = moment(endDate);

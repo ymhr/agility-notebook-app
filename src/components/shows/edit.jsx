@@ -168,7 +168,7 @@ class Edit extends Component {
 					</Form.Group>
 
 					<Form.Group>
-						<Form.Checkbox label="Camping Needed?" toggle checked={this.show.campingNeeded} name="campingNeeded" onChange={this.onCheckboxChange}/>
+						<Form.Checkbox label="Camping Needed?" toggle checked={this.show.campingRequired} name="campingRequired" onChange={this.onCheckboxChange}/>
 						<Form.Checkbox label="Camping Booked?" toggle checked={this.show.campingBooked} name="campingBooked" onChange={this.onCheckboxChange}/>
 						<Form.Checkbox label="Camping Confirmed?" toggle checked={this.show.campingConfirmed} name="campingConfirmed" onChange={this.onCheckboxChange}/>
 					</Form.Group>
