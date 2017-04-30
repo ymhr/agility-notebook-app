@@ -34,6 +34,9 @@ class Run {
 	@observable clear;
 	@observable eliminated;
 	@observable winningTime;
+	@observable campingRequired;
+	@observable campingBooked;
+	@observable campingConfirmed;
 	//Weather, surface type, indoor/outdoor?
 	@observable loaded = false;
 	@observable expanded = false;
@@ -53,36 +56,37 @@ class Run {
 	// 	return 'faults';
 	// }
 
-	constructor({id, showId, order, grade, notes, place, dogId, faults, runningOrder, ringNumber, classSize, judge, type, gradeType, classNumber, courseTime, runTime, courseLength, currentGrade, date, specialType, winningTime, clear, eliminated}) {
-		this.id = id;
-		this.showId = showId;
-		this.order = order;
-		this.grade = grade;
-		this.notes = notes;
-		this.place = place;
-		this.faults = faults;
-		this.runningOrder = runningOrder;
-		this.ringNumber = ringNumber;
-		this.dogId = dogId;
-		this.classSize = classSize;
-		this.judge = judge;
-		this.type = type;
-		this.gradeType = gradeType;
-		this.classNumber = classNumber;
-		this.courseTime = courseTime;
-		this.runTime = runTime;
-		this.courseLength = courseLength;
-		this.currentGrade = currentGrade;
-		this.date = date;
-		this.specialType = specialType;
-		this.clear = clear;
-		this.eliminated = eliminated;
-		this.winningTime = winningTime;
+	constructor(data) {
+		this.id = data.id;
+		this.showId = data.showId;
+		this.order = data.order;
+		this.grade = data.grade;
+		this.notes = data.notes;
+		this.place = data.place;
+		this.faults = data.faults;
+		this.runningOrder = data.runningOrder;
+		this.ringNumber = data.ringNumber;
+		this.dogId = data.dogId;
+		this.classSize = data.classSize;
+		this.judge = data.judge;
+		this.type = data.type;
+		this.gradeType = data.gradeType;
+		this.classNumber = data.classNumber;
+		this.courseTime = data.courseTime;
+		this.runTime = data.runTime;
+		this.courseLength = data.courseLength;
+		this.currentGrade = data.currentGrade;
+		this.date = data.date;
+		this.specialType = data.specialType;
+		this.clear = data.clear;
+		this.eliminated = data.eliminated;
+		this.winningTime = data.winningTime;
+		this.campingRequired = data.campingRequired;
+		this.campingBooked = data.campingBooked;
+		this.campingConfirmed = data.campingConfirmed;
 
-		if (date)
-			this.date = moment(date);
-		// else
-		// 	this.date = moment();
+		if (data.date)
+			this.date = moment(data.date);
 
 		//Make sure that the shows are loaded before we try to get a ref to this runs show
 		when(
