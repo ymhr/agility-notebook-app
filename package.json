@@ -39,7 +39,7 @@
     "mobx-react-devtools": "^4.2.11",
     "mocha": "^3.2.0",
     "mock-local-storage": "^1.0.2",
-    "node-sass": "^4.5.1",
+    "node-sass": "^4.5.2",
     "proxyquire": "^1.7.11",
     "react": "^15.3.1",
     "react-addons-test-utils": "^15.4.2",
