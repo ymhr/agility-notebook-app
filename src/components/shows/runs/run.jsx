@@ -83,9 +83,9 @@ class Run extends Component {
 			const date = (run.date ? run.date.format("dddd Do MMMM, YYYY") : '');
 
 			const runTitle = [
-				run.classNumber ? `Class #${run.classNumber} ` : null,
-				run.type ? `${this.makeTitleCase(run.type)} ` : null,
-				run.gradeType ? `${this.makeTitleCase(run.gradeType)} ` : null,
+				run.classNumber ? `Class #${run.classNumber}` : null,
+				run.type ? `${this.makeTitleCase(run.type)}` : null,
+				run.gradeType ? `${this.makeTitleCase(run.gradeType)}` : null,
 				run.grade ? `Grade ${run.grade}` : null
 			].filter(item => item !== null).join(', ');
 
