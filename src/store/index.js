@@ -5,8 +5,7 @@ import shows from './shows';
 import settings from './settings';
 import app from './app';
 import runs from './runs';
-
-import {when, observable} from 'mobx';
+import handlers from './handlers';
 
 const store = {
     auth,
@@ -15,7 +14,8 @@ const store = {
     shows,
     settings,
     app,
-    runs
+    runs,
+    handlers
 };
 
 export default store;

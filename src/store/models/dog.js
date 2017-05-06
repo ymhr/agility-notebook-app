@@ -1,16 +1,19 @@
-import {observable, toJS} from 'mobx';
+import {observable, toJS, when} from 'mobx';
 import auth from '../auth';
+import app from '../app';
+import handlers from '../handlers';
 
 class Dog {
 
-	id;
-	userId;
+	@observable id;
+	@observable userId;
 	@observable name;
 	@observable grade;
 	@observable notes;
 	@observable officialName;
+	@observable handlerId;
 
-	constructor({id, userId, name, grade, notes, officialName, height}) {
+	constructor({id, userId, name, grade, notes, officialName, height, handlerId}) {
 		this.id = id;
 		this.userId = userId;
 		this.name = name;
@@ -18,6 +21,19 @@ class Dog {
 		this.notes = notes;
 		this.officialName = officialName;
 		this.height = height;
+		this.handlerId = handlerId;
+
+		this.handler = null;
+
+		when(
+			() => app.ready,
+			() => this.loadHandler()
+		);
+	}
+	
+	loadHandler(){
+		if(!this.handlerId) return;
+		this.handler = handlers.items.filter(h => h.id === this.handlerId)[0] || null;
 	}
 
 	save(){
@@ -35,6 +51,8 @@ class Dog {
 						resolve(this.id);
 					});
 			}
+
+			this.loadHandler();
 		});
 	}
 

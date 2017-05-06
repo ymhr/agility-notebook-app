@@ -6,6 +6,8 @@ import {Form, Button, Select, Loader} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
 import Dog from 'store/models/dog';
 import {resolve} from 'react-resolver';
+import SelectHandler from '../handlers/selectHandler';
+
 
 @inject('profile', 'dogs', 'auth')
 @observer
@@ -44,7 +46,7 @@ class Edit extends Component {
         		// this.createVm();
             })
             .catch(err => {
-                console.error('Failed to load dog with id', id || this.props.params.id);
+                console.error('Failed to load dog with id', id || this.props.params.id, err);
                 this.loading = false;
 				this.dog = new Dog({});
 				this.createMode = true;
@@ -78,8 +80,7 @@ class Edit extends Component {
                     this.loading = false;
                 });
         }
-
-    }
+    };
 
     render(){
 
@@ -88,12 +89,6 @@ class Edit extends Component {
         const sizeOptions = [
             {text: 'Small', value: 'small'}, {text: 'Medium', value: 'medium'}, {text: 'Large', value: 'large'}
         ];
-
-        const heightSelect = (
-            this.dog.height ?
-                <Form.Select label="Height" name="height" placeholder="What size does your dog jump" options={sizeOptions} value={this.dog.height} onChange={this.onChange} /> :
-                <Form.Select label="Height" name="height" placeholder="What size does your dog jump" options={sizeOptions} onChange={this.onChange} />
-        )
 
         return(
 
@@ -106,6 +101,8 @@ class Edit extends Component {
                     {/*<Form.Input label="Breed" name="breed" placeholder="What breed is your dog?" value={this.dog.breed} onChange={this.onChange} />*/}
                     <Form.Select label="Height" name="height" placeholder="What size does your dog jump" options={sizeOptions} defaultValue={this.dog.height} onChange={this.onSelectChange} />
                     <Form.TextArea label="Notes" name="notes" placeholder="Notes" value={this.dog.notes} onChange={this.onChange} />
+                    <SelectHandler name="handlerId" value={this.dog.handlerId} onChange={this.onSelectChange}/>
+                    <br />
                     <Button type="submit">Submit</Button>
                 </Form>
 

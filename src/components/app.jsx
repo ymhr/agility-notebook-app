@@ -26,6 +26,7 @@ if (store.auth.isAuthed) {
 			store.settings.loadSettings();
 			store.dogs.load();
 			store.shows.load();
+			store.handlers.load();
 		});
 }
 

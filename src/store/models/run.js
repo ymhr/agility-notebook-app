@@ -1,6 +1,7 @@
 import {observable, computed, toJS, when, action} from 'mobx';
 import dogs from '../dogs';
 import shows from '../shows';
+import app from '../app';
 import Dog from './dog';
 import moment from 'moment';
 import auth from '../auth';
@@ -70,7 +71,7 @@ class Run {
 
 		//Make sure that the shows are loaded before we try to get a ref to this runs show
 		when(
-			() => shows.loaded,
+			() => app.ready,
 			() => this.load()
 		);
 
