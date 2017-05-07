@@ -13,7 +13,7 @@
     "push": "git push origin master && git push github master",
     "start": "node ./server.js",
     "prestart": "webpack -p",
-    "heroku-prebuild": "npm rebuild node-sass"
+    "heroku-prebuild": "yarn remove node-sass && yarn add node-sass@latest"
   },
   "author": "James Martin <jamesmartin442@gmail.com>",
   "license": "ISC",
