@@ -33,7 +33,7 @@ class Dogs extends Component {
                                <List.Item key={d.id} onClick={this.viewDog.bind(null, d.id)}>
                                    <List.Header>{d.name}</List.Header>
                                    <List.Content>
-                                       <div><strong>Grade:</strong> {d.grade}</div>
+                                       <span><strong>Grade:</strong> {d.grade}</span>
                                    </List.Content>
                                </List.Item>
                            )
