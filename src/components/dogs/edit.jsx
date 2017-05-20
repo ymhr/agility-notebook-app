@@ -7,6 +7,7 @@ import {hashHistory} from 'react-router';
 import Dog from 'store/models/dog';
 import {resolve} from 'react-resolver';
 import SelectHandler from '../handlers/selectHandler';
+import DatePicker from 'react-datepicker';
 
 
 @inject('profile', 'dogs', 'auth')
@@ -62,6 +63,10 @@ class Edit extends Component {
         this.dog[selectedItem.name] = selectedItem.value;
     };
 
+	onCheckboxChange = (e, data) => {
+		this.dog[data.name] = data.checked;
+	};
+
     save = (e, data) => {
         e.preventDefault();
 
@@ -82,12 +87,20 @@ class Edit extends Component {
         }
     };
 
+	setDate = (type = 'dateOfBirth', date) => {
+		date.hour(11);
+		this.dog[type] = date;
+	};
+
     render(){
 
         if(!this.dog) return <Loader />;
 
         const sizeOptions = [
             {text: 'Small', value: 'small'}, {text: 'Medium', value: 'medium'}, {text: 'Large', value: 'large'}
+        ];
+        const sexOptions = [
+            {text: 'Male', value: 'male'}, {text: 'Female', value: 'female'}
         ];
 
         return(
@@ -98,8 +111,22 @@ class Edit extends Component {
                     <Form.Input label="Name" name="name" placeholder="What is your dogs name?" value={this.dog.name} onChange={this.onChange} />
                     <Form.Input label="Registered Name" name="officialName" placeholder="What is your dogs KC name?" value={this.dog.officialName} onChange={this.onChange} />
                     <Form.Input type="number" label="Grade" name="grade" placeholder="What grade is your dog?" value={this.dog.grade} onChange={this.onChange} />
-                    {/*<Form.Input label="Breed" name="breed" placeholder="What breed is your dog?" value={this.dog.breed} onChange={this.onChange} />*/}
+                    <Form.Input label="Breed" name="breed" placeholder="What breed is your dog?" value={this.dog.breed} onChange={this.onChange} />
                     <Form.Select label="Height" name="height" placeholder="What size does your dog jump" options={sizeOptions} defaultValue={this.dog.height} onChange={this.onSelectChange} />
+                    <Form.Checkbox label="Lower height" toggle checked={this.dog.lowerHeight} name="lowerHeight" onChange={this.onCheckboxChange}/>
+                    <Form.Select label="Sex" name="sex" placeholder="What is the sex of your dog" options={sexOptions} defaultValue={this.dog.sex} onChange={this.onSelectChange} />
+                    <Form.Field>
+                        <label>Date of birth</label>
+                        <DatePicker name="dateOfBirth" placeholder="Date of birth"
+                                    dateFormat="dddd Do MMMM, YYYY"
+                                    onChange={this.setDate.bind(this, 'dateOfBirth')}
+                                    selected={this.dog.dateOfBirth}
+                        />
+                    </Form.Field>
+                    <Form.Input label="KC Number" name="registeredNumber" placeholder="Registererd Number" value={this.dog.registeredNumber} onChange={this.onChange} />
+
+                    <Form.Checkbox label="Not for competition" toggle checked={this.dog.notForCompetition} name="notForCompetition" onChange={this.onCheckboxChange}/>
+
                     <Form.TextArea label="Notes" name="notes" placeholder="Notes" value={this.dog.notes} onChange={this.onChange} />
                     <SelectHandler name="handlerId" value={this.dog.handlerId} onChange={this.onSelectChange}/>
                     <br />

@@ -2,6 +2,7 @@ import {observable, toJS, when} from 'mobx';
 import auth from '../auth';
 import app from '../app';
 import handlers from '../handlers';
+import moment from 'moment';
 
 class Dog {
 
@@ -12,8 +13,15 @@ class Dog {
 	@observable notes;
 	@observable officialName;
 	@observable handlerId;
+	@observable lowerHeight;
+	@observable notForCompetition;
+	@observable registeredNumber;
+	@observable meta;
+	@observable breed;
+	@observable sex;
+	@observable dateOfBirth;
 
-	constructor({id, userId, name, grade, notes, officialName, height, handlerId}) {
+	constructor({id, userId, name, grade, notes, officialName, height, handlerId, lowerHeight, notForCompetition, registeredNumber, meta, breed, sex, dateOfBirth}) {
 		this.id = id;
 		this.userId = userId;
 		this.name = name;
@@ -22,6 +30,16 @@ class Dog {
 		this.officialName = officialName;
 		this.height = height;
 		this.handlerId = handlerId;
+		this.lowerHeight = lowerHeight;
+		this.notForCompetition = notForCompetition;
+		this.registeredNumber = registeredNumber;
+		this.meta = meta;
+		this.breed = breed;
+		this.sex = sex;
+		this.dateOfBirth = dateOfBirth;
+
+		if(this.dateOfBirth)
+			this.dateOfBirth = moment(this.dateOfBirth);
 
 		this.handler = null;
 
