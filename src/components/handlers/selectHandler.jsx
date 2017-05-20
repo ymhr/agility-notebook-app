@@ -11,13 +11,15 @@ class SelectHandler extends Component {
 		
 		const {name, value, onChange} = this.props;
 
-		const options = this.props.handlers.items.map(d => {
-			return {
-				key: d.id,
-				text: d.name,
-				value: d.id
-			};
-		});
+		const options = this.props.handlers.items
+			.sort((a,b) => a.name > b.name)
+			.map(d => {
+				return {
+					key: d.id,
+					text: d.name,
+					value: d.id
+				};
+			});
 		
 		const hasHandlers = !!this.props.handlers.items.length;
 
