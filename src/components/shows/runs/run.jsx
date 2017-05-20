@@ -91,6 +91,8 @@ class Run extends Component {
 
 			const descriptionClass = (!expanded ? 'description-limit' : '');
 
+			const handler = (run.handler ? <h5>Handled by {run.handler.name}</h5> : null);
+
 			return (
 				<Segment clearing>
 					<h3>
@@ -99,6 +101,7 @@ class Run extends Component {
 					</h3>
 					<h4>{date}</h4>
 					<h4>{dogInfo} ran {run.currentGrade ? <span>at grade {run.currentGrade}</span> : ''}</h4>
+					{handler}
 
 					<p className={descriptionClass}>{run.notes}</p>
 

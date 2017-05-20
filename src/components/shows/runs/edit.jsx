@@ -7,6 +7,7 @@ import Run from 'store/models/run';
 import {hashHistory, Link} from 'react-router';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import SelectHandler from '../../handlers/selectHandler';
 
 @inject('dogs', 'shows')
 @observer
@@ -131,6 +132,9 @@ class EditRun extends Component {
 				<Form onSubmit={this.onSubmit} loading={this.formLoading}>
 					<Form.Field>
 						<DogSelect name="dogId" value={this.run.dogId} onChange={this.onSelectChange}/>
+					</Form.Field>
+					<Form.Field>
+						<SelectHandler name="handlerOverride" value={this.run.handler.id} onChange={this.onSelectChange}/>
 					</Form.Field>
 					<Form.Group widths="equal">
 						<Form.Field>

@@ -57,7 +57,7 @@ class Dog {
 	}
 
 	serialize(){
-		return toJS(this);
+		return Object.assign({}, toJS(this), {handler: undefined});
 	}
 
 }

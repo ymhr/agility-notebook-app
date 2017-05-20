@@ -1,11 +1,11 @@
-import {observable, computed, toJS, when, action} from 'mobx';
+import {observable, computed, toJS, when, action, reaction} from 'mobx';
 import dogs from '../dogs';
 import shows from '../shows';
 import app from '../app';
 import Dog from './dog';
 import moment from 'moment';
 import auth from '../auth';
-import runs from '../runs';
+import handlers from '../handlers';
 
 class Run {
 
@@ -35,6 +35,9 @@ class Run {
 	@observable clear;
 	@observable eliminated;
 	@observable winningTime;
+	@observable handlerOverride;
+
+	@observable handler;
 
 	//Weather, surface type, indoor/outdoor?
 	@observable loaded = false;
@@ -65,6 +68,7 @@ class Run {
 		this.clear = data.clear;
 		this.eliminated = data.eliminated;
 		this.winningTime = data.winningTime;
+		this.handlerOverride = data.handlerOverride;
 
 		if (data.date)
 			this.date = moment(data.date);
@@ -73,6 +77,19 @@ class Run {
 		when(
 			() => app.ready,
 			() => this.load()
+		);
+
+		reaction(
+			() => [this.handlerOverride, this.dog.handlerId],
+			() => {
+				if(this.handlerOverride && !(this.handlerOverride === this.dog.handlerId)) {
+					this.handler = handlers.get(this.handlerOverride)
+											.then(h => this.handler = h);
+				} else {
+					this.handlerOverride = null;
+					this.handler = this.dog.handler;
+				}
+			}
 		);
 
 	}
@@ -177,7 +194,8 @@ class Run {
 	serialize() {
 		const serializableObject = Object.assign({}, toJS(this), {
 			show: undefined,
-			dog: undefined
+			dog: undefined,
+			handler: undefined
 		});
 
 		return serializableObject;
