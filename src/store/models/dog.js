@@ -20,6 +20,7 @@ class Dog {
 	@observable breed;
 	@observable sex;
 	@observable dateOfBirth;
+	@observable metaObject;
 
 	constructor({id, userId, name, grade, notes, officialName, height, handlerId, lowerHeight, notForCompetition, registeredNumber, meta, breed, sex, dateOfBirth}) {
 		this.id = id;
@@ -40,6 +41,9 @@ class Dog {
 
 		if(this.dateOfBirth)
 			this.dateOfBirth = moment(this.dateOfBirth);
+
+		if(typeof this.meta === 'object')
+			this.metaObject = JSON.parse(this.meta);
 
 		this.handler = null;
 
@@ -75,7 +79,7 @@ class Dog {
 	}
 
 	serialize(){
-		return Object.assign({}, toJS(this), {handler: undefined});
+		return Object.assign({}, toJS(this), {handler: undefined, metaObject: undefined});
 	}
 
 }

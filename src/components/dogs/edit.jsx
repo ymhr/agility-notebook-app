@@ -121,6 +121,10 @@ class Edit extends Component {
                                     dateFormat="dddd Do MMMM, YYYY"
                                     onChange={this.setDate.bind(this, 'dateOfBirth')}
                                     selected={this.dog.dateOfBirth}
+                                    peekNextMonth
+                                    showMonthDropdown
+                                    showYearDropdown
+                                    dropdownMode="select"
                         />
                     </Form.Field>
                     <Form.Input label="KC Number" name="registeredNumber" placeholder="Registererd Number" value={this.dog.registeredNumber} onChange={this.onChange} />
