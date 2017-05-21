@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Icon, Modal, Popup} from 'semantic-ui-react';
+import {Icon, Modal, Popup, List} from 'semantic-ui-react';
+import moment from 'moment';
 
 class DogExpando extends Component {
 
@@ -16,6 +17,58 @@ class DogExpando extends Component {
 
 	close = () => {
 		this.setState({open: false});
+	};
+
+	createDetailsList = () => {
+		const {dog} = this.props;
+
+		const fieldsToRemove = ['id', 'name', 'userId', 'notes', 'handlerId', 'meta'];
+
+		const fieldNamesMap = {
+			grade: "Grade",
+			notes: "Notes",
+			officialName: "Official Name",
+			height: "Height",
+			lowerHeight: "Lower Height",
+			notForCompetition: "Not for Competition",
+			registeredNumber: "Registered Number",
+			breed: "Breed",
+			sex: "Sex",
+			dateOfBirth: "Date of Birth",
+			handler: "Handler"
+		};
+
+		const dogDetails = Object.keys(dog)
+			.filter(k => fieldsToRemove.indexOf(k) === -1)
+			.map(k => {
+				return {key: k, name: fieldNamesMap[k]}
+			})
+			.map(k => {
+				if(!dog[k.key]) return;
+
+				const value = do {
+					if(k.key === 'dateOfBirth') {
+						dog[k.key].format('d/M/Y');
+					} else if (k.key === 'notForCompetition') {
+						dog['notForCompetition'] ? 'yes' : 'no';
+					} else if (k.key === 'lowerHeight') {
+						dog['lowerHeight'] ? 'yes' : 'no';
+					} else if (k.key === 'handler') {
+						dog.handler.name;
+					} else {
+						dog[k.key];
+					}
+				};
+
+				return (
+					<List.Item key={Math.random()}>
+						<List.Header>{k.name}</List.Header>
+						<List.Description>{value}</List.Description>
+					</List.Item>
+				);
+			});
+
+		return dogDetails;
 	};
 
 	render() {
@@ -41,8 +94,9 @@ class DogExpando extends Component {
 					<Icon name="close" onClick={this.close} />
 					<Modal.Content>
 						<Modal.Description>
-							<p>Current grade: {dog.grade}</p>
-							<p>Official name: {dog.officialName}</p>
+							<List divided>
+								{this.createDetailsList()}
+							</List>
 						</Modal.Description>
 					</Modal.Content>
 				</Modal>

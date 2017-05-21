@@ -49,7 +49,7 @@ module.exports = {
 				{
 					loader: "babel-loader",
 					options: {
-						plugins: ['transform-runtime', 'transform-decorators-legacy', 'react-hot-loader/babel'],
+						plugins: ['transform-runtime', 'transform-decorators-legacy', 'react-hot-loader/babel', 'transform-do-expressions'],
 						presets: [['es2015', {"modules": false}], "react", "stage-0"]
 
 					}
