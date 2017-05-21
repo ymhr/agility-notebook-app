@@ -74,10 +74,6 @@ class DogExpando extends Component {
 	render() {
 		const {dog} = this.props;
 
-		const openStyle = {
-			"display":"block"
-		};
-
 		if (!this.state.open) {
 			const label = "Click this to view details of " + dog.name;
 			return (
