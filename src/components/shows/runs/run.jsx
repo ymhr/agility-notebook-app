@@ -5,7 +5,7 @@ import {isMoment} from 'moment';
 import DogExpando from '../dogs/dogExpando';
 import Rosette from './rosette';
 
-import './style.scss';
+import './style.css';
 
 @observer
 class Run extends Component {

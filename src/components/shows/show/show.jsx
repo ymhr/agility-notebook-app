@@ -4,7 +4,7 @@ import {List} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
 import moment from 'moment';
 
-import './style.scss';
+import './style.css';
 
 @observer
 class Show extends Component {
