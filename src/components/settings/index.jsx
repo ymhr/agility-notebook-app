@@ -3,7 +3,7 @@ import {inject, observer} from 'mobx-react';
 import {Checkbox} from 'semantic-ui-react';
 import {map} from 'lodash';
 
-import './style.scss';
+import './style.css';
 
 @inject('settings')
 @observer
