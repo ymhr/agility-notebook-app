@@ -5,7 +5,7 @@ import {isMoment} from 'moment';
 import DogExpando from '../dogs/dogExpando';
 import Rosette from './rosette';
 
-import './style.css';
+import styles from './style.css';
 
 @observer
 class Run extends Component {
@@ -49,7 +49,7 @@ class Run extends Component {
 			if(run.clear === 'clear') results = 'Clear!';
 			else if (run.clear === 'Not run') results = false;
 
-			const dogInfo = (run.dog) ? <DogExpando dog={run.dog} className="dogRunning" /> : <Loader active />;
+			const dogInfo = (run.dog) ? <DogExpando dog={run.dog} className={styles.dogRunning} /> : <Loader active />;
 
 			const day = (run.date) ? run.date.format('dddd Do') : '';
 
@@ -89,7 +89,7 @@ class Run extends Component {
 				run.grade ? `Grade ${run.grade}` : null
 			].filter(item => item !== null).join(', ');
 
-			const descriptionClass = (!expanded ? 'description-limit' : '');
+			const descriptionClass = (!expanded ? styles.descriptionLimit: '');
 
 			const handler = (run.handler ? <h5>Handled by {run.handler.name}</h5> : null);
 

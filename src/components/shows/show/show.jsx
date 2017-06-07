@@ -4,7 +4,7 @@ import {List, Button, Label, Icon} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
 import moment from 'moment';
 
-import './style.css';
+import styles from './style.css';
 
 @observer
 class Show extends Component {
@@ -43,17 +43,17 @@ class Show extends Component {
 		const {show} = this.props;
 		return (
 			<div>
-				<Label className="showDetails">Runs <Label.Detail>{show.runs.length}</Label.Detail></Label>
-				<Label className="showDetails">Booking platform <Label.Detail>{show.bookingPlatform}</Label.Detail></Label>
-				<Label className="showDetails">Booked <Label.Detail>{show.bookedIn ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-				<Label className="showDetails">Paid <Label.Detail>{show.paid ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-				<Label className="showDetails">Hotel needed <Label.Detail>{show.hotelNeeded ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-				<Label className="showDetails">Hotel booked <Label.Detail>{show.hotelBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-				<Label className="showDetails">Holiday needed <Label.Detail>{show.holidayNeeded ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-				<Label className="showDetails">Holiday booked <Label.Detail>{show.holidayBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-				<Label className="showDetails">Camping needed <Label.Detail>{show.campingRequired ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-				<Label className="showDetails">Camping booked <Label.Detail>{show.campingBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-				<Label className="showDetails">Camping confirmed <Label.Detail>{show.campingConfirmed ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+				<Label className={styles.showDetails}>Runs <Label.Detail>{show.runs.length}</Label.Detail></Label>
+				<Label className={styles.showDetails}>Booking platform <Label.Detail>{show.bookingPlatform}</Label.Detail></Label>
+				<Label className={styles.showDetails}>Booked <Label.Detail>{show.bookedIn ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+				<Label className={styles.showDetails}>Paid <Label.Detail>{show.paid ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+				<Label className={styles.showDetails}>Hotel needed <Label.Detail>{show.hotelNeeded ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+				<Label className={styles.showDetails}>Hotel booked <Label.Detail>{show.hotelBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+				<Label className={styles.showDetails}>Holiday needed <Label.Detail>{show.holidayNeeded ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+				<Label className={styles.showDetails}>Holiday booked <Label.Detail>{show.holidayBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+				<Label className={styles.showDetails}>Camping needed <Label.Detail>{show.campingRequired ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+				<Label className={styles.showDetails}>Camping booked <Label.Detail>{show.campingBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+				<Label className={styles.showDetails}>Camping confirmed <Label.Detail>{show.campingConfirmed ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
 			</div>
 		);
 	};
@@ -62,11 +62,11 @@ class Show extends Component {
 
 		const {show} = this.props;
 
-		const closingSoon = (show.closingSoon && !show.bookedIn ? <div className="showClosingSoon">Registration is ending in {show.closingDate.diff(moment(), 'days')} day(s)</div> : '');
+		const closingSoon = (show.closingSoon && !show.bookedIn ? <div className={styles.showClosingSoon}>Registration is ending in {show.closingDate.diff(moment(), 'days')} day(s)</div> : '');
 
 		const classNames = [];
 
-		if(show.endDate && show.endDate.diff(moment(), 'days') < 0) classNames.push('oldShow');
+		if(show.endDate && show.endDate.diff(moment(), 'days') < 0) classNames.push(styles.oldShow);
 
 		return (
 

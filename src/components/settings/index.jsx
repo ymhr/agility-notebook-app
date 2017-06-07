@@ -3,7 +3,7 @@ import {inject, observer} from 'mobx-react';
 import {Checkbox} from 'semantic-ui-react';
 import {map} from 'lodash';
 
-import './style.css';
+import styles from './style.css';
 
 @inject('settings')
 @observer
@@ -44,7 +44,7 @@ class Index extends Component {
 		return (
 			<div>
 				<h1>Settings</h1>
-				<table className="settings-list">
+				<table className={styles.settingsList}>
 					<tbody>
 						{settingsList}
 					</tbody>
