@@ -5,3 +5,7 @@
 .oldShow {
   opacity: 0.5;
 }
+
+.showDetails {
+  margin-top: 5px !important;
+}
