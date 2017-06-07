@@ -25,6 +25,7 @@ describe('Show item', function(){
         const wrapper = shallow(component);
 
         should(wrapper.find(List.Item)).have.length(1);
+        should(wrapper.find(List.Item)).have.length(1);
         should(wrapper.find(List.Content)).have.length(2);
         should(wrapper.find(List.Header)).have.length(1);
         should(wrapper.find(List.Description)).have.length(1);
