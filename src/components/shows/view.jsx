@@ -50,6 +50,10 @@ class View extends Component {
 		show.runs.forEach(r => r.expandToggle())
 	};
 
+	showPrintable = () => {
+		hashHistory.push(`shows/${this.show.id}/printable`);
+	};
+
 	render() {
 		const {show} = this;
 
@@ -72,6 +76,7 @@ class View extends Component {
 		} else {
 			return (
 				<div>
+					<Button onClick={this.showPrintable}>Printable view</Button>
 					<Button style={{'float':'right'}} onClick={this.editShow}>Edit</Button>
 					<Header as="h1">
 						<Header.Content>{show.name}</Header.Content>

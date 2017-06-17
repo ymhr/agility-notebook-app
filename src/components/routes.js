@@ -7,6 +7,7 @@ import Dogs from './dogs/index';
 import EditDog from './dogs/edit';
 import Settings from './settings/index';
 import EditRun from './shows/runs/edit';
+import Printable from './printable/index';
 
 const routes = [
 	{
@@ -22,7 +23,8 @@ const routes = [
 					{path: ':id', component: ViewShow, label: 'View show', childRoutes: [
 						{path: 'run/add', component: EditRun, label: 'Add run'},
 						{path: 'run/:runId', component: EditRun, label: 'Edit run'}
-					]}
+					]},
+					{path: ':id/printable', component: Printable, hideFromNav: true}
 			]
 			},
 			{path: '/profile', component: Profile, label: 'Profile', hideFromNav: true},
