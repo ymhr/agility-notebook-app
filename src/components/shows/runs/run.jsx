@@ -71,7 +71,8 @@ class Run extends Component {
 						{value:'currentGrade', label: 'Grade at the time'},
 						{value:'runTime', label: 'Your time'},
 						{value:'clear', label: 'Clear'},
-						{value:'eliminated', label: 'Eliminated'}
+						{value:'eliminated', label: 'Eliminated'},
+						{value: 'faults', label: 'Faults'}
 					])}
 				</div> : <Button basic size="mini" onClick={this.expand}><Icon name="chevron down" />Show more</Button>
 			);
