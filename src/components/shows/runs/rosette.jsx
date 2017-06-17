@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Popup} from 'semantic-ui-react';
+import ordinal from 'ordinal';
 
 import styles from './style.css';
 
@@ -14,20 +15,25 @@ class Rosette extends Component {
 		if((run.place !== null && run.place > 0)) {
 			placeClasses.push(styles.place);
 
-			switch(parseInt(run.place)) {
-				case 1:
-					placeClasses.push(styles.placeFirst);
-					popupContent = 'First place!';
-					break;
-				case 2:
-					placeClasses.push(styles.placSecond);
-					popupContent = 'Second place!';
-					break;
-				case 3:
-					placeClasses.push(styles.placeThird);
-					popupContent = 'Third place!';
-					break;
-			}
+			const className = 'place'+run.place;
+			placeClasses.push(styles[className]);
+
+			popupContent = ordinal(parseInt(run.place)) + ' ' + 'place!';
+
+			// switch(parseInt(run.place)) {
+			// 	case 1:
+			// 		placeClasses.push(styles.placeFirst);
+			// 		popupContent = 'First place!';
+			// 		break;
+			// 	case 2:
+			// 		placeClasses.push(styles.placeSecond);
+			// 		popupContent = 'Second place!';
+			// 		break;
+			// 	case 3:
+			// 		placeClasses.push(styles.placeThird);
+			// 		popupContent = 'Third place!';
+			// 		break;
+			// }
 		}
 
 		let rosette = (run.place !== null && run.place > 0) ? <div className={placeClasses.join(' ')}><span>{run.place}</span></div> : null;

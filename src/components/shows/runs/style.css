@@ -1,40 +1,63 @@
+@import '../../../styles/colours.css';
+
 .place {
   position: absolute;
   top: 5px;
   right: 5px;
   width: 30px;
   height: 30px;
-  background-color: yellow;
+  background-color: var(--other-place);
   border-radius: 1000px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #988e00;
+  color: color(var(--other-place) shade(30%));
   font-weight: bold;
   font-size: 15px;
   transition: 0.3s ease all;
-  border-color: darken(yellow, 30%);
+  border-color: color(var(--other-place) shade(30%));
 
-  &.placeFirst {
-    background-color: red;
-    border-color: darken(red, 30%);
+  &.place1 {
+    background-color: var(--first-place);
+    border-color: color(var(--first-place) shade(30%));
     color: white;
   }
 
-  &.placeSecond {
-    background-color: blue;
-    border-color: darken(blue, 30%);
-    color: white;
+  &.place2 {
+    background-color: var(--second-place);
+    border-color: color(var(--second-place) shade(30%));
+    color:  white;
   }
 
-  &.placeThird {
-    background-color: yellow;
-    border-color: darken(yellow, 30%);
+  &.place3 {
+    background-color: var(--third-place);
+    border-color: color(var(--third-place) shade(30%));
+    color:  color(var(--third-place) shade(30%));
   }
+
+  &.place4 {
+     background-color: var(--fourth-place);
+     border-color: color(var(--fourth-place) shade(30%));
+    color:  white;
+   }
+
+  &.place5 {
+    background-color: var(--fifth-place);
+    border-color: color(var(--fifth-place) shade(30%));
+    color:  white;
+  }
+
+  &.place6 {
+    background-color: var(--sixth-place);
+    border-color: color(var(--sixth-place) shade(30%));
+    color:  white;
+  }
+
 
   &.placeClear {
-    background-color: #a7ff48;
-    border-color: darken(#a7ff48, 30%);
+    background-color: var(--clear-round);
+    border-color: color(var(--clear-round) shade(30%));
+    color:  color(var(--clear-round) shade(30%));
     color: #4f9800;
   }
 

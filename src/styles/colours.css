@@ -1,0 +1,15 @@
+:root {
+
+    /*
+    Rosettes
+     */
+
+    --first-place: red;
+    --second-place: blue;
+    --third-place: yellow;
+    --fourth-place: #05824B;
+    --fifth-place: #F6521B;
+    --sixth-place: #6E34A4;
+    --other-place: lightblue;
+    --clear-round: lightgreen;
+}
