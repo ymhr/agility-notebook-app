@@ -6,6 +6,7 @@ import Dog from './dog';
 import moment from 'moment';
 import auth from '../auth';
 import handlers from '../handlers';
+import Handler from './handler';
 
 class Run {
 
@@ -69,6 +70,8 @@ class Run {
 		this.eliminated = data.eliminated;
 		this.winningTime = data.winningTime;
 		this.handlerOverride = data.handlerOverride;
+
+		this.handler = {};
 
 		if (data.date)
 			this.date = moment(data.date);
