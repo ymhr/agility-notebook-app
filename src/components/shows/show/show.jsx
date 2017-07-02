@@ -68,6 +68,8 @@ class Show extends Component {
 
 		if(show.endDate && show.endDate.diff(moment(), 'days') < 0) classNames.push(styles.oldShow);
 
+		classNames.push(styles.row);
+
 		return (
 
 			<List.Item onClick={this.itemClick.bind(this, show)} className={classNames.join(' ')}>

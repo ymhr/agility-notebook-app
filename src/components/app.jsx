@@ -9,7 +9,9 @@ import URL from 'domurl';
 import routes from './routes';
 import Login from './login/index';
 
+require();
 require('react-datepicker/dist/react-datepicker.css');
+require('../styles/global.css');
 
 const url = new URL(window.location.href);
 

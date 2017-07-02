@@ -72,6 +72,7 @@
     "react-resolver": "^3.0.3",
     "react-router": "^2.7.0",
     "react-sticky": "^5.0.8",
+    "semantic-ui": "^2.2.10",
     "semantic-ui-react": "^0.67.0"
   }
 }
