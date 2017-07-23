@@ -13,6 +13,9 @@ class Index extends Component {
 		return {
 			showEmptyMonths: {
 				label: 'Show Empty Months'
+			},
+			collapseOldMonths: {
+				label: "Collapse months in the show list when they've passed"
 			}
 		}
 	};

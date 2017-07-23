@@ -3,6 +3,7 @@ import auth from './auth';
 
 class Settings {
 	@observable showEmptyMonths;
+	@observable collapseOldMonths;
 	@observable loaded = false;
 
 	constructor() {
@@ -15,6 +16,7 @@ class Settings {
 
 	setDefaults() {
 		this.showEmptyMonths = true;
+		this.collapseOldMonths = true;
 	}
 
 	loadSettings() {
@@ -42,6 +44,9 @@ class Settings {
 	setSetting(name, value){
 		switch(name){
 			case 'showEmptyMonths':
+				value = (value == '1');
+				break;
+			case 'collapseOldMonths':
 				value = (value == '1');
 				break;
 		}
