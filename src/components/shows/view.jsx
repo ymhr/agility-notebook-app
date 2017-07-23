@@ -7,6 +7,7 @@ import {hashHistory} from 'react-router';
 import {reduce} from 'lodash';
 import Run from './runs/run';
 import RunsByDate from './runs/RunsByDate';
+import GiantButton from 'components/general/giantButton';
 
 @inject('shows')
 @observer
@@ -48,6 +49,19 @@ class View extends Component {
 		const {show} = this;
 
 		show.runs.forEach(r => r.expandToggle())
+	};
+
+	addButton = () => {
+		if(this.show.runs.length){
+			return <Button fluid onClick={this.addRun}><Icon name="plus" /> Add run</Button>
+		} else {
+			return <GiantButton
+				title="Add a new run"
+				icon="plus"
+				description="Click this to add a run to this show. This allows you to record, times, rings, places, etc!"
+				onClick={this.addRun}
+			/>
+		}
 	};
 
 	render() {
@@ -92,8 +106,8 @@ class View extends Component {
 					<Label>Camping confirmed <Label.Detail>{show.campingConfirmed ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
 
 					<h2>Runs</h2>
-					<Button onClick={this.addRun}>Add run</Button>
-					<Button basic size="mini" style={{float: 'right'}} onClick={this.toggleAllRunsExpanded}>Toggle all</Button>
+					{this.addButton()}
+					{this.show.runs.length ? <Button basic size="mini" style={{float: 'right'}} onClick={this.toggleAllRunsExpanded}>Toggle all</Button> : ''}
 					{runsForDisplay}
 
 				</div>

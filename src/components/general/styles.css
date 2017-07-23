@@ -1,0 +1,29 @@
+.giantButtonWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+    & .giantButton {
+        padding: 20px;
+        border: 2px dashed #bbb;
+        width: 100%;
+        background-color: white;
+        color: #aaa;
+
+        &:hover {
+            background-color: #eee;
+        }
+
+        & .title {
+            font-size: 32px;
+            color: #666;
+        }
+
+
+        & .icon {
+            font-size: 32px;
+        }
+    }
+    
+}

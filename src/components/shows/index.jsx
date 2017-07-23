@@ -5,6 +5,7 @@ import {Button, Icon, List} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
 import {each, padStart, map} from 'lodash';
 import moment from 'moment';
+import GiantButton from 'components/general/giantButton';
 
 @observer(['shows', 'settings'])
 class Shows extends Component {
@@ -72,6 +73,19 @@ class Shows extends Component {
 
 	};
 
+	addButton = () => {
+		if(this.props.shows.items.length) {
+			return <Button fluid content="Add show" icon="plus" onClick={this.openCreate}/>
+		} else {
+			return <GiantButton
+				title="Add a new show"
+				icon="plus"
+				description="Click this button to add a new show. You can then add new runs to it!"
+				onClick={this.openCreate}
+				/>
+		}
+	};
+
 	render() {
 
 		let content = this.props.children;
@@ -82,10 +96,12 @@ class Shows extends Component {
 			return <Month key={month} shows={m} month={month}/>
 		});
 
+		
+
 		if (!this.props.children) {
 			content = (
 				<div>
-					<Button fluid content="Add show" icon="plus" onClick={this.openCreate}/>
+					{this.addButton()}
 					<br />
 					{itemList}
 				</div>
