@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
+import {Container} from 'semantic-ui-react';
 
 import HeaderContainer from './header';
 
@@ -8,11 +9,12 @@ class Root extends Component {
 
     render() {
         return (
-            <span>
+            <div>
                 <HeaderContainer />
-
-                {this.props.children}
-            </span>
+                <Container>
+                    {this.props.children}
+                </Container>
+            </div>
         );
     }
 }

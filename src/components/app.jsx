@@ -52,12 +52,10 @@ class App extends Component {
 		}
 
 		return (
-			<Container>
-				<Provider {...store}>
-					<Router history={hashHistory} routes={routes}/>
-				</Provider>
-			</Container>
-		)
+			<Provider {...store}>
+				<Router history={hashHistory} routes={routes}/>
+			</Provider>
+	)
 	}
 
 }

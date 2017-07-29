@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import routes from '../routes';
-import {Header, Menu, Button} from 'semantic-ui-react';
+import {Header, Menu, Button, Container} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
 import {observer} from 'mobx-react';
+
+import styles from './styles.css';
 
 @observer(['auth'])
 class HeaderContainer extends Component {
@@ -28,23 +30,35 @@ class HeaderContainer extends Component {
         menu = [
             <Menu.Item key={Math.random()} onClick={this.clickMenuItem.bind(this, routes[0].path)}>{routes[0].label}</Menu.Item>,
                 ...menu
-        ]
+        ];
+
+        const navStyles = {
+            backgroundColor: 'transparent',
+            border: 0,
+            boxShadow: 'none'
+        };
 
         return (
+            <div style={{marginBottom: 20}}>
+                <header className={styles.header}>
+                    <Container>
+                        <Button size="mini" floated="right" onClick={this.logout}>Logout</Button>
+                        <Header as="h1">
+                            Agility Notebook
+                            <Header.Subheader>Makes notes and stuff</Header.Subheader>
+                        </Header>
+                    </Container>
+                </header>
 
-            <header>
-                <Button size="mini" floated="right" onClick={this.logout}>Logout</Button>
-                <Header as="h1">
-                    Agility Notebook
-                    <Header.Subheader>Makes notes and stuff</Header.Subheader>
-                </Header>
+                <nav className={styles.nav}>
+                    <Container>
+                        <Menu style={navStyles}>
+                            {menu}
+                        </Menu>
+                    </Container>
+                </nav>
 
-                <Menu>
-                    {menu}
-                </Menu>
-                <br />
-            </header>
-
+            </div>
         );
 
     }
