@@ -42,12 +42,13 @@ class HeaderContainer extends Component {
             <div style={{marginBottom: 20}}>
                 <header className={styles.header}>
                     <Container>
-                        <Button size="mini" floated="right" onClick={this.logout}>Logout</Button>
                         <Header as="h1">
                             Agility Notebook
                             <Header.Subheader>Makes notes and stuff</Header.Subheader>
                         </Header>
                     </Container>
+                    <Button size="mini" floated="right" onClick={this.logout}>Logout</Button>
+
                 </header>
 
                 <nav className={styles.nav}>

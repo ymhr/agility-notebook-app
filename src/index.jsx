@@ -8,6 +8,9 @@ if (module.hot) {
   module.hot.accept();
 }
 console.log(API_URL);
+
+Raven.config('https://b79178955a454bfab27afb2089fe8ed5@sentry.io/199214').install();
+
 ReactDOM.render(
     <App />,
     document.querySelector('#main')

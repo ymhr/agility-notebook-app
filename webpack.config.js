@@ -3,6 +3,7 @@ var CommonsChunkPlugin = require('./node_modules/webpack/lib/optimize/CommonsChu
 var DefinePlugin = require('./node_modules/webpack/lib/DefinePlugin');
 // var DashboardPlugin = require('webpack-dashboard/plugin');
 var path = require('path');
+var ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
 	entry: {
@@ -80,6 +81,20 @@ module.exports = {
 		}),
 		new DefinePlugin({
 			API_URL: JSON.stringify(process.env.API_URL || "http://localhost:3000")
+		}),
+		//need to make this output to crrect dir
+		new ManifestPlugin({
+			fileName: 'manifest.json',
+			publicPath: '/dist/',
+			writeToFileEmit: true,
+			seed: {
+				"name": "Agility Notebook",
+				"short_name": "Notebook",
+				"lang": "en-GB",
+				"start_url": "/",
+				"display": "standalone",
+				"theme_color": "#cccccc"
+			}
 		})
 	]
 };
