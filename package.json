@@ -72,5 +72,5 @@
     "webpack-dev-server": "^2.5.0",
     "webpack-livereload-plugin": "^0.8.2",
     "webpack-manifest-plugin": "^1.2.1"    
-  },
+  }
 }
