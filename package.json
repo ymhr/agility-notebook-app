@@ -39,10 +39,10 @@
     "jsdom": "^9.11.0",
     "jsdom-global": "^2.1.1",
     "lodash": "^4.16.2",
-    "mobx": "^2.5.0",
-    "mobx-react": "^3.5.5",
+    "mobx": "^3.2.2",
+    "mobx-react": "^4.2.2",
     "mobx-react-devtools": "^4.2.11",
-    "mobx-utils": "^1.1.0",
+    "mobx-utils": "^3.0.0",
     "mocha": "^3.2.0",
     "mock-local-storage": "^1.0.2",
     "moment": "^2.17.1",
@@ -64,13 +64,13 @@
     "semantic-ui-react": "^0.71.2",
     "should": "^11.2.0",
     "should-enzyme": "^1.1.0",
-    "should-sinon": "0.0.5",
+    "should-sinon": "^0.0.5",
     "sinon": "^2.0.0-pre.5",
     "style-loader": "^0.13.1",
-    "webpack": "3.0.0",
+    "webpack": "^3.0.0",
     "webpack-dashboard": "^0.3.0",
-    "webpack-dev-server": "^2.5.0",
+    "webpack-dev-server": "^2.6.1",
     "webpack-livereload-plugin": "^0.8.2",
-    "webpack-manifest-plugin": "^1.2.1"    
+    "webpack-manifest-plugin": "^1.2.1"
   }
 }
