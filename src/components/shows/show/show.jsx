@@ -3,6 +3,7 @@ import {observer} from 'mobx-react';
 import {List, Button, Label, Icon} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 import styles from './style.css';
 
@@ -89,7 +90,7 @@ class Show extends Component {
 }
 
 Show.propTypes = {
-	show: React.PropTypes.object.isRequired
+	show: PropTypes.object.isRequired
 };
 
 export default Show;

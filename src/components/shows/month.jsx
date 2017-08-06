@@ -3,6 +3,7 @@ import {observer, inject} from 'mobx-react';
 import Show from './show/show';
 import moment from 'moment';
 import {List, Icon} from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 @inject('settings')
 @observer
@@ -81,8 +82,8 @@ class Month extends Component {
 }
 
 Month.propTypes = {
-	month: React.PropTypes.string.isRequired,
-	shows: React.PropTypes.array
+	month: PropTypes.string.isRequired,
+	shows: PropTypes.array
 };
 
 export default Month;
