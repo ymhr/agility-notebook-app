@@ -4,6 +4,8 @@ import {Container} from 'semantic-ui-react';
 
 import HeaderContainer from './header';
 
+import styles from './styles.css'
+
 @observer
 class Root extends Component {
 
@@ -11,7 +13,7 @@ class Root extends Component {
         return (
             <div>
                 <HeaderContainer />
-                <Container>
+                <Container className={styles.main}>
                     {this.props.children}
                 </Container>
             </div>
