@@ -8,6 +8,7 @@ class App {
     @observable ready = false;
 
     constructor(){
+        console.log(shows, settings, dogs, handlers)
         when(
             () => (
                 shows.loaded

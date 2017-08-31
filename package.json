@@ -59,7 +59,7 @@
     "react-dom": "^15.6.1",
     "react-hot-loader": "next",
     "react-resolver": "^3.0.3",
-    "react-router": "^2.7.0",
+    "react-router": "^4.1.2",
     "react-sticky": "^5.0.8",
     "semantic-ui-react": "^0.71.2",
     "should": "^11.2.0",

@@ -4,10 +4,12 @@ import {observer, Provider} from 'mobx-react';
 import {when} from 'mobx';
 import store from '../store/index';
 import {Container, Dimmer, Loader} from 'semantic-ui-react';
-import {Router, hashHistory} from 'react-router';
+// import {Router, hashHistory} from 'react-router';
+import {BrowserRouter as Router, Link, Route} from 'react-router';
 import URL from 'domurl';
-import routes from './routes';
+import routes, {flatRoutes} from './routes';
 import Login from './login/index';
+import Root from 'components/root/index.jsx';
 
 require('react-datepicker/dist/react-datepicker-cssmodules.css');
 
@@ -34,7 +36,6 @@ if (store.auth.isAuthed) {
 class App extends Component {
 
 	render() {
-
 		if (!store.auth.isAuthed) {
 			return (
 				<Login />
@@ -42,7 +43,6 @@ class App extends Component {
 		}
 
 		//Make sure that the settings are loaded
-		// if (store.settings.loaded === false) {
 		if (!store.app.ready) {
 			return (
 				<Dimmer active page>
@@ -53,7 +53,8 @@ class App extends Component {
 
 		return (
 			<Provider {...store}>
-				<Router history={hashHistory} routes={routes}/>
+				{/* <Router history={hashHistory} routes={routes}/> */}
+				<Root />
 			</Provider>
 	)
 	}

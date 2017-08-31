@@ -9,12 +9,6 @@ import Settings from './settings/index';
 import EditRun from './shows/runs/edit';
 
 const routes = [
-	{
-		path: '/',
-		component: Root,
-		label: 'Shows',
-		indexRoute: {component: Shows},
-		childRoutes: [
 			{
 				path: '/shows', component: Shows, hideFromNav: true, childRoutes: [
 					{path: 'add', component: EditShow, label: 'Add show'},
@@ -33,8 +27,31 @@ const routes = [
 			]
 			},
 			{path: '/settings', component: Settings, label: 'Settings'}
-		]
-	}
 ];
+
+export const routeElements = (flatRoutes) => {
+	return flatRoutes.map((route, i) => <Route key={i} path={route.path} render={route.component} exact={route.exact} />);
+};
+
+export const flatRoutes = () => {
+	const flatRoutes = flattenRoutes(routes, '');
+	flatRoutes.unshift({path: '/', exact: true, component: Shows, label: 'Home'});
+	return flatRoutes;
+};
+
+const flattenRoutes = (routeList, currentPath) => {
+	return routeList.reduce((flatRoutes, r) => {
+		const path = currentPath ? currentPath + '/' + r.path : r.path;
+		const routeDefinition = {path, component: r.component, label: r.label, exact: r.exact || false};
+		flatRoutes.push(routeDefinition);
+		
+		if(r.childRoutes && r.childRoutes.length){
+			flatRoutes = flatRoutes.concat(flattenRoutes(r.childRoutes, routeDefinition.path));
+		}
+
+		return flatRoutes;
+
+	}, []);
+};
 
 export default routes;
