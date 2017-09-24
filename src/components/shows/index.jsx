@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 import Month from './month';
 import {Button, Icon, List} from 'semantic-ui-react';
 import {hashHistory} from 'react-router';
@@ -7,7 +7,8 @@ import {each, padStart, map} from 'lodash';
 import moment from 'moment';
 import GiantButton from 'components/general/giantButton';
 
-@observer(['shows', 'settings'])
+@inject('shows', 'settings')
+@observer
 class Shows extends Component {
 
 	componentWillMount() {

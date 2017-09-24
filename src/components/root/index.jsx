@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
 import {Container} from 'semantic-ui-react';
-import {Route, Link, BrowserRouter as Router} from 'react-router';
-import routes, {routeElements} from '../routes.js';
+import {Route, Link, Switch} from 'react-router-dom';
+import routes, {test, routeElements} from '../routes.js';
 
 import HeaderContainer from './header';
 
@@ -18,9 +18,9 @@ class Root extends Component {
                 <HeaderContainer />
                 <Container className={styles.main}>
                     {/* {this.props.children} */}
-                     <Router>
+                    {/* <Switch> */}
                         {routeElements()}
-                    </Router>
+                    {/* </Switch> */}
                 </Container>
             </div>
         );

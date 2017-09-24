@@ -16,14 +16,20 @@ class View extends Component {
 	@observable show;
 	@observable loaded = false;
 
+	constructor(props) {
+		super(props);
+		console.log('super');
+	}
+
 	componentWillMount(){
-		const {id} = this.props.routeParams;
+		const {id} = this.props.match.params;
 		this.loadShow(id);
 	}
 
 	componentWillReceiveProps(nextProps){
 		console.log('will receive props');
-		const {id} = nextProps.routeParams;
+		console.log(nextProps);
+		const {id} = nextProps.match.params;
 		this.loadShow(id);
 	}
 
@@ -66,6 +72,7 @@ class View extends Component {
 
 	render() {
 		const {show} = this;
+		console.log('show render')
 
 		if(!this.loaded) return <Loader />;
 

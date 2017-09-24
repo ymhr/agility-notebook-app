@@ -1,3 +1,5 @@
+import React from 'react';
+import {Route} from 'react-router-dom'
 import Root from './root/index';
 import Shows from './shows/index';
 import ViewShow from './shows/view';
@@ -29,29 +31,48 @@ const routes = [
 			{path: '/settings', component: Settings, label: 'Settings'}
 ];
 
-export const routeElements = (flatRoutes) => {
-	return flatRoutes.map((route, i) => <Route key={i} path={route.path} render={route.component} exact={route.exact} />);
-};
 
-export const flatRoutes = () => {
-	const flatRoutes = flattenRoutes(routes, '');
+
+export const routeElements = () => {
+	const flatRoutes = flattenRoutes(routes);
 	flatRoutes.unshift({path: '/', exact: true, component: Shows, label: 'Home'});
-	return flatRoutes;
+	return flatRoutes.map((route, i) => <Route key={i} path={route.path} component={route.component} exact={route.exact} />).reverse();
 };
 
-const flattenRoutes = (routeList, currentPath) => {
-	return routeList.reduce((flatRoutes, r) => {
-		const path = currentPath ? currentPath + '/' + r.path : r.path;
-		const routeDefinition = {path, component: r.component, label: r.label, exact: r.exact || false};
-		flatRoutes.push(routeDefinition);
-		
-		if(r.childRoutes && r.childRoutes.length){
-			flatRoutes = flatRoutes.concat(flattenRoutes(r.childRoutes, routeDefinition.path));
-		}
+// export const flatRoutes = () => {
+// 	const flatRoutes = flattenRoutes(routes, '');
+// 	flatRoutes.unshift({path: '/', exact: true, component: Shows, label: 'Home'});
+// 	return flatRoutes;
+// };
+export const test = () => {
+	console.log(flattenRoutes(routes));
+};
 
-		return flatRoutes;
+const flattenRoutes = (r, parentPath = '') => {
+	return r.reduce((flat, route) => {
+		const leadingSlash = parentPath ? '/' : '';
+		const path = parentPath + leadingSlash + route.path;
+		flat.push({path, component: route.component, exact: route.exact ||false});
 
+		if(route.childRoutes && route.childRoutes.length) flat = flat.concat(flattenRoutes(route.childRoutes, path));
+
+		return flat;
 	}, []);
-};
+}
+
+// const flattenRoutes = (routeList, currentPath) => {
+// 	return routeList.reduce((flatRoutes, r) => {
+// 		const path = currentPath ? currentPath + '/' + r.path : r.path;
+// 		const routeDefinition = {path, component: r.component, label: r.label, exact: r.exact || false};
+// 		flatRoutes.push(routeDefinition);
+		
+// 		if(r.childRoutes && r.childRoutes.length){
+// 			flatRoutes = flatRoutes.concat(flattenRoutes(r.childRoutes, routeDefinition.path));
+// 		}
+
+// 		return flatRoutes;
+
+// 	}, []);
+// };
 
 export default routes;

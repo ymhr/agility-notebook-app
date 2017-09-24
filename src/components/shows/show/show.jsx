@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
 import {List, Button, Label, Icon} from 'semantic-ui-react';
-import {hashHistory} from 'react-router';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom';
 
 import styles from './style.css';
 
@@ -16,7 +16,9 @@ class Show extends Component {
 	}
 
 	itemClick = (show) => {
-		hashHistory.push(`/shows/${show.id}`);
+		console.log(show);
+		console.log(this.props);
+		this.props.history.push(`/shows/${show.id}`);
 	};
 
 	toggleExpanded = (e) => {
@@ -93,4 +95,4 @@ Show.propTypes = {
 	show: PropTypes.object.isRequired
 };
 
-export default Show;
+export default withRouter(Show);
