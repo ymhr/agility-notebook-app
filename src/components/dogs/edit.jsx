@@ -3,7 +3,6 @@ import {observable} from 'mobx';
 import {observer, inject} from 'mobx-react';
 import {createViewModel} from 'mobx-utils';
 import {Form, Button, Select, Loader} from 'semantic-ui-react';
-import {hashHistory} from 'react-router';
 import Dog from 'store/models/dog';
 import {resolve} from 'react-resolver';
 import SelectHandler from '../handlers/selectHandler';
@@ -28,9 +27,9 @@ class Edit extends Component {
     }
 
     shouldComponentUpdate(nextProps){
-        if(this.props.params.id !== nextProps.params.id)
+        if(this.props.match.params.id !== nextProps.match.params.id)
         {
-            this.loadDog(nextProps.params.id);
+            this.loadDog(nextProps.match.params.id);
             return true;
         }
 
@@ -40,14 +39,14 @@ class Edit extends Component {
     loadDog = (id) => {
         this.loading = true;
         // this.dog = {};
-        this.props.dogs.get(id || this.props.params.id)
+        this.props.dogs.get(id || this.props.match.params.id)
             .then(d => {
                 this.loading = false;
                 this.dog = d;
         		// this.createVm();
             })
             .catch(err => {
-                console.error('Failed to load dog with id', id || this.props.params.id, err);
+                console.error('Failed to load dog with id', id || this.props.match.params.id, err);
                 this.loading = false;
 				this.dog = new Dog({});
 				this.createMode = true;
@@ -76,7 +75,7 @@ class Edit extends Component {
             this.dog.save()
                 .then(res => {
                     this.loading = false;
-                    hashHistory.push(`/dogs/${this.dog.id}/edit`);
+                    this.props.history.push(`/dogs/${this.dog.id}/edit`);
                 });
 
         } else {

@@ -5,7 +5,6 @@ import {createViewModel} from 'mobx-utils';
 import {Form, Button, Grid, Confirm} from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import Show from 'store/models/show';
-import {hashHistory} from 'react-router';
 import moment from 'moment';
 import {resolve} from 'react-resolver';
 
@@ -56,7 +55,7 @@ class Edit extends Component {
 			this.show.save()
 				.then(res => {
 					this.formLoading = false;
-					hashHistory.push(`/shows/${this.show.id}`);
+					this.props.history.push(`/shows/${this.show.id}`);
 				})
 				.catch(err => {
 					console.error('error', err);
@@ -66,7 +65,7 @@ class Edit extends Component {
 			this.show.save()
 				.then(res => {
 					this.formLoading = false;
-					hashHistory.push(`/shows/${this.show.id}`)
+					this.props.history.push(`/shows/${this.show.id}`)
 				})
 				.catch(err => {
 					console.error('error', err);

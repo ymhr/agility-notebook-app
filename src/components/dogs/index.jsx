@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {createViewModel} from 'mobx-utils';
 import {List, Button, Header, Form, Icon} from 'semantic-ui-react';
-import {hashHistory, Link} from 'react-router';
+import {Link} from 'react-router-dom';
 
 import Dog from '../../store/models/dog';
 
@@ -11,11 +11,12 @@ import Dog from '../../store/models/dog';
 class Dogs extends Component {
 
     openAddDog = () => {
-        hashHistory.push('/dogs/add');
+        console.log(this.props);
+        this.props.history.push('/dogs/add');
     };
 
     viewDog = (id) => {
-      hashHistory.push(`/dogs/${id}/edit`)
+      this.props.history.push(`/dogs/${id}/edit`)
     };
 
     render(){

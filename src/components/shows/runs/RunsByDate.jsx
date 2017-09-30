@@ -22,10 +22,10 @@ class RunsByDate extends Component {
 		date = moment(date);
 
 		return (
-			<StickyContainer>
-				<Sticky className="sticky-headers"><Divider horizontal style={{'backgroundColor': '#fff'}}>{date.format('dddd Do MMMM')}</Divider></Sticky>
-				{items}
-			</StickyContainer>
+				<div>
+					<Divider horizontal style={{'backgroundColor': '#fff'}}>{date.format('dddd Do MMMM')}</Divider>
+					{items}
+				</div>
 		);
 
 	}

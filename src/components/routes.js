@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router-dom'
+import {Route, withRouter} from 'react-router-dom'
 import Root from './root/index';
 import Shows from './shows/index';
 import ViewShow from './shows/view';
@@ -12,7 +12,7 @@ import EditRun from './shows/runs/edit';
 
 const routes = [
 			{
-				path: '/shows', component: Shows, hideFromNav: true, childRoutes: [
+				path: '/shows', component: Shows, label: 'Shows', childRoutes: [
 					{path: 'add', component: EditShow, label: 'Add show'},
 					{path: ':id/edit', component: EditShow, label: 'Edit show'},
 					{path: ':id', component: ViewShow, label: 'View show', childRoutes: [

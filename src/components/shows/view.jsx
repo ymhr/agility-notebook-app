@@ -3,7 +3,6 @@ import {observer, inject} from 'mobx-react';
 import {autorun, observable} from 'mobx';
 import {Form, Button, Loader, Grid, Header, Label, Icon} from 'semantic-ui-react';
 import {resolve} from 'react-resolver';
-import {hashHistory} from 'react-router';
 import {reduce} from 'lodash';
 import Run from './runs/run';
 import RunsByDate from './runs/RunsByDate';
@@ -18,7 +17,6 @@ class View extends Component {
 
 	constructor(props) {
 		super(props);
-		console.log('super');
 	}
 
 	componentWillMount(){
@@ -27,8 +25,6 @@ class View extends Component {
 	}
 
 	componentWillReceiveProps(nextProps){
-		console.log('will receive props');
-		console.log(nextProps);
 		const {id} = nextProps.match.params;
 		this.loadShow(id);
 	}
@@ -40,15 +36,15 @@ class View extends Component {
 	}
 
 	editShow = () => {
-		hashHistory.push(`shows/${this.show.id}/edit`);
+		this.props.history.push(`/shows/${this.show.id}/edit`);
 	};
 
 	addRun = () => {
-		hashHistory.push(`shows/${this.show.id}/run/add`);
+		this.props.history.push(`/shows/${this.show.id}/run/add`);
 	};
 
 	editButtonClickHandler = (id) => {
-		hashHistory.push(`shows/${this.props.routeParams.id}/run/${id}`)
+		this.props.history.push(`/shows/${this.props.routeParams.id}/run/${id}`)
 	};
 
 	toggleAllRunsExpanded = () => {
@@ -72,7 +68,6 @@ class View extends Component {
 
 	render() {
 		const {show} = this;
-		console.log('show render')
 
 		if(!this.loaded) return <Loader />;
 

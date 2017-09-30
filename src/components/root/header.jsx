@@ -1,17 +1,19 @@
 import React, {Component} from 'react';
 import routes from '../routes';
 import {Header, Menu, Button, Container} from 'semantic-ui-react';
-import {hashHistory} from 'react-router';
+import {withRouter} from 'react-router-dom';
 import {observer, inject} from 'mobx-react';
+import {Link} from 'react-router-dom';
 
 import styles from './styles.css';
 
+@withRouter
 @inject('auth')
 @observer
 class HeaderContainer extends Component {
 
     clickMenuItem = (path) => {
-        hashHistory.push(path);
+        this.props.history.push(path);
     };
 
     logout = () => {
@@ -21,7 +23,7 @@ class HeaderContainer extends Component {
 
     render() {
 
-        let menu = routes[0].childRoutes.map(item => {
+        let menu = routes.map(item => {
             if(item.hideFromNav) return null;
             return (
                 <Menu.Item key={Math.random()} onClick={this.clickMenuItem.bind(this, item.path)}>{item.label}</Menu.Item>
@@ -29,7 +31,7 @@ class HeaderContainer extends Component {
         });
 
         menu = [
-            <Menu.Item key={Math.random()} onClick={this.clickMenuItem.bind(this, routes[0].path)}>{routes[0].label}</Menu.Item>,
+            // <Menu.Item key={Math.random()} onClick={this.clickMenuItem.bind(this, routes[0].path)}>{routes[0].label}</Menu.Item>,
                 ...menu,
             <Menu.Item key={Math.random()} onClick={this.logout} position="right">Logout</Menu.Item>
         ];

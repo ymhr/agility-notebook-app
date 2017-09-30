@@ -4,8 +4,7 @@ import {observer, Provider} from 'mobx-react';
 import {when} from 'mobx';
 import store from '../store/index';
 import {Container, Dimmer, Loader} from 'semantic-ui-react';
-// import {Router, hashHistory} from 'react-router';
-import {HashRouter as Router} from 'react-router-dom';
+import {HashRouter as Router, withRouter} from 'react-router-dom';
 import URL from 'domurl';
 import routes, {flatRoutes} from './routes';
 import Login from './login/index';
@@ -54,7 +53,6 @@ class App extends Component {
 		return (
 			<Router>
 				<Provider {...store}>
-					{/* <Router history={hashHistory} routes={routes}/> */}
 					<Root />
 				</Provider>
 			</Router>

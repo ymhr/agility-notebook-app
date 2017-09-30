@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import Month from './month';
 import {Button, Icon, List} from 'semantic-ui-react';
-import {hashHistory} from 'react-router';
 import {each, padStart, map} from 'lodash';
 import moment from 'moment';
 import GiantButton from 'components/general/giantButton';
@@ -17,7 +16,7 @@ class Shows extends Component {
 	}
 
 	openCreate = () => {
-		hashHistory.push('/shows/add');
+		this.props.history.push('/shows/add');
 	};
 
 	generateMonthList = (shows, addEmptyMonths = true) => {

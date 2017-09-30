@@ -4,7 +4,7 @@ import {inject, observer} from 'mobx-react';
 import {observable, computed} from 'mobx';
 import DogSelect from '../dogs/dogSelect';
 import Run from 'store/models/run';
-import {hashHistory, Link} from 'react-router';
+import {Link} from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import SelectHandler from '../../handlers/selectHandler';
@@ -31,15 +31,15 @@ class EditRun extends Component {
 
 		this.formLoading = true;
 
-		if(this.props.params.runId){
-			this.props.shows.get(this.props.params.id)
+		if(this.props.match.params.runId){
+			this.props.shows.get(this.props.match.params.id)
 				.then(show => this.show = show)
-				.then(() => this.run = this.show.getRun(this.props.params.runId))
+				.then(() => this.run = this.show.getRun(this.props.match.params.runId))
 				.then(() => this.formLoading = false);
 
 		} else {
-			this.run = new Run({showId: this.props.params.id});
-			this.props.shows.get(this.props.params.id).then(show => this.show = show)
+			this.run = new Run({showId: this.props.match.params.id});
+			this.props.shows.get(this.props.match.params.id).then(show => this.show = show)
 				.then(() => this.formLoading = false);
 		}
 	}
@@ -75,7 +75,7 @@ class EditRun extends Component {
 			this.run.save()
 				.then(id => {
 					this.formLoading = false;
-					hashHistory.push(`/shows/${this.run.showId}`);
+					this.props.history.push(`/shows/${this.run.showId}`);
 				});
 		} else {
 			this.run.save()
@@ -94,7 +94,7 @@ class EditRun extends Component {
 		e.preventDefault();
 		const {showId} = this.run;
 		this.run.delete()
-			.then(() => hashHistory.push(`/shows/${showId}`));
+			.then(() => this.props.history.push(`/shows/${showId}`));
 	};
 
 	render(){

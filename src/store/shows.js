@@ -1,7 +1,6 @@
 import {observable} from 'mobx';
 import moment from 'moment';
 import Show from './models/show';
-import {hashHistory} from 'react-router';
 import auth from './auth';
 import ItemStore from './base/itemStore';
 
@@ -56,7 +55,7 @@ class Shows extends ItemStore{
 
 				this.items.splice(showIndex, 1);
 
-				hashHistory.push('/shows');
+				this.props.history.push('/shows');
 
 			});
 	}
