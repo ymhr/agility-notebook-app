@@ -31,7 +31,7 @@ class EditRun extends Component {
 
 		this.formLoading = true;
 
-		if(this.props.match.params.runId){
+		if(this.props.match.params.runId && this.props.match.params.runId !== 'add'){
 			this.props.shows.get(this.props.match.params.id)
 				.then(show => this.show = show)
 				.then(() => this.run = this.show.getRun(this.props.match.params.runId))

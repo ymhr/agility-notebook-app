@@ -2,9 +2,11 @@ import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {Divider, Grid} from 'semantic-ui-react';
 import {StickyContainer, Sticky} from 'react-sticky';
+import {withRouter} from 'react-router-dom';
 
 import Run from './run';
 
+@withRouter
 @inject('dogs', 'shows')
 @observer
 class RunsByDog extends Component {

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {autorun, observable} from 'mobx';
 import {Form, Button, Loader, Grid, Header, Label, Icon} from 'semantic-ui-react';
-import {resolve} from 'react-resolver';
 import {reduce} from 'lodash';
 import Run from './runs/run';
 import RunsByDate from './runs/RunsByDate';
@@ -36,7 +35,7 @@ class View extends Component {
 	}
 
 	editShow = () => {
-		this.props.history.push(`/shows/${this.show.id}/edit`);
+		this.props.history.push(`shows/${this.show.id}/edit`);
 	};
 
 	addRun = () => {

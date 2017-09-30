@@ -6,13 +6,8 @@ import {Form, Button, Grid, Confirm} from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import Show from 'store/models/show';
 import moment from 'moment';
-import {resolve} from 'react-resolver';
 
 @inject('shows', 'auth')
-@resolve('existingShow', (props) => {
-	if (props.routeParams.id)
-		return props.shows.get(parseInt(props.routeParams.id));
-})
 @observer
 class Edit extends Component {
 
@@ -26,8 +21,8 @@ class Edit extends Component {
 
 		this.state = {deleteConfirm: false};
 
-		if (this.props.existingShow) {
-			this.show = this.props.existingShow;
+		if (this.props.match.params.id && this.props.match.params.id !== 'add') {
+			this.show = this.props.show.get(this.props.match.params.id);
 		} else {
 			this.createMode = true;
 			this.show = new Show({});

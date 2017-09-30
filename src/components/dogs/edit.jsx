@@ -4,7 +4,6 @@ import {observer, inject} from 'mobx-react';
 import {createViewModel} from 'mobx-utils';
 import {Form, Button, Select, Loader} from 'semantic-ui-react';
 import Dog from 'store/models/dog';
-import {resolve} from 'react-resolver';
 import SelectHandler from '../handlers/selectHandler';
 import DatePicker from 'react-datepicker';
 
@@ -99,7 +98,7 @@ class Edit extends Component {
             {text: 'Small', value: 'small'}, {text: 'Medium', value: 'medium'}, {text: 'Large', value: 'large'}
         ];
         const sexOptions = [
-            {text: 'Male', value: 'male'}, {text: 'Female', value: 'female'}
+            {text: 'Dog', value: 'dog'}, {text: 'Bitch', value: 'bitch'}
         ];
 
         return(

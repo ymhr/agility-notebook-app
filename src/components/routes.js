@@ -36,7 +36,7 @@ const routes = [
 export const routeElements = () => {
 	const flatRoutes = flattenRoutes(routes);
 	flatRoutes.unshift({path: '/', exact: true, component: Shows, label: 'Home'});
-	return flatRoutes.map((route, i) => <Route key={i} path={route.path} component={route.component} exact={route.exact} />).reverse();
+	return flatRoutes.map((route, i) => <Route key={i} path={route.path} component={route.component} exact={route.exact} />);
 };
 
 // export const flatRoutes = () => {
@@ -52,7 +52,7 @@ const flattenRoutes = (r, parentPath = '') => {
 	return r.reduce((flat, route) => {
 		const leadingSlash = parentPath ? '/' : '';
 		const path = parentPath + leadingSlash + route.path;
-		flat.push({path, component: route.component, exact: route.exact ||false});
+		flat.push({path, component: route.component, exact: route.exact ||true});
 
 		if(route.childRoutes && route.childRoutes.length) flat = flat.concat(flattenRoutes(route.childRoutes, path));
 

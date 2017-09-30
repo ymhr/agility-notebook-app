@@ -16,6 +16,7 @@ const url = new URL(window.location.href);
 
 if (url.query.token) {
 	store.auth.setToken(url.query.token);
+	window.location.href = url.clearQuery();
 }
 
 //Make sure that this user is authed
