@@ -13,26 +13,19 @@ class Shows extends ItemStore{
 	@observable loaded = false;
 
 	load = () => {
-		return new Promise((resolve, reject) => {
-
-			if (this.loaded) {
-				resolve(this.items);
-				return;
-			}
-
-			auth.get('/shows')
-				.then(res => res.data.map(i => new Show(i)))
-				.then(items => this.addOrReplaceInList(items))
-				.then(items => this.sortList(items))
-				.then(items => this.items = items)
-				.then(items => {
-					this.loaded = true;
-					resolve(this.items);
-				})
-				.catch(err => console.warn('load runs err', err));
-		});
-
+		return auth.get('/shows')
+			.then(res => res.data)
+			.catch(err => console.warn('load runs err', err));
 	};
+
+	setShows(data) {
+		let shows = data.map(d => new Show(d));
+		shows = this.addOrReplaceInList(shows);
+		shows = this.sortList(shows);
+		this.items = shows;
+		shows.forEach(s => s.setRuns());		
+		this.loaded = true;
+	}
 
 	sortList(items) {
 		//TODO: Secodary sort by ID

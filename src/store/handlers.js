@@ -17,12 +17,13 @@ class Handlers extends ItemStore {
 	load() {
 		return auth.get('/handlers')
 			.then(res => res.data)
-			.then(data => data.map(d => new Handler(d)))
-			.then(handlers => this.items = handlers)
-			.then(handlers => {
-				this.loaded = true;
-				return handlers;
-			});
+	}
+
+	setHandlers(data) {
+		const handlers = data.map(d => new Handler(d));
+		this.items = handlers;
+		this.loaded = true;
+
 	}
 
 	createModelInstance(data){

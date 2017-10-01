@@ -14,9 +14,13 @@ class Profile {
 	};
 
 	@action loadProfile(){
-		auth.get('profile')
-			.then(res => this.populateProfile(res.data))
-			.then(() => this.loaded = true);
+		return auth.get('profile')
+			.then(res => res.data);
+	}
+
+	@action setProfile(data) {
+		this.populateProfile(data);
+		this.loaded = true;
 	}
 
 	populateProfile(data){

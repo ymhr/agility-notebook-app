@@ -24,11 +24,21 @@ if (store.auth.isAuthed) {
 	store.auth.checkAuthFromBackend()
 	//If the user auths successfully, then there are some things we need to load
 		.then(() => {
-			store.profile.loadProfile();
-			store.settings.loadSettings();
-			store.dogs.load();
-			store.shows.load();
-			store.handlers.load();
+			Promise.all([
+				store.profile.loadProfile(),
+				store.settings.loadSettings(),
+				store.dogs.load(),
+				store.shows.load(),
+				store.handlers.load()
+			]).then(responses => {
+				const [profile, settings, dogs, shows, handlers] = responses;
+				store.profile.setProfile(profile);
+				store.settings.setSettings(settings);
+				store.handlers.setHandlers(handlers);
+				store.dogs.setDogs(dogs);
+				store.shows.setShows(shows);
+			})
+			.catch(err => console.warn(err));
 		});
 }
 

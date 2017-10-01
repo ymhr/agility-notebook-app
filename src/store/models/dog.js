@@ -45,12 +45,9 @@ class Dog {
 		if(typeof this.meta === 'object')
 			this.metaObject = JSON.parse(this.meta);
 
-		this.handler = null;
 
-		when(
-			() => app.ready,
-			() => this.loadHandler()
-		);
+		this.loadHandler();
+
 	}
 	
 	loadHandler(){

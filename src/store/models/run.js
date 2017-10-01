@@ -76,11 +76,8 @@ class Run {
 		if (data.date)
 			this.date = moment(data.date);
 
-		//Make sure that the shows are loaded before we try to get a ref to this runs show
-		when(
-			() => app.ready,
-			() => this.load()
-		);
+
+		this.load();
 
 		reaction(
 			() => [this.handlerOverride, this.dog.handlerId],

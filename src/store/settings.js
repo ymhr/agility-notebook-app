@@ -20,7 +20,8 @@ class Settings {
 	}
 
 	loadSettings() {
-		auth.get('/settings').then(res => this.setSettings(res.data));
+		return auth.get('/settings')
+			.then(res => res.data);
 	}
 
 	setSettings(data) {

@@ -11,7 +11,7 @@ import GiantButton from 'components/general/giantButton';
 class Shows extends Component {
 
 	componentWillMount() {
-		this.props.shows.load();
+		if(!this.props.shows.loaded) this.props.shows.load();
 		this.generateMonthNumber = this.generateMonthNumber.bind(this);
 	}
 

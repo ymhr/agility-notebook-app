@@ -19,12 +19,9 @@ class Handler {
 		this.name = name;
 		this.notes = notes;
 
-		when(
-			() => app.ready,
-			() => this.loadDogs()
-		)
 	}
 
+	//TODO: not used? Not even sure we access a list of dogs for handlers anywhere
 	loadDogs(){
 		dogs.items.forEach(dog => {
 			if(dog.handlerId === this.id){

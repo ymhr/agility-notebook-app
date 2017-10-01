@@ -7,6 +7,8 @@ import {reduce} from 'lodash';
 
 class Show {
 
+	plainRuns = [];
+
 	@observable id;
 	@observable name;
 	@observable startDate;
@@ -57,9 +59,7 @@ class Show {
 		this.startDate = moment(startDate);
 		this.endDate = moment(endDate);
 		this.closingDate = moment(closingDate);
-
-		this.runs = observable(runs.map(r => new Run(r)));
-
+		this.plainRuns = runs;
 	}
 
 	save() {
@@ -78,6 +78,10 @@ class Show {
 					});
 			}
 		});
+	}
+
+	setRuns() {
+		this.runs = observable(this.plainRuns.map(r => new Run(r)));		
 	}
 
 	serialize() {

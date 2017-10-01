@@ -14,13 +14,13 @@ class Dogs extends ItemStore {
 
 	load() {
 		return auth.get('/dogs')
-			.then(res => res.data)
-			.then(data => data.map(d => new Dog(d)))
-			.then(dogs => this.items = dogs)
-			.then(dogs => {
-				this.loaded = true;
-				return dogs;
-			});
+			.then(res => res.data);
+	}
+
+	setDogs(data) {
+		const dogs = data.map(d => new Dog(d));
+		this.items = dogs;
+		this.loaded = true;
 	}
 
 	update(id, data) {
