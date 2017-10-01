@@ -35,7 +35,7 @@ class View extends Component {
 	}
 
 	editShow = () => {
-		this.props.history.push(`shows/${this.show.id}/edit`);
+		this.props.history.push(`/shows/${this.show.id}/edit`);
 	};
 
 	addRun = () => {

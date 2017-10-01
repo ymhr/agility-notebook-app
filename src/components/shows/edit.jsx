@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {observable, autorun} from 'mobx';
 import {observer, inject} from 'mobx-react';
 import {createViewModel} from 'mobx-utils';
-import {Form, Button, Grid, Confirm} from 'semantic-ui-react';
+import {Form, Button, Grid, Confirm, Loader} from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import Show from 'store/models/show';
 import moment from 'moment';
@@ -15,6 +15,7 @@ class Edit extends Component {
 	createMode = false;
 
 	@observable formLoading = false;
+	@observable pageLoading = false;
 
 	constructor(props) {
 		super(props);
@@ -22,20 +23,23 @@ class Edit extends Component {
 		this.state = {deleteConfirm: false};
 
 		if (this.props.match.params.id && this.props.match.params.id !== 'add') {
-			this.show = this.props.show.get(this.props.match.params.id);
+			this.pageLoading = true;
+			this.props.shows.get(this.props.match.params.id)
+				.then(show => {
+					this.pageLoading = false;
+					this.show = show;
+					this.show.startDate = moment(this.show.startDate);
+					this.show.endDate = moment(this.show.endDate);
+					this.show.closingDate = moment(this.show.closingDate);
+				});
 		} else {
 			this.createMode = true;
 			this.show = new Show({});
-		}
+			this.pageLoading = false;
 
-		if (this.createMode) {
 			this.show.startDate = moment();
 			this.show.endDate = moment();
 			this.show.closingDate = moment();
-		} else {
-			this.show.startDate = moment(this.show.startDate);
-			this.show.endDate = moment(this.show.endDate);
-			this.show.closingDate = moment(this.show.closingDate);
 		}
 
 	}
@@ -92,7 +96,14 @@ class Edit extends Component {
 		this.props.shows.delete(this.show.id);
 	};
 
+	renderLoading = () => {
+		return <Loader />;
+	};
+
 	render() {
+console.log(this.show);
+		if(this.pageLoading) return this.renderLoading();
+
 		return (
 
 			<div>

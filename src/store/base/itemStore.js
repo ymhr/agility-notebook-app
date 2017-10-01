@@ -34,15 +34,12 @@ class ItemStore {
 	}
 
 	async get(id) {
-
 		let item;
 
 		try{
 			const localRes = await this.getFromLocal(id);
-
 			if(!localRes){
 				const remoteRes = await this.getFromRemote(id);
-
 				if(remoteRes)
 					item = new this.itemClass(remoteRes);
 				else
@@ -51,23 +48,18 @@ class ItemStore {
 			} else {
 				item = localRes;
 			}
-
 			this.items = this.sortList(this.addOrReplaceInList(item));
-
+			console.groupEnd(this.itemClass.name + ' - ' + id);
 			return item;
 
 		} catch(err){
 			console.warn(err);
 			throw new Error(`No ${this.itemClass.name} were found on local or remote`);
 		};
-
 	}
 
-	getFromLocal(id) {
-		return new Promise((resolve, reject) => {
-			const item = this.items.filter(i => parseInt(i.id) === parseInt(id))[0];
-			resolve(item);
-		});
+	async getFromLocal(id) {
+		return this.items.filter(i => parseInt(i.id) === parseInt(id))[0];
 	}
 
 	getFromRemote(id) {
