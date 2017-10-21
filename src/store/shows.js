@@ -23,6 +23,7 @@ class Shows extends ItemStore{
 		shows = this.addOrReplaceInList(shows);
 		shows = this.sortList(shows);
 		this.items = shows;
+		//We have to set the runs after we have set the shows, otherwise it makes a new request for the show for every run it creates
 		shows.forEach(s => s.setRuns());		
 		this.loaded = true;
 	}

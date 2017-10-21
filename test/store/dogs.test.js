@@ -35,7 +35,6 @@ describe('dogs', function(){
 	describe('loading doggos', function(){
 		it('should retrieve a list of dogs', function(done) {
 			dogs.load().then((res) => {
-				console.log('res', res);
 				res.should.be.instanceOf(Array).and.have.lengthOf(2);
 				should(res[0].name).be.exactly('Pepe');
 				should(res[1].name).be.exactly('Toby');

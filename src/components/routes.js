@@ -39,15 +39,6 @@ export const routeElements = () => {
 	return flatRoutes.map((route, i) => <Route key={i} path={route.path} component={route.component} exact={route.exact} />);
 };
 
-// export const flatRoutes = () => {
-// 	const flatRoutes = flattenRoutes(routes, '');
-// 	flatRoutes.unshift({path: '/', exact: true, component: Shows, label: 'Home'});
-// 	return flatRoutes;
-// };
-export const test = () => {
-	console.log(flattenRoutes(routes));
-};
-
 const flattenRoutes = (r, parentPath = '') => {
 	return r.reduce((flat, route) => {
 		const leadingSlash = parentPath ? '/' : '';
@@ -58,21 +49,6 @@ const flattenRoutes = (r, parentPath = '') => {
 
 		return flat;
 	}, []);
-}
-
-// const flattenRoutes = (routeList, currentPath) => {
-// 	return routeList.reduce((flatRoutes, r) => {
-// 		const path = currentPath ? currentPath + '/' + r.path : r.path;
-// 		const routeDefinition = {path, component: r.component, label: r.label, exact: r.exact || false};
-// 		flatRoutes.push(routeDefinition);
-		
-// 		if(r.childRoutes && r.childRoutes.length){
-// 			flatRoutes = flatRoutes.concat(flattenRoutes(r.childRoutes, routeDefinition.path));
-// 		}
-
-// 		return flatRoutes;
-
-// 	}, []);
-// };
+};
 
 export default routes;

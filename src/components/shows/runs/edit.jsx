@@ -51,7 +51,6 @@ class EditRun extends Component {
 	onSelectChange = (e, selectedItem) => {
 
 		if(selectedItem.name === 'type') {
-			console.log(selectedItem);
 			this.run.specialType = '';
 		}
 
@@ -79,7 +78,6 @@ class EditRun extends Component {
 				});
 		} else {
 			this.run.save()
-				.then(res => console.log(res))
 				.then(res => this.formLoading = false);
 		}
 

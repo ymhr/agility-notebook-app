@@ -101,7 +101,6 @@ class Edit extends Component {
 	};
 
 	render() {
-console.log(this.show);
 		if(this.pageLoading) return this.renderLoading();
 
 		return (

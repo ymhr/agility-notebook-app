@@ -16,15 +16,12 @@ class Show extends Component {
 	}
 
 	itemClick = (show) => {
-		console.log(show);
-		console.log(this.props);
 		this.props.history.push(`/shows/${show.id}`);
 	};
 
 	toggleExpanded = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
-		console.log('called');
 		this.setState({expanded: !this.state.expanded});
 	};
 

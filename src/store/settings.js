@@ -56,7 +56,6 @@ class Settings {
 
 	update(name, value){
 		this[name] = value;
-		console.log('updating');
 
 		auth.post('/settings', {name, value})
 			.then(res => console.log('updated'))

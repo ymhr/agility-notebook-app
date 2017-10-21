@@ -21,7 +21,6 @@ class Index extends Component {
 	};
 
 	changeSetting = (e, data) => {
-		console.log(data);
 		this.props.settings.update(data.name, data.checked);
 	};
 

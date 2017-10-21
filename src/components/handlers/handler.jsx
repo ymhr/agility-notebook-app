@@ -42,7 +42,6 @@ class Handler extends Component {
 	saveHandler = (e) => {
 		const {handler} = this.props;
 		e.preventDefault();
-		console.log(this.state.name);
 		if(this.state.name) {
 			handler.name = this.state.name;
 			handler.save();

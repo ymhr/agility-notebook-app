@@ -11,7 +11,6 @@ import Dog from '../../store/models/dog';
 class Dogs extends Component {
 
     openAddDog = () => {
-        console.log(this.props);
         this.props.history.push('/dogs/add');
     };
 
