@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "engines": {
-    "node": "8.4.0"
+    "node": ">8.4.0"
   },
   "scripts": {
     "test": "NODE_PATH=./src ./node_modules/mocha/bin/mocha --recursive --compilers js:babel-core/register -r mock-local-storage -r ignore-styles",
