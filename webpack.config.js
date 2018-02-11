@@ -75,7 +75,7 @@ module.exports = {
 		hot: true,
 		overlay: true
  	},
-	devtool: 'eval-source-map',
+	devtool: 'cheap-module-source-map',
 	plugins: [
 		// new DashboardPlugin(),
 		new CommonsChunkPlugin({

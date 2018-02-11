@@ -15,22 +15,21 @@ class Edit extends Component {
 	createMode = false;
 
 	@observable formLoading = false;
-	@observable pageLoading = false;
 
 	constructor(props) {
 		super(props);
 
-		this.state = {deleteConfirm: false};
+		this.state = {deleteConfirm: false, loading: true};
 
 		if (this.props.match.params.id && this.props.match.params.id !== 'add') {
 			this.pageLoading = true;
 			this.props.shows.get(this.props.match.params.id)
 				.then(show => {
-					this.pageLoading = false;
 					this.show = show;
 					this.show.startDate = moment(this.show.startDate);
 					this.show.endDate = moment(this.show.endDate);
 					this.show.closingDate = moment(this.show.closingDate);
+					this.setState({loading: false});
 				});
 		} else {
 			this.createMode = true;
@@ -43,7 +42,6 @@ class Edit extends Component {
 		}
 
 	}
-
 
 	onSubmit = (e, data) => {
 		e.preventDefault();
@@ -101,10 +99,9 @@ class Edit extends Component {
 	};
 
 	render() {
-		if(this.pageLoading) return this.renderLoading();
+		if(this.state.loading) return this.renderLoading();
 
 		return (
-
 			<div>
 				<h3>Add Show</h3>
 				<Form onSubmit={this.onSubmit} loading={this.formLoading}>
