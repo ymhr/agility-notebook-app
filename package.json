@@ -9,7 +9,7 @@
   "scripts": {
     "test": "NODE_PATH=./src ./node_modules/mocha/bin/mocha --recursive --compilers js:babel-core/register -r mock-local-storage -r ignore-styles",
     "testWatch": "mocha --compilers js:babel-core/register -r mock-local-storage test/**/*.test.js --watch",
-    "dev": "webpack-dev-server --inline --hot",
+    "dev": "webpack-dev-server --inline --hot --port 8081",
     "push": "git push origin master && git push github master",
     "start": "node ./server.js",
     "heroku-postbuild": "webpack -p"
