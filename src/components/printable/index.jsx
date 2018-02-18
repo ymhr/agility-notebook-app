@@ -10,5 +10,4 @@ class Printable extends Component {
 
 }
 
-
 export default Printable;

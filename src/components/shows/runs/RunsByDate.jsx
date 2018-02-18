@@ -6,7 +6,6 @@ import {map} from 'lodash';
 import Run from './run';
 import moment from "moment";
 import RunsByDog from './RunsByDog';
-import {StickyContainer, Sticky} from 'react-sticky';
 
 @inject('dogs', 'shows')
 @observer
