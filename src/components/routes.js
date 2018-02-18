@@ -11,24 +11,24 @@ import Settings from './settings/index';
 import EditRun from './shows/runs/edit';
 
 const routes = [
-			{
-				path: '/shows', component: Shows, label: 'Shows', childRoutes: [
-					{path: 'add', component: EditShow, label: 'Add show'},
-					{path: ':id/edit', component: EditShow, label: 'Edit show'},
-					{path: ':id', component: ViewShow, label: 'View show', childRoutes: [
-						{path: 'run/add', component: EditRun, label: 'Add run'},
-						{path: 'run/:runId', component: EditRun, label: 'Edit run'}
-					]}
-			]
-			},
-			{path: '/profile', component: Profile, label: 'Profile', hideFromNav: true},
-			{
-				path: '/dogs', component: Dogs, label: 'Dogs', childRoutes: [
-					{path: 'add', component: EditDog, label: 'New Dog'},
-					{path: ':id/edit', component: EditDog, label: 'Edit dog'}
-			]
-			},
-			{path: '/settings', component: Settings, label: 'Settings'}
+	{
+		path: '/shows', component: Shows, label: 'Shows', childRoutes: [
+			{path: 'add', component: EditShow, label: 'Add show'},
+			{path: ':id/edit', component: EditShow, label: 'Edit show'},
+			{path: ':id', component: ViewShow, label: 'View show', childRoutes: [
+				{path: 'run/add', component: EditRun, label: 'Add run'},
+				{path: 'run/:runId', component: EditRun, label: 'Edit run'}
+			]}
+		]
+	},
+	{path: '/profile', component: Profile, label: 'Profile', hideFromNav: true},
+	{
+		path: '/dogs', component: Dogs, label: 'Dogs', childRoutes: [
+			{path: 'add', component: EditDog, label: 'New Dog'},
+			{path: ':id/edit', component: EditDog, label: 'Edit dog'}
+		]
+	},
+	{path: '/settings', component: Settings, label: 'Settings'}
 ];
 
 

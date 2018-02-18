@@ -39,6 +39,8 @@ class Edit extends Component {
 			this.show.startDate = moment();
 			this.show.endDate = moment();
 			this.show.closingDate = moment();
+
+			this.state.loading = false;
 		}
 
 	}
