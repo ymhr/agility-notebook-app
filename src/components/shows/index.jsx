@@ -5,6 +5,7 @@ import {Button, Icon, List} from 'semantic-ui-react';
 import {each, padStart, map} from 'lodash';
 import moment from 'moment';
 import GiantButton from 'components/general/giantButton';
+import YearFilters from 'components/shows/YearFilters/YearFilters';
 
 @inject('shows', 'settings')
 @observer
@@ -90,17 +91,16 @@ class Shows extends Component {
 
 		let content = this.props.children;
 
-		const monthList = this.insertShowsIntoMonthList(this.props.shows.items, this.props.settings.showEmptyMonths);
+		const monthList = this.insertShowsIntoMonthList(this.props.shows.getShows(), this.props.settings.showEmptyMonths);
 
 		const itemList = map(monthList, (m, month) => {
 			return <Month key={month} shows={m} month={month}/>
 		});
 
-		
-
 		if (!this.props.children) {
 			content = (
 				<div>
+					<YearFilters />
 					{this.addButton()}
 					<br />
 					{itemList}
@@ -109,7 +109,6 @@ class Shows extends Component {
 		}
 
 		return (
-
 			<div>
 				{content}
 			</div>
