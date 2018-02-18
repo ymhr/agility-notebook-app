@@ -40,7 +40,10 @@ class Shows extends ItemStore{
 		this.items = shows;
 		//We have to set the runs after we have set the shows, otherwise it makes a new request for the show for every run it creates
 		shows.forEach(s => s.setRuns());	
-		shows.forEach(s => this.availableYears.push(moment(s.endDate).format('Y')));	
+		shows.forEach(s => this.availableYears.push(moment(s.endDate).format('Y')));
+
+		//Make sure we always have the current year
+		this.availableYears.push(moment().format('Y'));
 		
 		this.availableYears = uniq(this.availableYears)
 								.sort((a, b) => a > b);
