@@ -151,6 +151,7 @@ class EditRun extends Component {
 										onChange={this.setDate.bind(this, 'date')}
 										selected={selectedDate}
 										style={{width: "50%"}}
+										withPortal
 							/>
 						</Form.Field>
 					</Form.Group>
