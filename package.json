@@ -58,7 +58,7 @@
     "react-addons-test-utils": "^15.6.2",
     "react-datepicker": "^0.55.0",
     "react-dom": "^16.0.0",
-    "react-hot-loader": "next",
+    "react-hot-loader": "^4.0.0",
     "react-resolver": "^3.0.3",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
