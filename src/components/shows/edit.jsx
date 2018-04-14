@@ -130,7 +130,8 @@ class Edit extends Component {
 									<DatePicker name="startDate" placeholder="Start date"
 												dateFormat="dddd Do MMMM, YYYY"
 												onChange={this.setDate.bind(this, 'startDate')}
-												selected={this.show.startDate}/>
+												selected={this.show.startDate}
+												withPortal />
 								</Form.Field>
 							</Grid.Column>
 							<Grid.Column>
@@ -139,7 +140,8 @@ class Edit extends Component {
 									<DatePicker name="endDate" placeholder="End date" dateFormat="dddd Do MMMM, YYYY"
 												minDate={this.show.startDate}
 												onChange={this.setDate.bind(this, 'endDate')}
-												selected={this.show.endDate}/>
+												selected={this.show.endDate}
+												withPortal />
 								</Form.Field>
 							</Grid.Column>
 							<Grid.Column>
@@ -148,7 +150,8 @@ class Edit extends Component {
 									<DatePicker name="closingDate" placeholder="Closing date"
 												dateFormat="dddd Do MMMM, YYYY"
 												onChange={this.setDate.bind(this, 'closingDate')}
-												selected={this.show.closingDate}/>
+												selected={this.show.closingDate}
+												withPortal/>
 								</Form.Field>
 							</Grid.Column>
 						</Grid.Row>
