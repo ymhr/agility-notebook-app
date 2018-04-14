@@ -1,9 +1,7 @@
-var LiveReloadPlugin = require('webpack-livereload-plugin');
-var CommonsChunkPlugin = require('./node_modules/webpack/lib/optimize/CommonsChunkPlugin');
 var DefinePlugin = require('./node_modules/webpack/lib/DefinePlugin');
-// var DashboardPlugin = require('webpack-dashboard/plugin');
 var path = require('path');
 var ManifestPlugin = require('webpack-manifest-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	entry: {
@@ -24,13 +22,13 @@ module.exports = {
 	output: {
 		path: __dirname,
 		// publicPath: '/dist',
-		filename: 'bundle.js',
-		sourceMapFilename: 'bundle.map',
+		filename: '[name].js',
 		path: path.join(__dirname, 'dist')
 	},
 	module: {
 		rules: [{
 			exclude: /node_modules/,
+			test: /\.js$/,
 			loader: 'babel-loader',
 			query: {
 				plugins: ['transform-runtime', 'transform-decorators-legacy', 'react-hot-loader/babel'],
@@ -77,11 +75,8 @@ module.exports = {
  	},
 	devtool: 'cheap-module-source-map',
 	plugins: [
-		// new DashboardPlugin(),
-		new CommonsChunkPlugin({
-			name: 'vendor',
-			filename: 'commons.js',
-			minChunks: 0
+		new HtmlWebpackPlugin({
+			template: './src/index.html'
 		}),
 		new DefinePlugin({
 			API_URL: JSON.stringify(process.env.API_URL || "http://localhost:3000")
