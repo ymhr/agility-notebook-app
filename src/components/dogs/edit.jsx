@@ -123,6 +123,7 @@ class Edit extends Component {
                                     showMonthDropdown
                                     showYearDropdown
                                     dropdownMode="select"
+                                    withPortal
                         />
                     </Form.Field>
                     <Form.Input label="KC Number" name="registeredNumber" placeholder="Registererd Number" value={this.dog.registeredNumber} onChange={this.onChange} />
