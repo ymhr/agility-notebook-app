@@ -5,18 +5,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	entry: {
-		vendor: [
-			'babel-polyfill',
-			'react',
-			'mobx',
-			'mobx-react',
-			'axios',
-			'semantic-ui-react',
-			'moment',
-			'react-dom',
-			'domurl',
-			'react-datepicker',
-		],
 		app: ['./src/index.jsx']
 	},
 	output: {
