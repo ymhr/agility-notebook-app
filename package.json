@@ -12,7 +12,8 @@
     "dev": "webpack-dev-server --inline --hot --mode development --port 8081",
     "push": "git push origin master && git push github master",
     "start": "node ./server.js",
-    "heroku-postbuild": "webpack -p"
+    "build": "webpack -p",
+    "heroku-postbuild": "yarn run build"
   },
   "author": "James Martin <jamesmartin442@gmail.com>",
   "license": "ISC",

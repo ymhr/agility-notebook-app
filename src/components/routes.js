@@ -1,14 +1,73 @@
 import React from 'react';
 import {Route, withRouter} from 'react-router-dom'
-import Root from './root/index';
-import Shows from './shows/index';
-import ViewShow from './shows/view';
-import EditShow from './shows/edit';
-import Profile from './profile/index';
-import Dogs from './dogs/index';
-import EditDog from './dogs/edit';
-import Settings from './settings/index';
-import EditRun from './shows/runs/edit';
+import Loadable from 'react-loadable';
+
+const Loading = (
+	<h4>Loading...</h4>
+);
+
+const Root = Loadable({
+	loader: () => import('./root/index'),
+	loading() {
+		return <div>Loading...</div>;
+	}
+});
+
+const Shows = Loadable({
+	loader: () => import('./shows/index'),
+	loading() {
+		return <div>Loading...</div>;
+	}
+});
+
+const ViewShow = Loadable({
+	loader: () => import('./shows/view'),
+	loading() {
+		return <div>Loading...</div>;
+	}
+});
+
+const EditShow = Loadable({
+	loader: () => import('./shows/edit'),
+	loading() {
+		return <div>Loading...</div>;
+	}
+});
+
+const Profile = Loadable({
+	loader: () => import('./profile/index'),
+	loading() {
+		return <div>Loading...</div>;
+	}
+});
+
+const Dogs = Loadable({
+	loader: () => import('./dogs/index'),
+	loading() {
+		return <div>Loading...</div>;
+	}
+});
+
+const EditDog = Loadable({
+	loader: () => import('./dogs/edit'),
+	loading() {
+		return <div>Loading...</div>;
+	}
+});
+
+const Settings = Loadable({
+	loader: () => import('./settings/index'),
+	loading() {
+		return <div>Loading...</div>;
+	}
+});
+
+const EditRun = Loadable({
+	loader: () => import('./shows/runs/edit'),
+	loading() {
+		return <div>Loading...</div>;
+	}
+});
 
 const routes = [
 	{
