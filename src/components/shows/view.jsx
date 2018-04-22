@@ -3,6 +3,7 @@ import {observer, inject} from 'mobx-react';
 import {autorun, observable} from 'mobx';
 import {Form, Button, Loader, Grid, Header, Label, Icon} from 'semantic-ui-react';
 import {reduce} from 'lodash';
+import styled from 'styled-components';
 import Run from './runs/run';
 import RunsByDate from './runs/RunsByDate';
 import GiantButton from 'components/general/giantButton';
@@ -78,6 +79,11 @@ class View extends Component {
 
 		const subHeading = (show.startDate.diff(show.endDate, 'days') ? show.startDate.format('dddd Do MMMM YYYY') + ' - ' + show.endDate.format('dddd Do MMMM YYYY') : show.startDate.format('dddd Do MMMM'));
 
+		const LabelWrapper = styled(Label)`
+			margin-bottom: 10px !important;
+			margin-left: 10px !important;
+		`;
+
 		if(this.props.children){
 			return (
 				<div>
@@ -94,17 +100,16 @@ class View extends Component {
 					</Header>
 
 					<p>{show.notes}</p>
-
-					<Label>Booking platform <Label.Detail>{show.bookingPlatform}</Label.Detail></Label>
-					<Label>Booked <Label.Detail>{show.bookedIn ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-					<Label>Paid <Label.Detail>{show.paid ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-					<Label>Hotel needed <Label.Detail>{show.hotelNeeded ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-					<Label>Hotel booked <Label.Detail>{show.hotelBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-					<Label>Holiday needed <Label.Detail>{show.holidayNeeded ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-					<Label>Holiday booked <Label.Detail>{show.holidayBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-					<Label>Camping needed <Label.Detail>{show.campingRequired ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-					<Label>Camping booked <Label.Detail>{show.campingBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
-					<Label>Camping confirmed <Label.Detail>{show.campingConfirmed ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></Label>
+					<LabelWrapper>Booking platform <Label.Detail>{show.bookingPlatform}</Label.Detail></LabelWrapper>
+					<LabelWrapper>Booked <Label.Detail>{show.bookedIn ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></LabelWrapper>
+					<LabelWrapper>Paid <Label.Detail>{show.paid ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></LabelWrapper>
+					<LabelWrapper>Hotel needed <Label.Detail>{show.hotelNeeded ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></LabelWrapper>
+					<LabelWrapper>Hotel booked <Label.Detail>{show.hotelBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></LabelWrapper>
+					<LabelWrapper>Holiday needed <Label.Detail>{show.holidayNeeded ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></LabelWrapper>
+					<LabelWrapper>Holiday booked <Label.Detail>{show.holidayBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></LabelWrapper>
+					<LabelWrapper>Camping needed <Label.Detail>{show.campingRequired ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></LabelWrapper>
+					<LabelWrapper>Camping booked <Label.Detail>{show.campingBooked ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></LabelWrapper>
+					<LabelWrapper>Camping confirmed <Label.Detail>{show.campingConfirmed ? <Icon name="check" /> : <Icon name="close" />}</Label.Detail></LabelWrapper>
 
 					<h2>Runs</h2>
 					{this.addButton()}
