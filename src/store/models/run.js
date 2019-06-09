@@ -1,4 +1,4 @@
-import {observable, computed, toJS, when, action, reaction} from 'mobx';
+import { observable, computed, toJS, when, action, reaction } from 'mobx';
 import dogs from '../dogs';
 import shows from '../shows';
 import app from '../app';
@@ -9,7 +9,6 @@ import handlers from '../handlers';
 import Handler from './handler';
 
 class Run {
-
 	@observable id;
 	@observable showId;
 	@observable order;
@@ -73,43 +72,40 @@ class Run {
 
 		this.handler = {};
 
-		if (data.date)
-			this.date = moment(data.date);
-
+		if (data.date) this.date = moment(data.date);
 
 		this.load();
 
 		reaction(
 			() => [this.handlerOverride, this.dog.handlerId],
 			() => {
-				if(this.handlerOverride && !(this.handlerOverride === this.dog.handlerId)) {
-					this.handler = handlers.get(this.handlerOverride)
-											.then(h => this.handler = h);
+				if (
+					this.handlerOverride &&
+					!(this.handlerOverride === this.dog.handlerId)
+				) {
+					this.handler = handlers
+						.get(this.handlerOverride)
+						.then((h) => (this.handler = h));
 				} else {
 					this.handlerOverride = null;
 					this.handler = this.dog.handler;
 				}
 			}
 		);
-
 	}
 
 	load() {
-		const dataToLoad = [
-			this.loadShow(),
-			this.loadDog()
-		];
+		const dataToLoad = [this.loadShow(), this.loadDog()];
 
 		Promise.all(dataToLoad).then((values) => {
 			this.markLoaded();
 
-			if (!this.date)
-				this.date = this.show.startDate;
-		})
+			if (!this.date) this.date = this.show.startDate;
+		});
 	}
 
 	@action
-	markLoaded(){
+	markLoaded() {
 		this.loaded = true;
 	}
 
@@ -125,11 +121,11 @@ class Run {
 				return;
 			}
 
-			dogs.get(this.dogId)
-				.then(d => this.dog = d)
+			dogs
+				.get(this.dogId)
+				.then((d) => (this.dog = d))
 				.then(() => resolve(this.dog))
-				.catch(err => console.warn(err));
-
+				.catch((err) => console.warn(err));
 		});
 	}
 
@@ -140,13 +136,12 @@ class Run {
 				return;
 			}
 
-			shows.get(this.showId)
-				.then(s => {
+			shows
+				.get(this.showId)
+				.then((s) => {
 					this.show = s;
 
-					if(!this.date)
-						this.date = moment(this.show.startDate);
-
+					if (!this.date) this.date = moment(this.show.startDate);
 				})
 				.then(() => resolve(this.show));
 		});
@@ -155,21 +150,29 @@ class Run {
 	save() {
 		return new Promise((resolve, reject) => {
 			if (this.id) {
-				auth.post(`/shows/${this.showId}/runs/${this.id}`, this.serialize())
-					.then(res => {
-						this.loadDog(true).then(() => console.log('loaded new dog', this.dog, this.dogId));
+				console.log(this.serialize());
+				auth
+					.post(
+						`/shows/${this.showId}/runs/${this.id}`,
+						this.serialize()
+					)
+					.then((res) => {
+						this.loadDog(true).then(() =>
+							console.log('loaded new dog', this.dog, this.dogId)
+						);
 						resolve(res);
 					})
-					.catch(err => {
+					.catch((err) => {
 						console.warn(err);
 						reject(err);
-					})
+					});
 			} else {
 				//create mode
-				auth.post(`/shows/${this.showId}/runs`, this.serialize())
-					.then(res => res.data)
-					.then(data => data.data)
-					.then(run => {
+				auth
+					.post(`/shows/${this.showId}/runs`, this.serialize())
+					.then((res) => res.data)
+					.then((data) => data.data)
+					.then((run) => {
 						this.id = run.id;
 						// runs.addRunToShowList(this)
 						this.show.runs.push(this);
@@ -180,14 +183,13 @@ class Run {
 		});
 	}
 
-	delete(){
+	delete() {
 		const id = this.id;
 		return new Promise((resolve, reject) => {
-			auth.post(`/shows/${this.showId}/runs/${id}/delete`)
-				.then(() => {
-					this.show.removeRun(id);
-					resolve();
-				});
+			auth.post(`/shows/${this.showId}/runs/${id}/delete`).then(() => {
+				this.show.removeRun(id);
+				resolve();
+			});
 		});
 	}
 
@@ -195,12 +197,12 @@ class Run {
 		const serializableObject = Object.assign({}, toJS(this), {
 			show: undefined,
 			dog: undefined,
-			handler: undefined
+			handler: undefined,
+			date: this.date.format('YYYY-MM-DD')
 		});
 
 		return serializableObject;
 	}
-
 }
 
 export default Run;
