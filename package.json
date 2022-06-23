@@ -40,7 +40,7 @@
     "ignore-styles": "^5.0.1",
     "jest": "^22.4.3",
     "jest-cli": "^22.4.3",
-    "jsdom": "^11.2.0",
+    "jsdom": "^16.5.0",
     "jsdom-global": "^3.0.2",
     "lodash": "^4.16.2",
     "mobx": "^4.1.1",
